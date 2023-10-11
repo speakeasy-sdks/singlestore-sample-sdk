@@ -8,17 +8,10 @@ import (
 )
 
 type GetteWorkspaceRequest struct {
-	// Comma-separated values list that correspond to the filtered fields for returned entities
-	Fields *string `queryParam:"style=form,explode=true,name=fields"`
 	// ID of the workspace
 	WorkspaceID string `pathParam:"style=simple,explode=false,name=workspaceID"`
-}
-
-func (o *GetteWorkspaceRequest) GetFields() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Fields
+	// Comma-separated values list that correspond to the filtered fields for returned entities
+	Fields *string `queryParam:"style=form,explode=true,name=fields"`
 }
 
 func (o *GetteWorkspaceRequest) GetWorkspaceID() string {
@@ -26,6 +19,13 @@ func (o *GetteWorkspaceRequest) GetWorkspaceID() string {
 		return ""
 	}
 	return o.WorkspaceID
+}
+
+func (o *GetteWorkspaceRequest) GetFields() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Fields
 }
 
 type GetteWorkspaceResponse struct {

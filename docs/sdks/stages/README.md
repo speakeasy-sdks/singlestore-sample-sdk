@@ -36,7 +36,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -44,17 +43,22 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
-    ctx := context.Background()
-    res, err := s.Stages.Create(ctx, operations.CreateStagesFileRequest{
-        CreateStagesFileRequest: &shared.CreateStagesFileRequest{
-            File: &shared.CreateStagesFileRequestFile{
-                Content: []byte("NN\pG;-j'}"),
-                File: "abnormally deposit evolve",
-            },
+
+    var path string = "online"
+
+    var workspaceGroupID string = "ad642c1f-c6fe-4072-81bc-dd89dc7fa504"
+
+    createStagesFileRequest := &shared.CreateStagesFileRequest{
+        File: &shared.CreateStagesFileRequestFile{
+            Content: []byte("t\"Q644c'n?"),
+            File: "Grocery Borders Northwest",
         },
-        Path: "/usr/bin",
-        WorkspaceGroupID: "cdd89dc7-fa50-44e0-8333-b1d5e261915a",
-    })
+    }
+
+    var isFile *bool = false
+
+    ctx := context.Background()
+    res, err := s.Stages.Create(ctx, path, workspaceGroupID, createStagesFileRequest, isFile)
     if err != nil {
         log.Fatal(err)
     }
@@ -67,10 +71,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.CreateStagesFileRequest](../../models/operations/createstagesfilerequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `path`                                                                            | *string*                                                                          | :heavy_check_mark:                                                                | Path in Stages                                                                    |
+| `workspaceGroupID`                                                                | *string*                                                                          | :heavy_check_mark:                                                                | ID of the Stages-enabled workspace group                                          |
+| `createStagesFileRequest`                                                         | [*shared.CreateStagesFileRequest](../../models/shared/createstagesfilerequest.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
+| `isFile`                                                                          | **bool*                                                                           | :heavy_minus_sign:                                                                | If set to `true`, forces creation of an empty file                                |
 
 
 ### Response
@@ -99,7 +106,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -107,11 +113,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var path string = "program"
+
+    var workspaceGroupID string = "b863f6ef-9b13-4aca-b0cb-816b33de6bc7"
+
     ctx := context.Background()
-    res, err := s.Stages.Delete(ctx, operations.DeleteStagesFileRequest{
-        Path: "/root",
-        WorkspaceGroupID: "db863f6e-f9b1-43ac-a70c-b816b33de6bc",
-    })
+    res, err := s.Stages.Delete(ctx, path, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -124,10 +132,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.DeleteStagesFileRequest](../../models/operations/deletestagesfilerequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `path`                                                | *string*                                              | :heavy_check_mark:                                    | Path in Stages to a file or folder to delete          |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the Stages-enabled workspace group              |
 
 
 ### Response
@@ -156,7 +165,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -164,11 +172,15 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var path string = "female"
+
+    var workspaceGroupID string = "8d8d81fd-7b76-44e3-9e47-5cb1f3659158"
+
+    var metadata *bool = false
+
     ctx := context.Background()
-    res, err := s.Stages.Get(ctx, operations.GetStagesFileRequest{
-        Path: "/usr/bin",
-        WorkspaceGroupID: "18d8d81f-d7b7-464e-b1e4-75cb1f365915",
-    })
+    res, err := s.Stages.Get(ctx, path, workspaceGroupID, metadata)
     if err != nil {
         log.Fatal(err)
     }
@@ -181,10 +193,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        |
-| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |
-| `request`                                                                          | [operations.GetStagesFileRequest](../../models/operations/getstagesfilerequest.md) | :heavy_check_mark:                                                                 | The request object to use for the request.                                         |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `path`                                                | *string*                                              | :heavy_check_mark:                                    | Path in Stages to a file or folder                    |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the Stages-enabled workspace group              |
+| `metadata`                                            | **bool*                                               | :heavy_minus_sign:                                    | If enabled, the API request returns only metadata     |
 
 
 ### Response
@@ -213,7 +227,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -221,14 +234,17 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var path string = "Van"
+
+    var workspaceGroupID string = "05bf4aa7-7f20-44e7-b54c-352acfe54077"
+
+    stagesPatch := &shared.StagesPatch{
+        NewPath: singlestoresamplesdk.String("parent_folder/new_sample_folder"),
+    }
+
     ctx := context.Background()
-    res, err := s.Stages.Update(ctx, operations.UpdateStagesFileRequest{
-        StagesPatch: &shared.StagesPatch{
-            NewPath: singlestoresamplesdk.String("parent_folder/new_sample_folder"),
-        },
-        Path: "/usr/sbin",
-        WorkspaceGroupID: "0905bf4a-a77f-4204-a775-4c352acfe540",
-    })
+    res, err := s.Stages.Update(ctx, path, workspaceGroupID, stagesPatch)
     if err != nil {
         log.Fatal(err)
     }
@@ -241,10 +257,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.UpdateStagesFileRequest](../../models/operations/updatestagesfilerequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |
+| `path`                                                    | *string*                                                  | :heavy_check_mark:                                        | Path in Stages to modify                                  |
+| `workspaceGroupID`                                        | *string*                                                  | :heavy_check_mark:                                        | ID of the Stages-enabled workspace group                  |
+| `stagesPatch`                                             | [*shared.StagesPatch](../../models/shared/stagespatch.md) | :heavy_minus_sign:                                        | N/A                                                       |
 
 
 ### Response

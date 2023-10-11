@@ -8,18 +8,11 @@ import (
 )
 
 type UpdateStagesFileRequest struct {
-	StagesPatch *shared.StagesPatch `request:"mediaType=application/json"`
 	// Path in Stages to modify
 	Path string `pathParam:"style=simple,explode=false,name=path"`
 	// ID of the Stages-enabled workspace group
-	WorkspaceGroupID string `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
-}
-
-func (o *UpdateStagesFileRequest) GetStagesPatch() *shared.StagesPatch {
-	if o == nil {
-		return nil
-	}
-	return o.StagesPatch
+	WorkspaceGroupID string              `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
+	StagesPatch      *shared.StagesPatch `request:"mediaType=application/json"`
 }
 
 func (o *UpdateStagesFileRequest) GetPath() string {
@@ -34,6 +27,13 @@ func (o *UpdateStagesFileRequest) GetWorkspaceGroupID() string {
 		return ""
 	}
 	return o.WorkspaceGroupID
+}
+
+func (o *UpdateStagesFileRequest) GetStagesPatch() *shared.StagesPatch {
+	if o == nil {
+		return nil
+	}
+	return o.StagesPatch
 }
 
 type UpdateStagesFileResponse struct {

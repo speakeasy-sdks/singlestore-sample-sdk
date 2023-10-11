@@ -28,7 +28,14 @@ func newBilling(sdkConfig sdkConfiguration) *billing {
 
 // List - Lists the compute and storage usage of a organization
 // Lists the compute and storage usage of an organization in a given timeframe and aggregate type. The usage entries also contains details such as name, type and usage value.
-func (s *billing) List(ctx context.Context, request operations.ListBillingUsageRequest) (*operations.ListBillingUsageResponse, error) {
+func (s *billing) List(ctx context.Context, endTime string, startTime string, aggregateBy *operations.ListBillingUsageAggregateBy, metric *operations.ListBillingUsageMetric) (*operations.ListBillingUsageResponse, error) {
+	request := operations.ListBillingUsageRequest{
+		EndTime:     endTime,
+		StartTime:   startTime,
+		AggregateBy: aggregateBy,
+		Metric:      metric,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/billing/usage"
 

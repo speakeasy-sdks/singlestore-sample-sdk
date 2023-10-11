@@ -74,7 +74,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -82,10 +81,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var connectionID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
     ctx := context.Background()
-    res, err := s.PrivateConnection.Delete(ctx, operations.DeletePrivateConnectionRequest{
-        ConnectionID: "8db863f6-ef9b-413a-8a70-cb816b33de6b",
-    })
+    res, err := s.PrivateConnection.Delete(ctx, connectionID)
     if err != nil {
         log.Fatal(err)
     }
@@ -98,10 +98,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
-| `request`                                                                                              | [operations.DeletePrivateConnectionRequest](../../models/operations/deleteprivateconnectionrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `connectionID`                                        | *string*                                              | :heavy_check_mark:                                    | ID of the private connection                          |
 
 
 ### Response
@@ -123,7 +123,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -131,10 +130,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var connectionID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
+    var fields *string = "Optional"
+
     ctx := context.Background()
-    res, err := s.PrivateConnection.Get(ctx, operations.GetPrivateConnectionRequest{
-        ConnectionID: "b18d8d81-fd7b-4764-a31e-475cb1f36591",
-    })
+    res, err := s.PrivateConnection.Get(ctx, connectionID, fields)
     if err != nil {
         log.Fatal(err)
     }
@@ -147,10 +149,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [operations.GetPrivateConnectionRequest](../../models/operations/getprivateconnectionrequest.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `connectionID`                                                                           | *string*                                                                                 | :heavy_check_mark:                                                                       | ID of the private connection                                                             |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
 
 
 ### Response
@@ -172,7 +175,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -180,13 +182,15 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    updatePrivateConnection := shared.UpdatePrivateConnection{
+        AllowList: singlestoresamplesdk.String("my-allow-list"),
+    }
+
+    var connectionID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
+
     ctx := context.Background()
-    res, err := s.PrivateConnection.Update(ctx, operations.UpdatePrivateConnectionRequest{
-        UpdatePrivateConnection: shared.UpdatePrivateConnection{
-            AllowList: singlestoresamplesdk.String("my-allow-list"),
-        },
-        ConnectionID: "d0905bf4-aa77-4f20-8e77-54c352acfe54",
-    })
+    res, err := s.PrivateConnection.Update(ctx, updatePrivateConnection, connectionID)
     if err != nil {
         log.Fatal(err)
     }
@@ -199,10 +203,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
-| `request`                                                                                              | [operations.UpdatePrivateConnectionRequest](../../models/operations/updateprivateconnectionrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `updatePrivateConnection`                                                        | [shared.UpdatePrivateConnection](../../models/shared/updateprivateconnection.md) | :heavy_check_mark:                                                               | Here's a sample of JSON data sent in the request body to the API.                |
+| `connectionID`                                                                   | *string*                                                                         | :heavy_check_mark:                                                               | ID of the private connection                                                     |
 
 
 ### Response

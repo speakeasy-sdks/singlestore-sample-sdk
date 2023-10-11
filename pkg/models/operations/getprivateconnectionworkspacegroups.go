@@ -8,17 +8,10 @@ import (
 )
 
 type GetPrivateConnectionWorkspaceGroupsRequest struct {
-	// Comma-separated values list that correspond to the filtered fields for returned entities
-	Fields *string `queryParam:"style=form,explode=true,name=fields"`
 	// ID of the workspace group
 	WorkspaceGroupID string `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
-}
-
-func (o *GetPrivateConnectionWorkspaceGroupsRequest) GetFields() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Fields
+	// Comma-separated values list that correspond to the filtered fields for returned entities
+	Fields *string `queryParam:"style=form,explode=true,name=fields"`
 }
 
 func (o *GetPrivateConnectionWorkspaceGroupsRequest) GetWorkspaceGroupID() string {
@@ -26,6 +19,13 @@ func (o *GetPrivateConnectionWorkspaceGroupsRequest) GetWorkspaceGroupID() strin
 		return ""
 	}
 	return o.WorkspaceGroupID
+}
+
+func (o *GetPrivateConnectionWorkspaceGroupsRequest) GetFields() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Fields
 }
 
 type GetPrivateConnectionWorkspaceGroupsResponse struct {

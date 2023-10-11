@@ -61,10 +61,10 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.ServerIndex], nil
 }
 
-// SingleStoreManagementAPI - SingleStore Management API: The `Management` API can be used to create and manage workspaces, workspace groups, private connections, etc. SingleStore recommends reading the [`Management` API Overview](https://docs.singlestore.com/managed-service/en/reference/management-api.html) before getting started with the API reference.
+// Singlestore - SingleStore Management API: The `Management` API can be used to create and manage workspaces, workspace groups, private connections, etc. SingleStore recommends reading the [`Management` API Overview](https://docs.singlestore.com/managed-service/en/reference/management-api.html) before getting started with the API reference.
 //
 // All the URLs referenced in this API documentation use the `https://api.singlestore.com` service endpoint as their base.
-type SingleStoreManagementAPI struct {
+type Singlestore struct {
 	// Operations related to billing
 	Billing *billing
 	// Operations related to organizations
@@ -81,18 +81,18 @@ type SingleStoreManagementAPI struct {
 	sdkConfiguration sdkConfiguration
 }
 
-type SDKOption func(*SingleStoreManagementAPI)
+type SDKOption func(*Singlestore)
 
 // WithServerURL allows the overriding of the default server URL
 func WithServerURL(serverURL string) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 }
 
 // WithTemplatedServerURL allows the overriding of the default server URL with a templated URL populated with the provided parameters
 func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		if params != nil {
 			serverURL = utils.ReplaceParameters(serverURL, params)
 		}
@@ -103,7 +103,7 @@ func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOptio
 
 // WithServerIndex allows the overriding of the default server by index
 func WithServerIndex(serverIndex int) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		if serverIndex < 0 || serverIndex >= len(ServerList) {
 			panic(fmt.Errorf("server index %d out of range", serverIndex))
 		}
@@ -114,7 +114,7 @@ func WithServerIndex(serverIndex int) SDKOption {
 
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		sdk.sdkConfiguration.DefaultClient = client
 	}
 }
@@ -128,27 +128,27 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 // WithSecurity configures the SDK to use the provided security details
 
 func WithSecurity(apiKeyAuth string) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		security := shared.Security{APIKeyAuth: apiKeyAuth}
 		sdk.sdkConfiguration.Security = withSecurity(&security)
 	}
 }
 
 func WithRetryConfig(retryConfig utils.RetryConfig) SDKOption {
-	return func(sdk *SingleStoreManagementAPI) {
+	return func(sdk *Singlestore) {
 		sdk.sdkConfiguration.RetryConfig = &retryConfig
 	}
 }
 
 // New creates a new instance of the SDK with the provided options
-func New(opts ...SDKOption) *SingleStoreManagementAPI {
-	sdk := &SingleStoreManagementAPI{
+func New(opts ...SDKOption) *Singlestore {
+	sdk := &Singlestore{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.1.0",
+			SDKVersion:        "0.2.0",
 			GenVersion:        "2.152.1",
-			UserAgent:         "speakeasy-sdk/go 0.1.0 2.152.1 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			UserAgent:         "speakeasy-sdk/go 0.2.0 2.152.1 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
 		},
 	}
 	for _, opt := range opts {

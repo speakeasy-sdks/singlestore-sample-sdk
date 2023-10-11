@@ -28,7 +28,11 @@ func newRegions(sdkConfig sdkConfiguration) *regions {
 
 // List - Lists all of the regions for the user that support workspaces
 // Returns a list of valid regions for the user that support workspaces, including the region ID and provider for each region.
-func (s *regions) List(ctx context.Context, request operations.ListRegionsRequest) (*operations.ListRegionsResponse, error) {
+func (s *regions) List(ctx context.Context, fields *string) (*operations.ListRegionsResponse, error) {
+	request := operations.ListRegionsRequest{
+		Fields: fields,
+	}
+
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/regions"
 

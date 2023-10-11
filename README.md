@@ -7,7 +7,7 @@
 </div>
 
 <!-- Start SDK Installation -->
-# SDK Installation
+## SDK Installation
 
 ```bash
 go get github.com/speakeasy-sdks/singlestore-sample-sdk
@@ -16,8 +16,6 @@ go get github.com/speakeasy-sdks/singlestore-sample-sdk
 
 ## SDK Example Usage
 <!-- Start SDK Example Usage -->
-
-
 ```go
 package main
 
@@ -34,11 +32,16 @@ func main() {
 		singlestoresamplesdk.WithSecurity(""),
 	)
 
+	var endTime string = "Bicycle"
+
+	var startTime string = "Metal"
+
+	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByHour
+
+	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+
 	ctx := context.Background()
-	res, err := s.Billing.List(ctx, operations.ListBillingUsageRequest{
-		EndTime:   "Northeast Metal Canada",
-		StartTime: "Data Response West",
-	})
+	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,36 +55,36 @@ func main() {
 <!-- End SDK Example Usage -->
 
 <!-- Start SDK Available Operations -->
-# Available Resources and Operations
+## Available Resources and Operations
 
 
-## [Billing](docs/sdks/billing/README.md)
+### [Billing](docs/sdks/billing/README.md)
 
 * [List](docs/sdks/billing/README.md#list) - Lists the compute and storage usage of a organization
 
-## [Organizations](docs/sdks/organizations/README.md)
+### [Organizations](docs/sdks/organizations/README.md)
 
 * [Get](docs/sdks/organizations/README.md#get) - Gets information about the current organization
 
-## [PrivateConnection](docs/sdks/privateconnection/README.md)
+### [PrivateConnection](docs/sdks/privateconnection/README.md)
 
 * [Create](docs/sdks/privateconnection/README.md#create) - Creates a new private connection
 * [Delete](docs/sdks/privateconnection/README.md#delete) - Deletes a private connection
 * [Get](docs/sdks/privateconnection/README.md#get) - Gets information about a private connection
 * [Update](docs/sdks/privateconnection/README.md#update) - Updates a private connection
 
-## [Regions](docs/sdks/regions/README.md)
+### [Regions](docs/sdks/regions/README.md)
 
 * [List](docs/sdks/regions/README.md#list) - Lists all of the regions for the user that support workspaces
 
-## [Stages](docs/sdks/stages/README.md)
+### [Stages](docs/sdks/stages/README.md)
 
 * [Create](docs/sdks/stages/README.md#create) - Creates a new folder or uploads a file
 * [Delete](docs/sdks/stages/README.md#delete) - Deletes a file or folder
 * [Get](docs/sdks/stages/README.md#get) - Gets information about a folder or downloads a file
 * [Update](docs/sdks/stages/README.md#update) - Modifies a file or folder in Stages
 
-## [WorkspaceGroups](docs/sdks/workspacegroups/README.md)
+### [WorkspaceGroups](docs/sdks/workspacegroups/README.md)
 
 * [Create](docs/sdks/workspacegroups/README.md#create) - Creates a new workspace group
 * [CreateStorage](docs/sdks/workspacegroups/README.md#createstorage) - Sets up Storage DR for the workspace group. Backup region and selected databases to be replicated are provided as part of the request.
@@ -97,7 +100,7 @@ func main() {
 * [UpdateStartFailoverTestMode](docs/sdks/workspacegroups/README.md#updatestartfailovertestmode) - Starts Failover test mode
 * [UpdateStopFailoverTestMode](docs/sdks/workspacegroups/README.md#updatestopfailovertestmode) - Stops Failover test mode
 
-## [Workspaces](docs/sdks/workspaces/README.md)
+### [Workspaces](docs/sdks/workspaces/README.md)
 
 * [Create](docs/sdks/workspaces/README.md#create) - Creates a new workspace
 * [CreateResume](docs/sdks/workspaces/README.md#createresume) - Resumes a workspace
@@ -118,8 +121,6 @@ func main() {
 <!-- End SDK Available Operations -->
 
 <!-- Start Dev Containers -->
-
-
 
 <!-- End Dev Containers -->
 

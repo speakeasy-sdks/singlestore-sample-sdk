@@ -69,21 +69,14 @@ func (e *ListBillingUsageMetric) UnmarshalJSON(data []byte) error {
 }
 
 type ListBillingUsageRequest struct {
-	// The aggregate type used to group usage which includes hour, day and month. default is hour
-	AggregateBy *ListBillingUsageAggregateBy `queryParam:"style=form,explode=true,name=aggregateBy"`
 	// The end time for the usage interval valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z
 	EndTime string `queryParam:"style=form,explode=true,name=endTime"`
-	// Metrics include ComputeCredit, StorageAvgByte. default is all
-	Metric *ListBillingUsageMetric `queryParam:"style=form,explode=true,name=metric"`
 	// The start time for the usage interval in valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z
 	StartTime string `queryParam:"style=form,explode=true,name=startTime"`
-}
-
-func (o *ListBillingUsageRequest) GetAggregateBy() *ListBillingUsageAggregateBy {
-	if o == nil {
-		return nil
-	}
-	return o.AggregateBy
+	// The aggregate type used to group usage which includes hour, day and month. default is hour
+	AggregateBy *ListBillingUsageAggregateBy `queryParam:"style=form,explode=true,name=aggregateBy"`
+	// Metrics include ComputeCredit, StorageAvgByte. default is all
+	Metric *ListBillingUsageMetric `queryParam:"style=form,explode=true,name=metric"`
 }
 
 func (o *ListBillingUsageRequest) GetEndTime() string {
@@ -93,18 +86,25 @@ func (o *ListBillingUsageRequest) GetEndTime() string {
 	return o.EndTime
 }
 
-func (o *ListBillingUsageRequest) GetMetric() *ListBillingUsageMetric {
-	if o == nil {
-		return nil
-	}
-	return o.Metric
-}
-
 func (o *ListBillingUsageRequest) GetStartTime() string {
 	if o == nil {
 		return ""
 	}
 	return o.StartTime
+}
+
+func (o *ListBillingUsageRequest) GetAggregateBy() *ListBillingUsageAggregateBy {
+	if o == nil {
+		return nil
+	}
+	return o.AggregateBy
+}
+
+func (o *ListBillingUsageRequest) GetMetric() *ListBillingUsageMetric {
+	if o == nil {
+		return nil
+	}
+	return o.Metric
 }
 
 type ListBillingUsageResponse struct {

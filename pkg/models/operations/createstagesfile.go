@@ -8,27 +8,13 @@ import (
 )
 
 type CreateStagesFileRequest struct {
-	CreateStagesFileRequest *shared.CreateStagesFileRequest `request:"mediaType=multipart/form-data"`
-	// If set to `true`, forces creation of an empty file
-	IsFile *bool `queryParam:"style=form,explode=true,name=isFile"`
 	// Path in Stages
 	Path string `pathParam:"style=simple,explode=false,name=path"`
 	// ID of the Stages-enabled workspace group
-	WorkspaceGroupID string `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
-}
-
-func (o *CreateStagesFileRequest) GetCreateStagesFileRequest() *shared.CreateStagesFileRequest {
-	if o == nil {
-		return nil
-	}
-	return o.CreateStagesFileRequest
-}
-
-func (o *CreateStagesFileRequest) GetIsFile() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.IsFile
+	WorkspaceGroupID        string                          `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
+	CreateStagesFileRequest *shared.CreateStagesFileRequest `request:"mediaType=multipart/form-data"`
+	// If set to `true`, forces creation of an empty file
+	IsFile *bool `queryParam:"style=form,explode=true,name=isFile"`
 }
 
 func (o *CreateStagesFileRequest) GetPath() string {
@@ -43,6 +29,20 @@ func (o *CreateStagesFileRequest) GetWorkspaceGroupID() string {
 		return ""
 	}
 	return o.WorkspaceGroupID
+}
+
+func (o *CreateStagesFileRequest) GetCreateStagesFileRequest() *shared.CreateStagesFileRequest {
+	if o == nil {
+		return nil
+	}
+	return o.CreateStagesFileRequest
+}
+
+func (o *CreateStagesFileRequest) GetIsFile() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsFile
 }
 
 type CreateStagesFileResponse struct {

@@ -8,17 +8,10 @@ import (
 )
 
 type DeleteWorkspaceGroupsRequest struct {
-	// To terminate a workspace group even if it has active workspaces, set to `true`
-	Force *bool `queryParam:"style=form,explode=true,name=force"`
 	// ID of the workspace group
 	WorkspaceGroupID string `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
-}
-
-func (o *DeleteWorkspaceGroupsRequest) GetForce() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.Force
+	// To terminate a workspace group even if it has active workspaces, set to `true`
+	Force *bool `queryParam:"style=form,explode=true,name=force"`
 }
 
 func (o *DeleteWorkspaceGroupsRequest) GetWorkspaceGroupID() string {
@@ -26,6 +19,13 @@ func (o *DeleteWorkspaceGroupsRequest) GetWorkspaceGroupID() string {
 		return ""
 	}
 	return o.WorkspaceGroupID
+}
+
+func (o *DeleteWorkspaceGroupsRequest) GetForce() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Force
 }
 
 type DeleteWorkspaceGroupsResponse struct {

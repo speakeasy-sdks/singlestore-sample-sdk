@@ -32,11 +32,17 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var endTime string = "Bicycle"
+
+    var startTime string = "Metal"
+
+    var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByHour
+
+    var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+
     ctx := context.Background()
-    res, err := s.Billing.List(ctx, operations.ListBillingUsageRequest{
-        EndTime: "Northeast Metal Canada",
-        StartTime: "Data Response West",
-    })
+    res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
     if err != nil {
         log.Fatal(err)
     }
@@ -49,10 +55,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.ListBillingUsageRequest](../../models/operations/listbillingusagerequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                             | [context.Context](https://pkg.go.dev/context#Context)                                             | :heavy_check_mark:                                                                                | The context to use for the request.                                                               |
+| `endTime`                                                                                         | *string*                                                                                          | :heavy_check_mark:                                                                                | The end time for the usage interval valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z            |
+| `startTime`                                                                                       | *string*                                                                                          | :heavy_check_mark:                                                                                | The start time for the usage interval in valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z       |
+| `aggregateBy`                                                                                     | [*operations.ListBillingUsageAggregateBy](../../models/operations/listbillingusageaggregateby.md) | :heavy_minus_sign:                                                                                | The aggregate type used to group usage which includes hour, day and month. default is hour        |
+| `metric`                                                                                          | [*operations.ListBillingUsageMetric](../../models/operations/listbillingusagemetric.md)           | :heavy_minus_sign:                                                                                | Metrics include ComputeCredit, StorageAvgByte. default is all                                     |
 
 
 ### Response

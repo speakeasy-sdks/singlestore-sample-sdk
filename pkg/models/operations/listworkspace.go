@@ -8,12 +8,19 @@ import (
 )
 
 type ListWorkspaceRequest struct {
+	// ID of the workspace group
+	WorkspaceGroupID string `queryParam:"style=form,explode=true,name=workspaceGroupID"`
 	// Comma-separated values list that correspond to the filtered fields for returned entities
 	Fields *string `queryParam:"style=form,explode=true,name=fields"`
 	// To include any terminated workspaces, set to `true`
 	IncludeTerminated *bool `queryParam:"style=form,explode=true,name=includeTerminated"`
-	// ID of the workspace group
-	WorkspaceGroupID string `queryParam:"style=form,explode=true,name=workspaceGroupID"`
+}
+
+func (o *ListWorkspaceRequest) GetWorkspaceGroupID() string {
+	if o == nil {
+		return ""
+	}
+	return o.WorkspaceGroupID
 }
 
 func (o *ListWorkspaceRequest) GetFields() *string {
@@ -28,13 +35,6 @@ func (o *ListWorkspaceRequest) GetIncludeTerminated() *bool {
 		return nil
 	}
 	return o.IncludeTerminated
-}
-
-func (o *ListWorkspaceRequest) GetWorkspaceGroupID() string {
-	if o == nil {
-		return ""
-	}
-	return o.WorkspaceGroupID
 }
 
 type ListWorkspaceResponse struct {

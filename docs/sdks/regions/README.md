@@ -23,7 +23,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -31,8 +30,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var fields *string = "Bicycle"
+
     ctx := context.Background()
-    res, err := s.Regions.List(ctx, operations.ListRegionsRequest{})
+    res, err := s.Regions.List(ctx, fields)
     if err != nil {
         log.Fatal(err)
     }
@@ -45,10 +47,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.ListRegionsRequest](../../models/operations/listregionsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
 
 
 ### Response

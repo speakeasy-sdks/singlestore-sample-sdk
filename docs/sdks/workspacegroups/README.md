@@ -93,7 +93,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -101,19 +100,21 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
-    ctx := context.Background()
-    res, err := s.WorkspaceGroups.CreateStorage(ctx, operations.CreateStorageWorkspaceGroupsRequest{
-        StorageDRSetup: shared.StorageDRSetup{
-            DatabaseNames: []string{
-                "x",
-                "_",
-                "d",
-                "b",
-            },
-            RegionID: "6eaad1a5-ac7d-4864-9f5c-1bc4cadf5345",
+
+    storageDRSetup := shared.StorageDRSetup{
+        DatabaseNames: []string{
+            "x",
+            "_",
+            "d",
+            "b",
         },
-        WorkspaceGroupID: "a7ac8961-1881-4fc6-aa1d-b91f19b96abd",
-    })
+        RegionID: "6eaad1a5-ac7d-4864-9f5c-1bc4cadf5345",
+    }
+
+    var workspaceGroupID string = "a7ac8961-1881-4fc6-aa1d-b91f19b96abd"
+
+    ctx := context.Background()
+    res, err := s.WorkspaceGroups.CreateStorage(ctx, storageDRSetup, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -126,10 +127,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.CreateStorageWorkspaceGroupsRequest](../../models/operations/createstorageworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
+| `storageDRSetup`                                                  | [shared.StorageDRSetup](../../models/shared/storagedrsetup.md)    | :heavy_check_mark:                                                | Here's a sample of JSON data sent in the request body to the API. |
+| `workspaceGroupID`                                                | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace group                                         |
 
 
 ### Response
@@ -154,7 +156,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -162,10 +163,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
+
+    var force *bool = false
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.Delete(ctx, operations.DeleteWorkspaceGroupsRequest{
-        WorkspaceGroupID: "8db863f6-ef9b-413a-8a70-cb816b33de6b",
-    })
+    res, err := s.WorkspaceGroups.Delete(ctx, workspaceGroupID, force)
     if err != nil {
         log.Fatal(err)
     }
@@ -178,10 +182,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.DeleteWorkspaceGroupsRequest](../../models/operations/deleteworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `workspaceGroupID`                                                             | *string*                                                                       | :heavy_check_mark:                                                             | ID of the workspace group                                                      |
+| `force`                                                                        | **bool*                                                                        | :heavy_minus_sign:                                                             | To terminate a workspace group even if it has active workspaces, set to `true` |
 
 
 ### Response
@@ -205,7 +210,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -213,10 +217,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
+
+    var fields *string = "Optional"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.Get(ctx, operations.GetWorkspaceGroupsRequest{
-        WorkspaceGroupID: "b18d8d81-fd7b-4764-a31e-475cb1f36591",
-    })
+    res, err := s.WorkspaceGroups.Get(ctx, workspaceGroupID, fields)
     if err != nil {
         log.Fatal(err)
     }
@@ -229,10 +236,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.GetWorkspaceGroupsRequest](../../models/operations/getworkspacegroupsrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `workspaceGroupID`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | ID of the workspace group                                                                |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
 
 
 ### Response
@@ -256,7 +264,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -264,10 +271,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "4e6c6827-27ee-4013-85e7-e36151e0fa57"
+
+    var fields *string = "mobile"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.GetPrivateConnection(ctx, operations.GetPrivateConnectionWorkspaceGroupsRequest{
-        WorkspaceGroupID: "4e6c6827-27ee-4013-85e7-e36151e0fa57",
-    })
+    res, err := s.WorkspaceGroups.GetPrivateConnection(ctx, workspaceGroupID, fields)
     if err != nil {
         log.Fatal(err)
     }
@@ -280,10 +290,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
-| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
-| `request`                                                                                                                      | [operations.GetPrivateConnectionWorkspaceGroupsRequest](../../models/operations/getprivateconnectionworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `workspaceGroupID`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | ID of the workspace group                                                                |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
 
 
 ### Response
@@ -305,7 +316,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -313,10 +323,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "0ebde48c-76bc-474b-a15a-a09cafb361f4"
+
+    var fields *string = "Dinar"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.GetRecoveryBackup(ctx, operations.GetRecoveryBackupWorkspaceGroupsRequest{
-        WorkspaceGroupID: "0ebde48c-76bc-474b-a15a-a09cafb361f4",
-    })
+    res, err := s.WorkspaceGroups.GetRecoveryBackup(ctx, workspaceGroupID, fields)
     if err != nil {
         log.Fatal(err)
     }
@@ -329,10 +342,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |
-| `request`                                                                                                                | [operations.GetRecoveryBackupWorkspaceGroupsRequest](../../models/operations/getrecoverybackupworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                       | The request object to use for the request.                                                                               |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `workspaceGroupID`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | ID of the workspace group                                                                |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
 
 
 ### Response
@@ -354,7 +368,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -362,10 +375,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "0a28532b-9597-4f57-8ab0-f1d1e4f998a8"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.GetStorageStatus(ctx, operations.GetStorageStatusWorkspaceGroupsRequest{
-        WorkspaceGroupID: "0a28532b-9597-4f57-8ab0-f1d1e4f998a8",
-    })
+    res, err := s.WorkspaceGroups.GetStorageStatus(ctx, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -378,10 +392,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                              | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
-| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                  | :heavy_check_mark:                                                                                                     | The context to use for the request.                                                                                    |
-| `request`                                                                                                              | [operations.GetStorageStatusWorkspaceGroupsRequest](../../models/operations/getstoragestatusworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                     | The request object to use for the request.                                                                             |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the workspace group                             |
 
 
 ### Response
@@ -404,7 +418,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -412,8 +425,13 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var fields *string = "Bicycle"
+
+    var includeTerminated *bool = false
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.List(ctx, operations.ListWorkspaceGroupRequest{})
+    res, err := s.WorkspaceGroups.List(ctx, fields, includeTerminated)
     if err != nil {
         log.Fatal(err)
     }
@@ -426,10 +444,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `request`                                                                                    | [operations.ListWorkspaceGroupRequest](../../models/operations/listworkspacegrouprequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `fields`                                                                                 | **string*                                                                                | :heavy_minus_sign:                                                                       | Comma-separated values list that correspond to the filtered fields for returned entities |
+| `includeTerminated`                                                                      | **bool*                                                                                  | :heavy_minus_sign:                                                                       | To include any terminated workspace groups, set to `true`                                |
 
 
 ### Response
@@ -452,7 +471,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -460,23 +478,25 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
-    ctx := context.Background()
-    res, err := s.WorkspaceGroups.Update(ctx, operations.UpdateWorkspaceGroupsRequest{
-        WorkspaceGroupUpdate: shared.WorkspaceGroupUpdate{
-            AdminPassword: singlestoresamplesdk.String("New Reactive dock"),
-            ExpiresAt: singlestoresamplesdk.String("Analyst invoice"),
-            FirewallRanges: []string{
-                "192.168.0.1/32",
-                "192.168.0.81/12",
-            },
-            Name: singlestoresamplesdk.String("new-workspace-group-name"),
-            UpdateWindow: &shared.UpdateWindow{
-                Day: 2,
-                Hour: 1,
-            },
+
+    workspaceGroupUpdate := shared.WorkspaceGroupUpdate{
+        AdminPassword: singlestoresamplesdk.String("New Reactive dock"),
+        ExpiresAt: singlestoresamplesdk.String("Analyst invoice"),
+        FirewallRanges: []string{
+            "192.168.0.1/32",
+            "192.168.0.81/12",
         },
-        WorkspaceGroupID: "204e7754-c352-4acf-a540-77cabf6805c5",
-    })
+        Name: singlestoresamplesdk.String("new-workspace-group-name"),
+        UpdateWindow: &shared.UpdateWindow{
+            Day: 2,
+            Hour: 1,
+        },
+    }
+
+    var workspaceGroupID string = "204e7754-c352-4acf-a540-77cabf6805c5"
+
+    ctx := context.Background()
+    res, err := s.WorkspaceGroups.Update(ctx, workspaceGroupUpdate, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -489,10 +509,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.UpdateWorkspaceGroupsRequest](../../models/operations/updateworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
+| `workspaceGroupUpdate`                                                     | [shared.WorkspaceGroupUpdate](../../models/shared/workspacegroupupdate.md) | :heavy_check_mark:                                                         | Here's a sample of JSON data sent to the API in the request body.          |
+| `workspaceGroupID`                                                         | *string*                                                                   | :heavy_check_mark:                                                         | ID of the workspace group                                                  |
 
 
 ### Response
@@ -514,7 +535,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -522,10 +542,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "ee046eb6-b3d2-4b2b-8152-054b3b64d961"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.UpdateFailback(ctx, operations.UpdateFailbackWorkspaceGroupsRequest{
-        WorkspaceGroupID: "ee046eb6-b3d2-4b2b-8152-054b3b64d961",
-    })
+    res, err := s.WorkspaceGroups.UpdateFailback(ctx, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -538,10 +559,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
-| `request`                                                                                                          | [operations.UpdateFailbackWorkspaceGroupsRequest](../../models/operations/updatefailbackworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the workspace group                             |
 
 
 ### Response
@@ -563,7 +584,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -571,10 +591,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "15aad03f-9196-4964-a967-bbe47f374a9c"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.UpdateFailover(ctx, operations.UpdateFailoverWorkspaceGroupsRequest{
-        WorkspaceGroupID: "15aad03f-9196-4964-a967-bbe47f374a9c",
-    })
+    res, err := s.WorkspaceGroups.UpdateFailover(ctx, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -587,10 +608,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
-| `request`                                                                                                          | [operations.UpdateFailoverWorkspaceGroupsRequest](../../models/operations/updatefailoverworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the workspace group                             |
 
 
 ### Response
@@ -612,7 +633,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -620,10 +640,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "062601a8-d539-45de-82f7-4bf69a96713d"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.UpdateStartFailoverTestMode(ctx, operations.UpdateStartFailoverTestModeWorkspaceGroupsRequest{
-        WorkspaceGroupID: "062601a8-d539-45de-82f7-4bf69a96713d",
-    })
+    res, err := s.WorkspaceGroups.UpdateStartFailoverTestMode(ctx, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -636,10 +657,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                    | Type                                                                                                                                         | Required                                                                                                                                     | Description                                                                                                                                  |
-| -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                                                        | :heavy_check_mark:                                                                                                                           | The context to use for the request.                                                                                                          |
-| `request`                                                                                                                                    | [operations.UpdateStartFailoverTestModeWorkspaceGroupsRequest](../../models/operations/updatestartfailovertestmodeworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                                           | The request object to use for the request.                                                                                                   |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the workspace group                             |
 
 
 ### Response
@@ -661,7 +682,6 @@ import(
 	"log"
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
 )
 
 func main() {
@@ -669,10 +689,11 @@ func main() {
         singlestoresamplesdk.WithSecurity(""),
     )
 
+
+    var workspaceGroupID string = "e2ad172a-bce4-4aca-90ec-87dc592f3d9f"
+
     ctx := context.Background()
-    res, err := s.WorkspaceGroups.UpdateStopFailoverTestMode(ctx, operations.UpdateStopFailoverTestModeWorkspaceGroupsRequest{
-        WorkspaceGroupID: "e2ad172a-bce4-4aca-90ec-87dc592f3d9f",
-    })
+    res, err := s.WorkspaceGroups.UpdateStopFailoverTestMode(ctx, workspaceGroupID)
     if err != nil {
         log.Fatal(err)
     }
@@ -685,10 +706,10 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                  | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                                      | :heavy_check_mark:                                                                                                                         | The context to use for the request.                                                                                                        |
-| `request`                                                                                                                                  | [operations.UpdateStopFailoverTestModeWorkspaceGroupsRequest](../../models/operations/updatestopfailovertestmodeworkspacegroupsrequest.md) | :heavy_check_mark:                                                                                                                         | The request object to use for the request.                                                                                                 |
+| Parameter                                             | Type                                                  | Required                                              | Description                                           |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
+| `workspaceGroupID`                                    | *string*                                              | :heavy_check_mark:                                    | ID of the workspace group                             |
 
 
 ### Response

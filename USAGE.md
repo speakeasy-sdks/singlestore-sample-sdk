@@ -17,11 +17,16 @@ func main() {
 		singlestoresamplesdk.WithSecurity(""),
 	)
 
+	var endTime string = "Bicycle"
+
+	var startTime string = "Metal"
+
+	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByHour
+
+	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+
 	ctx := context.Background()
-	res, err := s.Billing.List(ctx, operations.ListBillingUsageRequest{
-		EndTime:   "Northeast Metal Canada",
-		StartTime: "Data Response West",
-	})
+	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
 	if err != nil {
 		log.Fatal(err)
 	}

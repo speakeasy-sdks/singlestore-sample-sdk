@@ -5,7 +5,7 @@ regions.go
 stages.go
 workspacegroups.go
 workspaces.go
-singlestoremanagementapi.go
+singlestore.go
 go.mod
 go.sum
 pkg/models/sdkerrors/sdkerror.go
@@ -225,7 +225,7 @@ docs/models/shared/privateconnectionoutboundallowlist.md
 docs/models/shared/workspaceupdate.md
 docs/models/shared/security.md
 docs/models/shared/createstagesfilerequest1.md
-docs/sdks/singlestoremanagementapi/README.md
+docs/sdks/singlestore/README.md
 docs/sdks/billing/README.md
 docs/sdks/organizations/README.md
 docs/sdks/privateconnection/README.md

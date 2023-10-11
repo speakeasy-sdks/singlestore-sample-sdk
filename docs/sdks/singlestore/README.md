@@ -1,4 +1,4 @@
-# SingleStoreManagementAPI SDK
+# Singlestore SDK
 
 
 ## Overview

@@ -8,19 +8,12 @@ import (
 )
 
 type GetStagesFileRequest struct {
-	// If enabled, the API request returns only metadata
-	Metadata *bool `queryParam:"style=form,explode=true,name=metadata"`
 	// Path in Stages to a file or folder
 	Path string `pathParam:"style=simple,explode=false,name=path"`
 	// ID of the Stages-enabled workspace group
 	WorkspaceGroupID string `pathParam:"style=simple,explode=false,name=workspaceGroupID"`
-}
-
-func (o *GetStagesFileRequest) GetMetadata() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.Metadata
+	// If enabled, the API request returns only metadata
+	Metadata *bool `queryParam:"style=form,explode=true,name=metadata"`
 }
 
 func (o *GetStagesFileRequest) GetPath() string {
@@ -35,6 +28,13 @@ func (o *GetStagesFileRequest) GetWorkspaceGroupID() string {
 		return ""
 	}
 	return o.WorkspaceGroupID
+}
+
+func (o *GetStagesFileRequest) GetMetadata() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
 }
 
 type GetStagesFileResponse struct {
