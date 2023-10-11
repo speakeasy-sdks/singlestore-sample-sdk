@@ -9,7 +9,7 @@ generation:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
   baseServerURL: ""
-  sdkClassName: SingleStore-Management-API
+  sdkClassName: singlestore
   singleTagPerOp: false
   tagNamespacingDisabled: false
 features:
@@ -26,5 +26,5 @@ go:
   version: 0.1.0
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
-  maxMethodParams: 0
+  maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/singlestore-sample-sdk
