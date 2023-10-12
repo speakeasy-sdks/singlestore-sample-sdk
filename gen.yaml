@@ -12,6 +12,9 @@ generation:
   sdkClassName: singlestore
   singleTagPerOp: false
   tagNamespacingDisabled: false
+  devContainers:
+    enabled: true
+    schemaPath: ./openapi.yaml
 features:
   go:
     core: 2.91.4
