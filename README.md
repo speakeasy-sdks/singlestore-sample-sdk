@@ -121,7 +121,15 @@ func main() {
 <!-- End SDK Available Operations -->
 
 <!-- Start Dev Containers -->
+# Dev Containers
+<div align="left">
+    <a href="https://codespaces.new/speakeasy-sdks/singlestore-sample-sdk.git/tree/main"><img src="https://github.com/codespaces/badge.svg" /></a>
+    
+</div>
 
+Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Codespaces**!
+
+* [Explore Dev Containers](.devcontainer/README.md)
 <!-- End Dev Containers -->
 
 <!-- Start Go Types -->

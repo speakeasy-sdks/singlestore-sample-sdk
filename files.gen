@@ -234,3 +234,6 @@ docs/sdks/stages/README.md
 docs/sdks/workspacegroups/README.md
 docs/sdks/workspaces/README.md
 .gitattributes
+.devcontainer/README.md
+.devcontainer/devcontainer.json
+.devcontainer/setup.sh
