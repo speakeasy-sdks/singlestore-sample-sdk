@@ -43,8 +43,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Create(ctx, shared.WorkspaceGroupCreate{
-        AdminPassword: singlestoresamplesdk.String("bluetooth Extended"),
-        ExpiresAt: singlestoresamplesdk.String("blue"),
+        AdminPassword: singlestoresamplesdk.String("online"),
+        ExpiresAt: singlestoresamplesdk.String("Configuration"),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
@@ -480,8 +480,8 @@ func main() {
 
 
     workspaceGroupUpdate := shared.WorkspaceGroupUpdate{
-        AdminPassword: singlestoresamplesdk.String("New Reactive dock"),
-        ExpiresAt: singlestoresamplesdk.String("Analyst invoice"),
+        AdminPassword: singlestoresamplesdk.String("Van"),
+        ExpiresAt: singlestoresamplesdk.String("East"),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
@@ -493,7 +493,7 @@ func main() {
         },
     }
 
-    var workspaceGroupID string = "204e7754-c352-4acf-a540-77cabf6805c5"
+    var workspaceGroupID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Update(ctx, workspaceGroupUpdate, workspaceGroupID)
