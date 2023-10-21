@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
-  speakeasyVersion: 1.101.0
-  generationVersion: 2.161.0
+  speakeasyVersion: 1.104.0
+  generationVersion: 2.169.0
 generation:
   comments:
     disableComments: false
@@ -12,24 +12,26 @@ generation:
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
+  repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git
   sdkClassName: singlestore
   singleTagPerOp: false
   tagNamespacingDisabled: false
 features:
   go:
-    core: 2.91.5
+    core: 2.94.0
     devContainers: 2.90.0
-    downloadStreams: 0.1.0
     flattening: 2.81.1
     globalSecurity: 2.82.2
     globalServerURLs: 2.82.0
     groups: 2.81.2
-    includes: 2.81.1
     nameOverrides: 2.81.1
-    unions: 2.83.1
+    unions: 2.84.0
 go:
-  version: 0.5.0
+  version: 0.6.0
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
+  installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
   maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/singlestore-sample-sdk
+  published: true
+  repoSubDirectory: .
