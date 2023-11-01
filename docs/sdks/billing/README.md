@@ -33,11 +33,11 @@ func main() {
     )
 
 
-    var endTime string = "Bicycle"
+    var endTime string = "string"
 
-    var startTime string = "Metal"
+    var startTime string = "string"
 
-    var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByHour
+    var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByMonth
 
     var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
 

@@ -31,7 +31,7 @@ func main() {
     )
 
 
-    var fields *string = "Bicycle"
+    var fields *string = "string"
 
     ctx := context.Background()
     res, err := s.Regions.List(ctx, fields)
