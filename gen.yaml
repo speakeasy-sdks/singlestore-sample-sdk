@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
-  speakeasyVersion: 1.104.0
-  generationVersion: 2.169.0
+  speakeasyVersion: 1.109.2
+  generationVersion: 2.173.0
 generation:
   comments:
     disableComments: false
@@ -25,9 +25,9 @@ features:
     globalServerURLs: 2.82.0
     groups: 2.81.2
     nameOverrides: 2.81.1
-    unions: 2.84.0
+    unions: 2.84.1
 go:
-  version: 0.6.0
+  version: 0.6.1
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
