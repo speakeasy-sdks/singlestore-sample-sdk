@@ -96,7 +96,6 @@ pkg/models/shared/workspace.go
 pkg/models/shared/privateconnectionoutboundallowlist.go
 pkg/models/shared/workspaceupdate.go
 pkg/models/shared/security.go
-pkg/models/shared/createstagesfilerequest1.go
 USAGE.md
 docs/models/operations/listbillingusageaggregateby.md
 docs/models/operations/listbillingusagemetric.md
@@ -224,7 +223,6 @@ docs/models/shared/workspace.md
 docs/models/shared/privateconnectionoutboundallowlist.md
 docs/models/shared/workspaceupdate.md
 docs/models/shared/security.md
-docs/models/shared/createstagesfilerequest1.md
 docs/sdks/singlestore/README.md
 docs/sdks/billing/README.md
 docs/sdks/organizations/README.md

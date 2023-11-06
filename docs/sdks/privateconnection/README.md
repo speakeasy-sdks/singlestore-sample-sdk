@@ -133,7 +133,7 @@ func main() {
 
     var connectionID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var fields *string = "Optional"
+    var fields *string = "string"
 
     ctx := context.Background()
     res, err := s.PrivateConnection.Get(ctx, connectionID, fields)

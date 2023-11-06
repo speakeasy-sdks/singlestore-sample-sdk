@@ -43,8 +43,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Create(ctx, shared.WorkspaceGroupCreate{
-        AdminPassword: singlestoresamplesdk.String("online"),
-        ExpiresAt: singlestoresamplesdk.String("Configuration"),
+        AdminPassword: singlestoresamplesdk.String("string"),
+        ExpiresAt: singlestoresamplesdk.String("string"),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
@@ -220,7 +220,7 @@ func main() {
 
     var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var fields *string = "Optional"
+    var fields *string = "string"
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Get(ctx, workspaceGroupID, fields)
@@ -274,7 +274,7 @@ func main() {
 
     var workspaceGroupID string = "4e6c6827-27ee-4013-85e7-e36151e0fa57"
 
-    var fields *string = "mobile"
+    var fields *string = "string"
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.GetPrivateConnection(ctx, workspaceGroupID, fields)
@@ -326,7 +326,7 @@ func main() {
 
     var workspaceGroupID string = "0ebde48c-76bc-474b-a15a-a09cafb361f4"
 
-    var fields *string = "Dinar"
+    var fields *string = "string"
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.GetRecoveryBackup(ctx, workspaceGroupID, fields)
@@ -426,7 +426,7 @@ func main() {
     )
 
 
-    var fields *string = "Bicycle"
+    var fields *string = "string"
 
     var includeTerminated *bool = false
 
@@ -480,8 +480,8 @@ func main() {
 
 
     workspaceGroupUpdate := shared.WorkspaceGroupUpdate{
-        AdminPassword: singlestoresamplesdk.String("Van"),
-        ExpiresAt: singlestoresamplesdk.String("East"),
+        AdminPassword: singlestoresamplesdk.String("string"),
+        ExpiresAt: singlestoresamplesdk.String("string"),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
@@ -493,7 +493,7 @@ func main() {
         },
     }
 
-    var workspaceGroupID string = "bf4aa77f-204e-4775-8c35-2acfe54077ca"
+    var workspaceGroupID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Update(ctx, workspaceGroupUpdate, workspaceGroupID)
