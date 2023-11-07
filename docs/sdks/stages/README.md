@@ -1,5 +1,5 @@
 # Stages
-(*Stages*)
+(*.Stages*)
 
 ## Overview
 
@@ -49,9 +49,9 @@ func main() {
     var workspaceGroupID string = "77ad642c-1fc6-4fe0-b241-bcdd89dc7fa5"
 
     createStagesFileRequest := &shared.CreateStagesFileRequest{
-        File: &shared.CreateStagesFileRequestFile{
-            Content: []byte("#9t\"Q644c'"),
-            File: "string",
+        File: &shared.File{
+            Content: []byte("0x05D0b544f1"),
+            FileName: "functionalities_grocery_borders.pdf",
         },
     }
 

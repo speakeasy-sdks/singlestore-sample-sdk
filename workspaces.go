@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// workspaces - Operations related to workspaces
-type workspaces struct {
+// Workspaces - Operations related to workspaces
+type Workspaces struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newWorkspaces(sdkConfig sdkConfiguration) *workspaces {
-	return &workspaces{
+func newWorkspaces(sdkConfig sdkConfiguration) *Workspaces {
+	return &Workspaces{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newWorkspaces(sdkConfig sdkConfiguration) *workspaces {
 // Create - Creates a new workspace
 // Creates a new workspace for the current user in the specified workspace group. You must specify the name of the workspace and the workspace group ID in the request body. Once a workspace is created, you can neither change its name nor its workspace group. See [Workspaces](https://docs.singlestore.com/managed-service/en/reference/management-api.html#workspaces-729524) for more information.
 // This API call does not take any request parameters.
-func (s *workspaces) Create(ctx context.Context, request shared.WorkspaceCreate) (*operations.CreateWorkspaceResponse, error) {
+func (s *Workspaces) Create(ctx context.Context, request shared.WorkspaceCreate) (*operations.CreateWorkspaceResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaces"
 
@@ -106,7 +106,7 @@ func (s *workspaces) Create(ctx context.Context, request shared.WorkspaceCreate)
 
 // CreateResume - Resumes a workspace
 // Resumes a workspace with the specified workspace ID. You must specify the workspace ID in the API call.
-func (s *workspaces) CreateResume(ctx context.Context, workspaceID string) (*operations.CreateResumeWorkspaceResponse, error) {
+func (s *Workspaces) CreateResume(ctx context.Context, workspaceID string) (*operations.CreateResumeWorkspaceResponse, error) {
 	request := operations.CreateResumeWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -182,7 +182,7 @@ func (s *workspaces) CreateResume(ctx context.Context, workspaceID string) (*ope
 
 // CreateStorage - Sets up Storage DR for the workspace group of the provided workspace. Backup region and selected databases to be replicated are provided as part of the request.
 // You must specify the workspace ID of a workspace in the group you are setting up for disaster recovery and the region ID of your secondary region.
-func (s *workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.StorageDRSetup, workspaceID string) (*operations.CreateStorageWorkspaceResponse, error) {
+func (s *Workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.StorageDRSetup, workspaceID string) (*operations.CreateStorageWorkspaceResponse, error) {
 	request := operations.CreateStorageWorkspaceRequest{
 		StorageDRSetup: storageDRSetup,
 		WorkspaceID:    workspaceID,
@@ -256,7 +256,7 @@ func (s *workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.St
 
 // CreateSuspend - Suspends a workspace
 // Suspends a workspace with the specified workspace ID. You must specify the workspace ID in the API call.
-func (s *workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*operations.CreateSuspendWorkspaceResponse, error) {
+func (s *Workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*operations.CreateSuspendWorkspaceResponse, error) {
 	request := operations.CreateSuspendWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -334,7 +334,7 @@ func (s *workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*op
 // Terminates a workspace with the specified workspace ID. You must specify the workspace ID in the API call.
 //
 // All the databases attached to the workspace are detached when the workspace is terminated.
-func (s *workspaces) Delete(ctx context.Context, workspaceID string) (*operations.DeleteWorkspaceResponse, error) {
+func (s *Workspaces) Delete(ctx context.Context, workspaceID string) (*operations.DeleteWorkspaceResponse, error) {
 	request := operations.DeleteWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -410,7 +410,7 @@ func (s *workspaces) Delete(ctx context.Context, workspaceID string) (*operation
 
 // Get - Gets information about a workspace
 // Returns workspace information for the specified workspace ID, in JSON format. You must specify the workspace ID in the API call.
-func (s *workspaces) Get(ctx context.Context, workspaceID string, fields *string) (*operations.GetteWorkspaceResponse, error) {
+func (s *Workspaces) Get(ctx context.Context, workspaceID string, fields *string) (*operations.GetteWorkspaceResponse, error) {
 	request := operations.GetteWorkspaceRequest{
 		WorkspaceID: workspaceID,
 		Fields:      fields,
@@ -491,7 +491,7 @@ func (s *workspaces) Get(ctx context.Context, workspaceID string, fields *string
 
 // GetOutbound - Gets the outbound allow list for a workspace
 // Returns the account ID which must be allowed for outbound connections.
-func (s *workspaces) GetOutbound(ctx context.Context, workspaceID string) (*operations.GetOutboundWorkspaceResponse, error) {
+func (s *Workspaces) GetOutbound(ctx context.Context, workspaceID string) (*operations.GetOutboundWorkspaceResponse, error) {
 	request := operations.GetOutboundWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -567,7 +567,7 @@ func (s *workspaces) GetOutbound(ctx context.Context, workspaceID string) (*oper
 
 // GetPrivateConnection - Gets private connection information for a workspace
 // Returns private connection information for the specified workspace ID, in JSON format. You must specify the workspace ID in the API call.
-func (s *workspaces) GetPrivateConnection(ctx context.Context, workspaceID string, fields *string) (*operations.GetPrivateConnectionWorkspaceResponse, error) {
+func (s *Workspaces) GetPrivateConnection(ctx context.Context, workspaceID string, fields *string) (*operations.GetPrivateConnectionWorkspaceResponse, error) {
 	request := operations.GetPrivateConnectionWorkspaceRequest{
 		WorkspaceID: workspaceID,
 		Fields:      fields,
@@ -648,7 +648,7 @@ func (s *workspaces) GetPrivateConnection(ctx context.Context, workspaceID strin
 
 // GetRecoveryBackup - Gets information about which regions you can setup as a disaster recovery backup
 // Returns a list of regions with regions IDs in JSON format. You must specify the workspace ID of a workspace in the group you are setting up for disaster recovery.
-func (s *workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, fields *string) (*operations.GetRecoveryBackupWorkspaceResponse, error) {
+func (s *Workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, fields *string) (*operations.GetRecoveryBackupWorkspaceResponse, error) {
 	request := operations.GetRecoveryBackupWorkspaceRequest{
 		WorkspaceID: workspaceID,
 		Fields:      fields,
@@ -727,7 +727,7 @@ func (s *workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, 
 
 // GetStorageStatus - Gets information about the storage DR status of the group in which the provided workspace belongs to
 // Returns the replication status of each database and the status of the latest Storage DR operation (Failover, Failback, etc.). You must specify the workspace ID of a workspace in the group for which you are requesting the status information.
-func (s *workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (*operations.GetStorageStatusWorkspaceResponse, error) {
+func (s *Workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (*operations.GetStorageStatusWorkspaceResponse, error) {
 	request := operations.GetStorageStatusWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -801,7 +801,7 @@ func (s *workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (
 
 // List - Lists the workspaces the user can access
 // Returns a list of all of the workspaces accessible to the user in the specified workspace group. You must specify the workspace group ID in the API call to list the workspaces in the group. Use the `includeTerminated` parameter to list the terminated workspaces.
-func (s *workspaces) List(ctx context.Context, workspaceGroupID string, fields *string, includeTerminated *bool) (*operations.ListWorkspaceResponse, error) {
+func (s *Workspaces) List(ctx context.Context, workspaceGroupID string, fields *string, includeTerminated *bool) (*operations.ListWorkspaceResponse, error) {
 	request := operations.ListWorkspaceRequest{
 		WorkspaceGroupID:  workspaceGroupID,
 		Fields:            fields,
@@ -880,7 +880,7 @@ func (s *workspaces) List(ctx context.Context, workspaceGroupID string, fields *
 
 // Update - Updates information about a workspace
 // Updates workspace information for the specified workspace, including the size. Specify the workspace's new parameters in the request body. You must specify the workspace ID in the API call.
-func (s *workspaces) Update(ctx context.Context, workspaceUpdate shared.WorkspaceUpdate, workspaceID string) (*operations.UpdateWorkspaceResponse, error) {
+func (s *Workspaces) Update(ctx context.Context, workspaceUpdate shared.WorkspaceUpdate, workspaceID string) (*operations.UpdateWorkspaceResponse, error) {
 	request := operations.UpdateWorkspaceRequest{
 		WorkspaceUpdate: workspaceUpdate,
 		WorkspaceID:     workspaceID,
@@ -969,7 +969,7 @@ func (s *workspaces) Update(ctx context.Context, workspaceUpdate shared.Workspac
 
 // UpdateFailback - Starts failback to the primary region
 // You must specify the workspace ID of a workspace in the standby (secondary) region from which you are triggering the failback.
-func (s *workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*operations.UpdateFailbackWorkspaceResponse, error) {
+func (s *Workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*operations.UpdateFailbackWorkspaceResponse, error) {
 	request := operations.UpdateFailbackWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -1032,7 +1032,7 @@ func (s *workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*o
 
 // UpdateFailover - Starts failover to the secondary region
 // You must specify the workspace ID of a workspace in the group in the inactive (primary) region from which you are triggering the failover.
-func (s *workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*operations.UpdateFailoverWorkspaceResponse, error) {
+func (s *Workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*operations.UpdateFailoverWorkspaceResponse, error) {
 	request := operations.UpdateFailoverWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -1095,7 +1095,7 @@ func (s *workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*o
 
 // UpdateStartFailoverTestMode - Starts Failover test mode
 // You must specify the workspace ID of a workspace in the group in the active (primary) region that you will failover from. This will give you an opportunity to setup any configuration on your workspace group in the secondary region.
-func (s *workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStartFailoverTestModeWorkspaceResponse, error) {
+func (s *Workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStartFailoverTestModeWorkspaceResponse, error) {
 	request := operations.UpdateStartFailoverTestModeWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}
@@ -1158,7 +1158,7 @@ func (s *workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceI
 
 // UpdateStopFailoverTestMode - Stops Failover test mode
 // You must specify the workspace ID of a workspace in the group in the active (primary) region that you will failover from. This will end the Failover test making the workspace group in the secondary region along with its configuration no longer accessible.
-func (s *workspaces) UpdateStopFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStopFailoverTestModeWorkspaceResponse, error) {
+func (s *Workspaces) UpdateStopFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStopFailoverTestModeWorkspaceResponse, error) {
 	request := operations.UpdateStopFailoverTestModeWorkspaceRequest{
 		WorkspaceID: workspaceID,
 	}

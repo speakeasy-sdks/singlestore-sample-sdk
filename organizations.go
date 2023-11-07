@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// organizations - Operations related to organizations
-type organizations struct {
+// Organizations - Operations related to organizations
+type Organizations struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newOrganizations(sdkConfig sdkConfiguration) *organizations {
-	return &organizations{
+func newOrganizations(sdkConfig sdkConfiguration) *Organizations {
+	return &Organizations{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get - Gets information about the current organization
 // Returns information about the current authorized user's organization.
-func (s *organizations) Get(ctx context.Context) (*operations.GetOrganizationInfoResponse, error) {
+func (s *Organizations) Get(ctx context.Context) (*operations.GetOrganizationInfoResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/organizations/current"
 

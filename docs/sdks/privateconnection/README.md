@@ -1,5 +1,5 @@
 # PrivateConnection
-(*PrivateConnection*)
+(*.PrivateConnection*)
 
 ### Available Operations
 

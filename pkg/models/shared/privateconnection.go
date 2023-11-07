@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// PrivateConnectionStatus - The status of the private connection
-type PrivateConnectionStatus string
+// Status - The status of the private connection
+type Status string
 
 const (
-	PrivateConnectionStatusPending PrivateConnectionStatus = "PENDING"
-	PrivateConnectionStatusActive  PrivateConnectionStatus = "ACTIVE"
-	PrivateConnectionStatusDeleted PrivateConnectionStatus = "DELETED"
+	StatusPending Status = "PENDING"
+	StatusActive  Status = "ACTIVE"
+	StatusDeleted Status = "DELETED"
 )
 
-func (e PrivateConnectionStatus) ToPointer() *PrivateConnectionStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *PrivateConnectionStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,26 +31,26 @@ func (e *PrivateConnectionStatus) UnmarshalJSON(data []byte) error {
 	case "ACTIVE":
 		fallthrough
 	case "DELETED":
-		*e = PrivateConnectionStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PrivateConnectionStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
-// PrivateConnectionType - The private connection type
-type PrivateConnectionType string
+// Type - The private connection type
+type Type string
 
 const (
-	PrivateConnectionTypeInbound  PrivateConnectionType = "INBOUND"
-	PrivateConnectionTypeOutbound PrivateConnectionType = "OUTBOUND"
+	TypeInbound  Type = "INBOUND"
+	TypeOutbound Type = "OUTBOUND"
 )
 
-func (e PrivateConnectionType) ToPointer() *PrivateConnectionType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *PrivateConnectionType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -59,10 +59,10 @@ func (e *PrivateConnectionType) UnmarshalJSON(data []byte) error {
 	case "INBOUND":
 		fallthrough
 	case "OUTBOUND":
-		*e = PrivateConnectionType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PrivateConnectionType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -83,9 +83,9 @@ type PrivateConnection struct {
 	// The name of the private connection service
 	ServiceName *string `json:"serviceName,omitempty"`
 	// The status of the private connection
-	Status *PrivateConnectionStatus `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 	// The private connection type
-	Type *PrivateConnectionType `json:"type,omitempty"`
+	Type *Type `json:"type,omitempty"`
 	// The timestamp of when the private connection was last updated
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	// The ID of the workspace group containing the private connection
@@ -143,14 +143,14 @@ func (o *PrivateConnection) GetServiceName() *string {
 	return o.ServiceName
 }
 
-func (o *PrivateConnection) GetStatus() *PrivateConnectionStatus {
+func (o *PrivateConnection) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}
 	return o.Status
 }
 
-func (o *PrivateConnection) GetType() *PrivateConnectionType {
+func (o *PrivateConnection) GetType() *Type {
 	if o == nil {
 		return nil
 	}

@@ -1,5 +1,5 @@
 # WorkspaceGroups
-(*WorkspaceGroups*)
+(*.WorkspaceGroups*)
 
 ### Available Operations
 

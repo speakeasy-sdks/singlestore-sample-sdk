@@ -1,5 +1,5 @@
 # Regions
-(*Regions*)
+(*.Regions*)
 
 ## Overview
 

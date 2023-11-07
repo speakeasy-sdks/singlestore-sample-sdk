@@ -1,5 +1,5 @@
 # Workspaces
-(*Workspaces*)
+(*.Workspaces*)
 
 ## Overview
 

@@ -66,17 +66,17 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // All the URLs referenced in this API documentation use the `https://api.singlestore.com` service endpoint as their base.
 type Singlestore struct {
 	// Operations related to billing
-	Billing *billing
+	Billing *Billing
 	// Operations related to organizations
-	Organizations     *organizations
-	PrivateConnection *privateConnection
+	Organizations     *Organizations
+	PrivateConnection *PrivateConnection
 	// Operations related to regions
-	Regions *regions
+	Regions *Regions
 	// Operations related to stages
-	Stages          *stages
-	WorkspaceGroups *workspaceGroups
+	Stages          *Stages
+	WorkspaceGroups *WorkspaceGroups
 	// Operations related to workspaces
-	Workspaces *workspaces
+	Workspaces *Workspaces
 
 	sdkConfiguration sdkConfiguration
 }
@@ -146,9 +146,9 @@ func New(opts ...SDKOption) *Singlestore {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.6.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.6.0 2.173.0 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			SDKVersion:        "0.7.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.7.0 2.181.1 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
 		},
 	}
 	for _, opt := range opts {

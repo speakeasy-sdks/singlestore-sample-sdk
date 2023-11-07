@@ -1,5 +1,5 @@
 # Organizations
-(*Organizations*)
+(*.Organizations*)
 
 ## Overview
 

@@ -21,9 +21,9 @@ func main() {
 
 	var startTime string = "string"
 
-	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByMonth
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
 
-	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+	var metric *operations.Metric = operations.MetricComputeCredit
 
 	ctx := context.Background()
 	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)

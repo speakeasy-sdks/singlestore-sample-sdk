@@ -2,7 +2,7 @@
 
 package shared
 
-type BillingUsageUsage struct {
+type Usage struct {
 	EndTime      *string `json:"endTime,omitempty"`
 	OwnerID      *string `json:"ownerId,omitempty"`
 	ResourceID   *string `json:"resourceId,omitempty"`
@@ -12,49 +12,49 @@ type BillingUsageUsage struct {
 	Value        *string `json:"value,omitempty"`
 }
 
-func (o *BillingUsageUsage) GetEndTime() *string {
+func (o *Usage) GetEndTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EndTime
 }
 
-func (o *BillingUsageUsage) GetOwnerID() *string {
+func (o *Usage) GetOwnerID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.OwnerID
 }
 
-func (o *BillingUsageUsage) GetResourceID() *string {
+func (o *Usage) GetResourceID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ResourceID
 }
 
-func (o *BillingUsageUsage) GetResourceName() *string {
+func (o *Usage) GetResourceName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ResourceName
 }
 
-func (o *BillingUsageUsage) GetResourceType() *string {
+func (o *Usage) GetResourceType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ResourceType
 }
 
-func (o *BillingUsageUsage) GetStartTime() *string {
+func (o *Usage) GetStartTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.StartTime
 }
 
-func (o *BillingUsageUsage) GetValue() *string {
+func (o *Usage) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -66,8 +66,8 @@ type BillingUsage struct {
 	// What the unit indicates
 	Description *string `json:"description,omitempty"`
 	// The metric name
-	Metric *string             `json:"metric,omitempty"`
-	Usage  []BillingUsageUsage `json:"usage,omitempty"`
+	Metric *string `json:"metric,omitempty"`
+	Usage  []Usage `json:"usage,omitempty"`
 }
 
 func (o *BillingUsage) GetDescription() *string {
@@ -84,7 +84,7 @@ func (o *BillingUsage) GetMetric() *string {
 	return o.Metric
 }
 
-func (o *BillingUsage) GetUsage() []BillingUsageUsage {
+func (o *BillingUsage) GetUsage() []Usage {
 	if o == nil {
 		return nil
 	}

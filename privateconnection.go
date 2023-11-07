@@ -15,19 +15,19 @@ import (
 	"strings"
 )
 
-type privateConnection struct {
+type PrivateConnection struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPrivateConnection(sdkConfig sdkConfiguration) *privateConnection {
-	return &privateConnection{
+func newPrivateConnection(sdkConfig sdkConfiguration) *PrivateConnection {
+	return &PrivateConnection{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Create - Creates a new private connection
 // Creates a new private connection. Upon successful completion of the request, a private connection is scheduled for creation. To query the private connection status, use the endpoints for the workspace group and workspace (if provided).
-func (s *privateConnection) Create(ctx context.Context, request shared.PrivateConnectionCreate) (*operations.CreatePrivateConnectionResponse, error) {
+func (s *PrivateConnection) Create(ctx context.Context, request shared.PrivateConnectionCreate) (*operations.CreatePrivateConnectionResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/privateConnections"
 
@@ -104,7 +104,7 @@ func (s *privateConnection) Create(ctx context.Context, request shared.PrivateCo
 
 // Delete - Deletes a private connection
 // Deletes a private connection for the specified connection ID. Upon successful completion, a private connection is scheduled for deletion.
-func (s *privateConnection) Delete(ctx context.Context, connectionID string) (*operations.DeletePrivateConnectionResponse, error) {
+func (s *PrivateConnection) Delete(ctx context.Context, connectionID string) (*operations.DeletePrivateConnectionResponse, error) {
 	request := operations.DeletePrivateConnectionRequest{
 		ConnectionID: connectionID,
 	}
@@ -180,7 +180,7 @@ func (s *privateConnection) Delete(ctx context.Context, connectionID string) (*o
 
 // Get - Gets information about a private connection
 // Returns private connection information for the specified connection ID, in JSON format. You must specify the connection ID in the API call.
-func (s *privateConnection) Get(ctx context.Context, connectionID string, fields *string) (*operations.GetPrivateConnectionResponse, error) {
+func (s *PrivateConnection) Get(ctx context.Context, connectionID string, fields *string) (*operations.GetPrivateConnectionResponse, error) {
 	request := operations.GetPrivateConnectionRequest{
 		ConnectionID: connectionID,
 		Fields:       fields,
@@ -261,7 +261,7 @@ func (s *privateConnection) Get(ctx context.Context, connectionID string, fields
 
 // Update - Updates a private connection
 // Updates a private connection. You must specify the connection ID in the API call.
-func (s *privateConnection) Update(ctx context.Context, updatePrivateConnection shared.UpdatePrivateConnection, connectionID string) (*operations.UpdatePrivateConnectionResponse, error) {
+func (s *PrivateConnection) Update(ctx context.Context, updatePrivateConnection shared.UpdatePrivateConnection, connectionID string) (*operations.UpdatePrivateConnectionResponse, error) {
 	request := operations.UpdatePrivateConnectionRequest{
 		UpdatePrivateConnection: updatePrivateConnection,
 		ConnectionID:            connectionID,

@@ -36,9 +36,9 @@ func main() {
 
 	var startTime string = "string"
 
-	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByMonth
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
 
-	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+	var metric *operations.Metric = operations.MetricComputeCredit
 
 	ctx := context.Background()
 	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
@@ -58,33 +58,33 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Billing](docs/sdks/billing/README.md)
+### [.Billing](docs/sdks/billing/README.md)
 
 * [List](docs/sdks/billing/README.md#list) - Lists the compute and storage usage of a organization
 
-### [Organizations](docs/sdks/organizations/README.md)
+### [.Organizations](docs/sdks/organizations/README.md)
 
 * [Get](docs/sdks/organizations/README.md#get) - Gets information about the current organization
 
-### [PrivateConnection](docs/sdks/privateconnection/README.md)
+### [.PrivateConnection](docs/sdks/privateconnection/README.md)
 
 * [Create](docs/sdks/privateconnection/README.md#create) - Creates a new private connection
 * [Delete](docs/sdks/privateconnection/README.md#delete) - Deletes a private connection
 * [Get](docs/sdks/privateconnection/README.md#get) - Gets information about a private connection
 * [Update](docs/sdks/privateconnection/README.md#update) - Updates a private connection
 
-### [Regions](docs/sdks/regions/README.md)
+### [.Regions](docs/sdks/regions/README.md)
 
 * [List](docs/sdks/regions/README.md#list) - Lists all of the regions for the user that support workspaces
 
-### [Stages](docs/sdks/stages/README.md)
+### [.Stages](docs/sdks/stages/README.md)
 
 * [Create](docs/sdks/stages/README.md#create) - Creates a new folder or uploads a file
 * [Delete](docs/sdks/stages/README.md#delete) - Deletes a file or folder
 * [Get](docs/sdks/stages/README.md#get) - Gets information about a folder or downloads a file
 * [Update](docs/sdks/stages/README.md#update) - Modifies a file or folder in Stages
 
-### [WorkspaceGroups](docs/sdks/workspacegroups/README.md)
+### [.WorkspaceGroups](docs/sdks/workspacegroups/README.md)
 
 * [Create](docs/sdks/workspacegroups/README.md#create) - Creates a new workspace group
 * [CreateStorage](docs/sdks/workspacegroups/README.md#createstorage) - Sets up Storage DR for the workspace group. Backup region and selected databases to be replicated are provided as part of the request.
@@ -100,7 +100,7 @@ func main() {
 * [UpdateStartFailoverTestMode](docs/sdks/workspacegroups/README.md#updatestartfailovertestmode) - Starts Failover test mode
 * [UpdateStopFailoverTestMode](docs/sdks/workspacegroups/README.md#updatestopfailovertestmode) - Stops Failover test mode
 
-### [Workspaces](docs/sdks/workspaces/README.md)
+### [.Workspaces](docs/sdks/workspaces/README.md)
 
 * [Create](docs/sdks/workspaces/README.md#create) - Creates a new workspace
 * [CreateResume](docs/sdks/workspaces/README.md#createresume) - Resumes a workspace
@@ -142,8 +142,6 @@ Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Co
 # Error Handling
 
 Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
-
-
 <!-- End Error Handling -->
 
 
@@ -161,7 +159,6 @@ You can override the default server globally using the `WithServerIndex` option 
 
 For example:
 
-
 ```go
 package main
 
@@ -175,17 +172,17 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
 		singlestoresamplesdk.WithServerIndex(0),
+		singlestoresamplesdk.WithSecurity(""),
 	)
 
 	var endTime string = "string"
 
 	var startTime string = "string"
 
-	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByMonth
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
 
-	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+	var metric *operations.Metric = operations.MetricComputeCredit
 
 	ctx := context.Background()
 	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
@@ -205,7 +202,6 @@ func main() {
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
 
-
 ```go
 package main
 
@@ -219,17 +215,17 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
 		singlestoresamplesdk.WithServerURL("https://api.singlestore.com"),
+		singlestoresamplesdk.WithSecurity(""),
 	)
 
 	var endTime string = "string"
 
 	var startTime string = "string"
 
-	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByMonth
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
 
-	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+	var metric *operations.Metric = operations.MetricComputeCredit
 
 	ctx := context.Background()
 	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
@@ -275,6 +271,60 @@ var (
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
 <!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Authentication -->
+
+# Authentication
+
+## Per-Client Security Schemes
+
+Your SDK supports the following security scheme globally:
+
+| Name         | Type         | Scheme       |
+| ------------ | ------------ | ------------ |
+| `APIKeyAuth` | http         | HTTP Bearer  |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+
+```go
+package main
+
+import (
+	"context"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/operations"
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := singlestoresamplesdk.New(
+		singlestoresamplesdk.WithSecurity(""),
+	)
+
+	var endTime string = "string"
+
+	var startTime string = "string"
+
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
+
+	var metric *operations.Metric = operations.MetricComputeCredit
+
+	ctx := context.Background()
+	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.BillingUsage != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
