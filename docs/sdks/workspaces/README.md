@@ -1,5 +1,5 @@
 # Workspaces
-(*.Workspaces*)
+(*Workspaces*)
 
 ## Overview
 
@@ -64,16 +64,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
-| `request`                                                        | [shared.WorkspaceCreate](../../models/shared/workspacecreate.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
+| `request`                                                            | [shared.WorkspaceCreate](../../pkg/models/shared/workspacecreate.md) | :heavy_check_mark:                                                   | The request object to use for the request.                           |
 
 
 ### Response
 
-**[*operations.CreateWorkspaceResponse](../../models/operations/createworkspaceresponse.md), error**
-
+**[*operations.CreateWorkspaceResponse](../../pkg/models/operations/createworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateResume
 
@@ -122,8 +124,10 @@ func main() {
 
 ### Response
 
-**[*operations.CreateResumeWorkspaceResponse](../../models/operations/createresumeworkspaceresponse.md), error**
-
+**[*operations.CreateResumeWorkspaceResponse](../../pkg/models/operations/createresumeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateStorage
 
@@ -173,17 +177,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `storageDRSetup`                                                  | [shared.StorageDRSetup](../../models/shared/storagedrsetup.md)    | :heavy_check_mark:                                                | Here's a sample of JSON data sent in the request body to the API. |
-| `workspaceID`                                                     | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace                                               |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `ctx`                                                                 | [context.Context](https://pkg.go.dev/context#Context)                 | :heavy_check_mark:                                                    | The context to use for the request.                                   |
+| `storageDRSetup`                                                      | [shared.StorageDRSetup](../../../pkg/models/shared/storagedrsetup.md) | :heavy_check_mark:                                                    | Here's a sample of JSON data sent in the request body to the API.     |
+| `workspaceID`                                                         | *string*                                                              | :heavy_check_mark:                                                    | ID of the workspace                                                   |
 
 
 ### Response
 
-**[*operations.CreateStorageWorkspaceResponse](../../models/operations/createstorageworkspaceresponse.md), error**
-
+**[*operations.CreateStorageWorkspaceResponse](../../pkg/models/operations/createstorageworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateSuspend
 
@@ -231,8 +237,10 @@ func main() {
 
 ### Response
 
-**[*operations.CreateSuspendWorkspaceResponse](../../models/operations/createsuspendworkspaceresponse.md), error**
-
+**[*operations.CreateSuspendWorkspaceResponse](../../pkg/models/operations/createsuspendworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -283,8 +291,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteWorkspaceResponse](../../models/operations/deleteworkspaceresponse.md), error**
-
+**[*operations.DeleteWorkspaceResponse](../../pkg/models/operations/deleteworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -335,8 +345,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetteWorkspaceResponse](../../models/operations/getteworkspaceresponse.md), error**
-
+**[*operations.GetteWorkspaceResponse](../../pkg/models/operations/getteworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetOutbound
 
@@ -384,8 +396,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetOutboundWorkspaceResponse](../../models/operations/getoutboundworkspaceresponse.md), error**
-
+**[*operations.GetOutboundWorkspaceResponse](../../pkg/models/operations/getoutboundworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetPrivateConnection
 
@@ -436,8 +450,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPrivateConnectionWorkspaceResponse](../../models/operations/getprivateconnectionworkspaceresponse.md), error**
-
+**[*operations.GetPrivateConnectionWorkspaceResponse](../../pkg/models/operations/getprivateconnectionworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetRecoveryBackup
 
@@ -488,8 +504,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRecoveryBackupWorkspaceResponse](../../models/operations/getrecoverybackupworkspaceresponse.md), error**
-
+**[*operations.GetRecoveryBackupWorkspaceResponse](../../pkg/models/operations/getrecoverybackupworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetStorageStatus
 
@@ -537,8 +555,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetStorageStatusWorkspaceResponse](../../models/operations/getstoragestatusworkspaceresponse.md), error**
-
+**[*operations.GetStorageStatusWorkspaceResponse](../../pkg/models/operations/getstoragestatusworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -593,8 +613,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListWorkspaceResponse](../../models/operations/listworkspaceresponse.md), error**
-
+**[*operations.ListWorkspaceResponse](../../pkg/models/operations/listworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -639,17 +661,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `workspaceUpdate`                                                 | [shared.WorkspaceUpdate](../../models/shared/workspaceupdate.md)  | :heavy_check_mark:                                                | Here's a sample of JSON data sent to the API in the request body. |
-| `workspaceID`                                                     | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace                                               |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `ctx`                                                                   | [context.Context](https://pkg.go.dev/context#Context)                   | :heavy_check_mark:                                                      | The context to use for the request.                                     |
+| `workspaceUpdate`                                                       | [shared.WorkspaceUpdate](../../../pkg/models/shared/workspaceupdate.md) | :heavy_check_mark:                                                      | Here's a sample of JSON data sent to the API in the request body.       |
+| `workspaceID`                                                           | *string*                                                                | :heavy_check_mark:                                                      | ID of the workspace                                                     |
 
 
 ### Response
 
-**[*operations.UpdateWorkspaceResponse](../../models/operations/updateworkspaceresponse.md), error**
-
+**[*operations.UpdateWorkspaceResponse](../../pkg/models/operations/updateworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateFailback
 
@@ -697,8 +721,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailbackWorkspaceResponse](../../models/operations/updatefailbackworkspaceresponse.md), error**
-
+**[*operations.UpdateFailbackWorkspaceResponse](../../pkg/models/operations/updatefailbackworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateFailover
 
@@ -746,8 +772,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailoverWorkspaceResponse](../../models/operations/updatefailoverworkspaceresponse.md), error**
-
+**[*operations.UpdateFailoverWorkspaceResponse](../../pkg/models/operations/updatefailoverworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateStartFailoverTestMode
 
@@ -795,8 +823,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStartFailoverTestModeWorkspaceResponse](../../models/operations/updatestartfailovertestmodeworkspaceresponse.md), error**
-
+**[*operations.UpdateStartFailoverTestModeWorkspaceResponse](../../pkg/models/operations/updatestartfailovertestmodeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateStopFailoverTestMode
 
@@ -844,5 +874,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStopFailoverTestModeWorkspaceResponse](../../models/operations/updatestopfailovertestmodeworkspaceresponse.md), error**
-
+**[*operations.UpdateStopFailoverTestModeWorkspaceResponse](../../pkg/models/operations/updatestopfailovertestmodeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

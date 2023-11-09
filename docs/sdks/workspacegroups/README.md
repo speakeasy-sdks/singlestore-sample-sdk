@@ -1,5 +1,5 @@
 # WorkspaceGroups
-(*.WorkspaceGroups*)
+(*WorkspaceGroups*)
 
 ### Available Operations
 
@@ -68,16 +68,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [shared.WorkspaceGroupCreate](../../models/shared/workspacegroupcreate.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [shared.WorkspaceGroupCreate](../../pkg/models/shared/workspacegroupcreate.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
 
 
 ### Response
 
-**[*operations.CreateWorkspaceGroupResponse](../../models/operations/createworkspacegroupresponse.md), error**
-
+**[*operations.CreateWorkspaceGroupResponse](../../pkg/models/operations/createworkspacegroupresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## CreateStorage
 
@@ -127,17 +129,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `storageDRSetup`                                                  | [shared.StorageDRSetup](../../models/shared/storagedrsetup.md)    | :heavy_check_mark:                                                | Here's a sample of JSON data sent in the request body to the API. |
-| `workspaceGroupID`                                                | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace group                                         |
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `ctx`                                                                 | [context.Context](https://pkg.go.dev/context#Context)                 | :heavy_check_mark:                                                    | The context to use for the request.                                   |
+| `storageDRSetup`                                                      | [shared.StorageDRSetup](../../../pkg/models/shared/storagedrsetup.md) | :heavy_check_mark:                                                    | Here's a sample of JSON data sent in the request body to the API.     |
+| `workspaceGroupID`                                                    | *string*                                                              | :heavy_check_mark:                                                    | ID of the workspace group                                             |
 
 
 ### Response
 
-**[*operations.CreateStorageWorkspaceGroupsResponse](../../models/operations/createstorageworkspacegroupsresponse.md), error**
-
+**[*operations.CreateStorageWorkspaceGroupsResponse](../../pkg/models/operations/createstorageworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -191,8 +195,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteWorkspaceGroupsResponse](../../models/operations/deleteworkspacegroupsresponse.md), error**
-
+**[*operations.DeleteWorkspaceGroupsResponse](../../pkg/models/operations/deleteworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -245,8 +251,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetWorkspaceGroupsResponse](../../models/operations/getworkspacegroupsresponse.md), error**
-
+**[*operations.GetWorkspaceGroupsResponse](../../pkg/models/operations/getworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetPrivateConnection
 
@@ -299,8 +307,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPrivateConnectionWorkspaceGroupsResponse](../../models/operations/getprivateconnectionworkspacegroupsresponse.md), error**
-
+**[*operations.GetPrivateConnectionWorkspaceGroupsResponse](../../pkg/models/operations/getprivateconnectionworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetRecoveryBackup
 
@@ -351,8 +361,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRecoveryBackupWorkspaceGroupsResponse](../../models/operations/getrecoverybackupworkspacegroupsresponse.md), error**
-
+**[*operations.GetRecoveryBackupWorkspaceGroupsResponse](../../pkg/models/operations/getrecoverybackupworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## GetStorageStatus
 
@@ -400,8 +412,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetStorageStatusWorkspaceGroupsResponse](../../models/operations/getstoragestatusworkspacegroupsresponse.md), error**
-
+**[*operations.GetStorageStatusWorkspaceGroupsResponse](../../pkg/models/operations/getstoragestatusworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## List
 
@@ -453,8 +467,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListWorkspaceGroupResponse](../../models/operations/listworkspacegroupresponse.md), error**
-
+**[*operations.ListWorkspaceGroupResponse](../../pkg/models/operations/listworkspacegroupresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -509,17 +525,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `workspaceGroupUpdate`                                                     | [shared.WorkspaceGroupUpdate](../../models/shared/workspacegroupupdate.md) | :heavy_check_mark:                                                         | Here's a sample of JSON data sent to the API in the request body.          |
-| `workspaceGroupID`                                                         | *string*                                                                   | :heavy_check_mark:                                                         | ID of the workspace group                                                  |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
+| `workspaceGroupUpdate`                                                            | [shared.WorkspaceGroupUpdate](../../../pkg/models/shared/workspacegroupupdate.md) | :heavy_check_mark:                                                                | Here's a sample of JSON data sent to the API in the request body.                 |
+| `workspaceGroupID`                                                                | *string*                                                                          | :heavy_check_mark:                                                                | ID of the workspace group                                                         |
 
 
 ### Response
 
-**[*operations.UpdateWorkspaceGroupsResponse](../../models/operations/updateworkspacegroupsresponse.md), error**
-
+**[*operations.UpdateWorkspaceGroupsResponse](../../pkg/models/operations/updateworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateFailback
 
@@ -567,8 +585,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailbackWorkspaceGroupsResponse](../../models/operations/updatefailbackworkspacegroupsresponse.md), error**
-
+**[*operations.UpdateFailbackWorkspaceGroupsResponse](../../pkg/models/operations/updatefailbackworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateFailover
 
@@ -616,8 +636,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailoverWorkspaceGroupsResponse](../../models/operations/updatefailoverworkspacegroupsresponse.md), error**
-
+**[*operations.UpdateFailoverWorkspaceGroupsResponse](../../pkg/models/operations/updatefailoverworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateStartFailoverTestMode
 
@@ -665,8 +687,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse](../../models/operations/updatestartfailovertestmodeworkspacegroupsresponse.md), error**
-
+**[*operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse](../../pkg/models/operations/updatestartfailovertestmodeworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## UpdateStopFailoverTestMode
 
@@ -714,5 +738,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse](../../models/operations/updatestopfailovertestmodeworkspacegroupsresponse.md), error**
-
+**[*operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse](../../pkg/models/operations/updatestopfailovertestmodeworkspacegroupsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

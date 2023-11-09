@@ -1,5 +1,5 @@
 # PrivateConnection
-(*.PrivateConnection*)
+(*PrivateConnection*)
 
 ### Available Operations
 
@@ -49,16 +49,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [shared.PrivateConnectionCreate](../../models/shared/privateconnectioncreate.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [shared.PrivateConnectionCreate](../../pkg/models/shared/privateconnectioncreate.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 
 
 ### Response
 
-**[*operations.CreatePrivateConnectionResponse](../../models/operations/createprivateconnectionresponse.md), error**
-
+**[*operations.CreatePrivateConnectionResponse](../../pkg/models/operations/createprivateconnectionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -106,8 +108,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePrivateConnectionResponse](../../models/operations/deleteprivateconnectionresponse.md), error**
-
+**[*operations.DeletePrivateConnectionResponse](../../pkg/models/operations/deleteprivateconnectionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -158,8 +162,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPrivateConnectionResponse](../../models/operations/getprivateconnectionresponse.md), error**
-
+**[*operations.GetPrivateConnectionResponse](../../pkg/models/operations/getprivateconnectionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -203,14 +209,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `updatePrivateConnection`                                                        | [shared.UpdatePrivateConnection](../../models/shared/updateprivateconnection.md) | :heavy_check_mark:                                                               | Here's a sample of JSON data sent in the request body to the API.                |
-| `connectionID`                                                                   | *string*                                                                         | :heavy_check_mark:                                                               | ID of the private connection                                                     |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `ctx`                                                                                   | [context.Context](https://pkg.go.dev/context#Context)                                   | :heavy_check_mark:                                                                      | The context to use for the request.                                                     |
+| `updatePrivateConnection`                                                               | [shared.UpdatePrivateConnection](../../../pkg/models/shared/updateprivateconnection.md) | :heavy_check_mark:                                                                      | Here's a sample of JSON data sent in the request body to the API.                       |
+| `connectionID`                                                                          | *string*                                                                                | :heavy_check_mark:                                                                      | ID of the private connection                                                            |
 
 
 ### Response
 
-**[*operations.UpdatePrivateConnectionResponse](../../models/operations/updateprivateconnectionresponse.md), error**
-
+**[*operations.UpdatePrivateConnectionResponse](../../pkg/models/operations/updateprivateconnectionresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Regions
-(*.Regions*)
+(*Regions*)
 
 ## Overview
 
@@ -55,5 +55,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListRegionsResponse](../../models/operations/listregionsresponse.md), error**
-
+**[*operations.ListRegionsResponse](../../pkg/models/operations/listregionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Organizations
-(*.Organizations*)
+(*Organizations*)
 
 ## Overview
 
@@ -51,5 +51,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetOrganizationInfoResponse](../../models/operations/getorganizationinforesponse.md), error**
-
+**[*operations.GetOrganizationInfoResponse](../../pkg/models/operations/getorganizationinforesponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Billing
-(*.Billing*)
+(*Billing*)
 
 ## Overview
 
@@ -60,11 +60,13 @@ func main() {
 | `ctx`                                                                                       | [context.Context](https://pkg.go.dev/context#Context)                                       | :heavy_check_mark:                                                                          | The context to use for the request.                                                         |
 | `endTime`                                                                                   | *string*                                                                                    | :heavy_check_mark:                                                                          | The end time for the usage interval valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z      |
 | `startTime`                                                                                 | *string*                                                                                    | :heavy_check_mark:                                                                          | The start time for the usage interval in valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z |
-| `aggregateBy`                                                                               | [*operations.AggregateBy](../../models/operations/aggregateby.md)                           | :heavy_minus_sign:                                                                          | The aggregate type used to group usage which includes hour, day and month. default is hour  |
-| `metric`                                                                                    | [*operations.Metric](../../models/operations/metric.md)                                     | :heavy_minus_sign:                                                                          | Metrics include ComputeCredit, StorageAvgByte. default is all                               |
+| `aggregateBy`                                                                               | [*operations.AggregateBy](../../../pkg/models/operations/aggregateby.md)                    | :heavy_minus_sign:                                                                          | The aggregate type used to group usage which includes hour, day and month. default is hour  |
+| `metric`                                                                                    | [*operations.Metric](../../../pkg/models/operations/metric.md)                              | :heavy_minus_sign:                                                                          | Metrics include ComputeCredit, StorageAvgByte. default is all                               |
 
 
 ### Response
 
-**[*operations.ListBillingUsageResponse](../../models/operations/listbillingusageresponse.md), error**
-
+**[*operations.ListBillingUsageResponse](../../pkg/models/operations/listbillingusageresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |

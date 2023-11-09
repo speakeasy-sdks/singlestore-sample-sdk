@@ -1,5 +1,5 @@
 # Stages
-(*.Stages*)
+(*Stages*)
 
 ## Overview
 
@@ -71,19 +71,21 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `path`                                                                            | *string*                                                                          | :heavy_check_mark:                                                                | Path in Stages                                                                    |
-| `workspaceGroupID`                                                                | *string*                                                                          | :heavy_check_mark:                                                                | ID of the Stages-enabled workspace group                                          |
-| `createStagesFileRequest`                                                         | [*shared.CreateStagesFileRequest](../../models/shared/createstagesfilerequest.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `isFile`                                                                          | **bool*                                                                           | :heavy_minus_sign:                                                                | If set to `true`, forces creation of an empty file                                |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `path`                                                                                   | *string*                                                                                 | :heavy_check_mark:                                                                       | Path in Stages                                                                           |
+| `workspaceGroupID`                                                                       | *string*                                                                                 | :heavy_check_mark:                                                                       | ID of the Stages-enabled workspace group                                                 |
+| `createStagesFileRequest`                                                                | [*shared.CreateStagesFileRequest](../../../pkg/models/shared/createstagesfilerequest.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `isFile`                                                                                 | **bool*                                                                                  | :heavy_minus_sign:                                                                       | If set to `true`, forces creation of an empty file                                       |
 
 
 ### Response
 
-**[*operations.CreateStagesFileResponse](../../models/operations/createstagesfileresponse.md), error**
-
+**[*operations.CreateStagesFileResponse](../../pkg/models/operations/createstagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Delete
 
@@ -141,8 +143,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteStagesFileResponse](../../models/operations/deletestagesfileresponse.md), error**
-
+**[*operations.DeleteStagesFileResponse](../../pkg/models/operations/deletestagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Get
 
@@ -203,8 +207,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetStagesFileResponse](../../models/operations/getstagesfileresponse.md), error**
-
+**[*operations.GetStagesFileResponse](../../pkg/models/operations/getstagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## Update
 
@@ -257,15 +263,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |
-| `path`                                                    | *string*                                                  | :heavy_check_mark:                                        | Path in Stages to modify                                  |
-| `workspaceGroupID`                                        | *string*                                                  | :heavy_check_mark:                                        | ID of the Stages-enabled workspace group                  |
-| `stagesPatch`                                             | [*shared.StagesPatch](../../models/shared/stagespatch.md) | :heavy_minus_sign:                                        | N/A                                                       |
+| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
+| `path`                                                           | *string*                                                         | :heavy_check_mark:                                               | Path in Stages to modify                                         |
+| `workspaceGroupID`                                               | *string*                                                         | :heavy_check_mark:                                               | ID of the Stages-enabled workspace group                         |
+| `stagesPatch`                                                    | [*shared.StagesPatch](../../../pkg/models/shared/stagespatch.md) | :heavy_minus_sign:                                               | N/A                                                              |
 
 
 ### Response
 
-**[*operations.UpdateStagesFileResponse](../../models/operations/updatestagesfileresponse.md), error**
-
+**[*operations.UpdateStagesFileResponse](../../pkg/models/operations/updatestagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 400-600            | */*                |
