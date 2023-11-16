@@ -35,10 +35,10 @@ This API call does not take any request parameters.
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -88,10 +88,10 @@ Resumes a workspace with the specified workspace ID. You must specify the worksp
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -139,10 +139,11 @@ You must specify the workspace ID of a workspace in the group you are setting up
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
@@ -201,10 +202,10 @@ Suspends a workspace with the specified workspace ID. You must specify the works
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -255,10 +256,10 @@ All the databases attached to the workspace are detached when the workspace is t
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -306,10 +307,10 @@ Returns workspace information for the specified workspace ID, in JSON format. Yo
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -360,10 +361,10 @@ Returns the account ID which must be allowed for outbound connections.
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -411,10 +412,10 @@ Returns private connection information for the specified workspace ID, in JSON f
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -465,10 +466,10 @@ Returns a list of regions with regions IDs in JSON format. You must specify the 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -519,10 +520,10 @@ Returns the replication status of each database and the status of the latest Sto
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -571,10 +572,10 @@ Returns a list of all of the workspaces accessible to the user in the specified 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -629,10 +630,10 @@ Updates workspace information for the specified workspace, including the size. S
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -685,10 +686,11 @@ You must specify the workspace ID of a workspace in the standby (secondary) regi
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
@@ -736,10 +738,11 @@ You must specify the workspace ID of a workspace in the group in the inactive (p
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
@@ -787,10 +790,11 @@ You must specify the workspace ID of a workspace in the group in the active (pri
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"net/http"
 )
 
 func main() {
@@ -838,10 +842,11 @@ You must specify the workspace ID of a workspace in the group in the active (pri
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	"net/http"
 )
 
 func main() {

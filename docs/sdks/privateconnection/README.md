@@ -19,10 +19,10 @@ Creates a new private connection. Upon successful completion of the request, a p
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -72,10 +72,10 @@ Deletes a private connection for the specified connection ID. Upon successful co
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -123,10 +123,10 @@ Returns private connection information for the specified connection ID, in JSON 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
@@ -177,10 +177,10 @@ Updates a private connection. You must specify the connection ID in the API call
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
