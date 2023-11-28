@@ -96,7 +96,6 @@ pkg/utils/utils.go
 /pkg/models/shared/privateconnectionoutboundallowlist.go
 /pkg/models/shared/workspaceupdate.go
 /pkg/models/shared/security.go
-USAGE.md
 docs/pkg/models/operations/aggregateby.md
 docs/pkg/models/operations/metric.md
 docs/pkg/models/operations/listbillingusagerequest.md
@@ -231,6 +230,7 @@ docs/sdks/regions/README.md
 docs/sdks/stages/README.md
 docs/sdks/workspacegroups/README.md
 docs/sdks/workspaces/README.md
+USAGE.md
 .gitattributes
 .devcontainer/README.md
 .devcontainer/devcontainer.json
