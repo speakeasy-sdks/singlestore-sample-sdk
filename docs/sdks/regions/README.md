@@ -27,7 +27,7 @@ import(
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 

@@ -32,7 +32,7 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var endTime string = "string"
@@ -124,6 +124,8 @@ func main() {
 
 <!-- Start Special Types [types] -->
 ## Special Types
+
+
 <!-- End Special Types [types] -->
 
 
@@ -154,7 +156,7 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var endTime string = "string"
@@ -209,7 +211,7 @@ import (
 func main() {
 	s := singlestoresamplesdk.New(
 		singlestoresamplesdk.WithServerIndex(0),
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var endTime string = "string"
@@ -251,7 +253,7 @@ import (
 func main() {
 	s := singlestoresamplesdk.New(
 		singlestoresamplesdk.WithServerURL("https://api.singlestore.com"),
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var endTime string = "string"
@@ -333,7 +335,7 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
 	var endTime string = "string"

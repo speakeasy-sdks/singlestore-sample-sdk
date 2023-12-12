@@ -27,7 +27,7 @@ import(
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -80,7 +80,7 @@ import(
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -131,7 +131,7 @@ import(
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -185,7 +185,7 @@ import(
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -209,11 +209,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `ctx`                                                                                   | [context.Context](https://pkg.go.dev/context#Context)                                   | :heavy_check_mark:                                                                      | The context to use for the request.                                                     |
-| `updatePrivateConnection`                                                               | [shared.UpdatePrivateConnection](../../../pkg/models/shared/updateprivateconnection.md) | :heavy_check_mark:                                                                      | Here's a sample of JSON data sent in the request body to the API.                       |
-| `connectionID`                                                                          | *string*                                                                                | :heavy_check_mark:                                                                      | ID of the private connection                                                            |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `updatePrivateConnection`                                                            | [shared.UpdatePrivateConnection](../../pkg/models/shared/updateprivateconnection.md) | :heavy_check_mark:                                                                   | Here's a sample of JSON data sent in the request body to the API.                    |
+| `connectionID`                                                                       | *string*                                                                             | :heavy_check_mark:                                                                   | ID of the private connection                                                         |
 
 
 ### Response

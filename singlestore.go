@@ -126,7 +126,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKeyAuth string) SDKOption {
 	return func(sdk *Singlestore) {
 		security := shared.Security{APIKeyAuth: apiKeyAuth}
@@ -146,9 +145,9 @@ func New(opts ...SDKOption) *Singlestore {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.7.3",
-			GenVersion:        "2.202.2",
-			UserAgent:         "speakeasy-sdk/go 0.7.3 2.202.2 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			SDKVersion:        "0.8.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 0.8.0 2.213.3 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
 		},
 	}
 	for _, opt := range opts {
