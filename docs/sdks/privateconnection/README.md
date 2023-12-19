@@ -60,7 +60,7 @@ func main() {
 **[*operations.CreatePrivateConnectionResponse](../../pkg/models/operations/createprivateconnectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -111,7 +111,7 @@ func main() {
 **[*operations.DeletePrivateConnectionResponse](../../pkg/models/operations/deleteprivateconnectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -165,7 +165,7 @@ func main() {
 **[*operations.GetPrivateConnectionResponse](../../pkg/models/operations/getprivateconnectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -221,4 +221,4 @@ func main() {
 **[*operations.UpdatePrivateConnectionResponse](../../pkg/models/operations/updateprivateconnectionresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

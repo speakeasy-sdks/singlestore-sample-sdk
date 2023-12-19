@@ -85,7 +85,7 @@ func main() {
 **[*operations.CreateStagesFileResponse](../../pkg/models/operations/createstagesfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -146,7 +146,7 @@ func main() {
 **[*operations.DeleteStagesFileResponse](../../pkg/models/operations/deletestagesfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -210,7 +210,7 @@ func main() {
 **[*operations.GetStagesFileResponse](../../pkg/models/operations/getstagesfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -276,4 +276,4 @@ func main() {
 **[*operations.UpdateStagesFileResponse](../../pkg/models/operations/updatestagesfileresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

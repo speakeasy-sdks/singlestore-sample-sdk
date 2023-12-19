@@ -79,7 +79,7 @@ func main() {
 **[*operations.CreateWorkspaceGroupResponse](../../pkg/models/operations/createworkspacegroupresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateStorage
 
@@ -139,7 +139,7 @@ func main() {
 **[*operations.CreateStorageWorkspaceGroupsResponse](../../pkg/models/operations/createstorageworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -196,7 +196,7 @@ func main() {
 **[*operations.DeleteWorkspaceGroupsResponse](../../pkg/models/operations/deleteworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -252,7 +252,7 @@ func main() {
 **[*operations.GetWorkspaceGroupsResponse](../../pkg/models/operations/getworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetPrivateConnection
 
@@ -308,7 +308,7 @@ func main() {
 **[*operations.GetPrivateConnectionWorkspaceGroupsResponse](../../pkg/models/operations/getprivateconnectionworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetRecoveryBackup
 
@@ -362,7 +362,7 @@ func main() {
 **[*operations.GetRecoveryBackupWorkspaceGroupsResponse](../../pkg/models/operations/getrecoverybackupworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetStorageStatus
 
@@ -413,7 +413,7 @@ func main() {
 **[*operations.GetStorageStatusWorkspaceGroupsResponse](../../pkg/models/operations/getstoragestatusworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -468,7 +468,7 @@ func main() {
 **[*operations.ListWorkspaceGroupResponse](../../pkg/models/operations/listworkspacegroupresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -535,7 +535,7 @@ func main() {
 **[*operations.UpdateWorkspaceGroupsResponse](../../pkg/models/operations/updateworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateFailback
 
@@ -587,7 +587,7 @@ func main() {
 **[*operations.UpdateFailbackWorkspaceGroupsResponse](../../pkg/models/operations/updatefailbackworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateFailover
 
@@ -639,7 +639,7 @@ func main() {
 **[*operations.UpdateFailoverWorkspaceGroupsResponse](../../pkg/models/operations/updatefailoverworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateStartFailoverTestMode
 
@@ -691,7 +691,7 @@ func main() {
 **[*operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse](../../pkg/models/operations/updatestartfailovertestmodeworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateStopFailoverTestMode
 
@@ -743,4 +743,4 @@ func main() {
 **[*operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse](../../pkg/models/operations/updatestopfailovertestmodeworkspacegroupsresponse.md), error**
 | Error Object       | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.SDKError | 400-600            | */*                |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
