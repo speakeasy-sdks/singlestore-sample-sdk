@@ -1,30 +1,13 @@
-configVersion: 1.0.0
-management:
-  docChecksum: 45c13b19398e9a0ecbb6c51994f44611
-  docVersion: 1.1.33
-  speakeasyVersion: 1.127.0
-  generationVersion: 2.220.0
+configVersion: 2.0.0
 generation:
-  comments: {}
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
   sdkClassName: singlestore
-  repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git
   usageSnippets:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
-features:
-  go:
-    core: 3.2.2
-    devContainers: 2.90.0
-    flattening: 2.81.1
-    globalSecurity: 2.82.3
-    globalServerURLs: 2.82.1
-    groups: 2.81.2
-    nameOverrides: 2.81.1
-    unions: 2.85.2
 go:
   version: 0.8.1
   clientServerStatusCodesAsErrors: true
@@ -38,9 +21,6 @@ go:
       shared: pkg/models/shared
       webhooks: pkg/models/webhooks
   inputModelSuffix: input
-  installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
   maxMethodParams: 4
   outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/singlestore-sample-sdk
-  published: true
-  repoSubDirectory: .
