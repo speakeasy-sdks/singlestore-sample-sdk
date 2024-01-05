@@ -66,17 +66,17 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // All the URLs referenced in this API documentation use the `https://api.singlestore.com` service endpoint as their base.
 type Singlestore struct {
 	// Operations related to billing
-	Billing *billing
+	Billing *Billing
 	// Operations related to organizations
-	Organizations     *organizations
-	PrivateConnection *privateConnection
+	Organizations     *Organizations
+	PrivateConnection *PrivateConnection
 	// Operations related to regions
-	Regions *regions
+	Regions *Regions
 	// Operations related to stages
-	Stages          *stages
-	WorkspaceGroups *workspaceGroups
+	Stages          *Stages
+	WorkspaceGroups *WorkspaceGroups
 	// Operations related to workspaces
-	Workspaces *workspaces
+	Workspaces *Workspaces
 
 	sdkConfiguration sdkConfiguration
 }
@@ -126,7 +126,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKeyAuth string) SDKOption {
 	return func(sdk *Singlestore) {
 		security := shared.Security{APIKeyAuth: apiKeyAuth}
@@ -146,9 +145,9 @@ func New(opts ...SDKOption) *Singlestore {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.5.0",
-			GenVersion:        "2.161.0",
-			UserAgent:         "speakeasy-sdk/go 0.5.0 2.161.0 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			SDKVersion:        "0.8.1",
+			GenVersion:        "2.225.2",
+			UserAgent:         "speakeasy-sdk/go 0.8.1 2.225.2 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
 		},
 	}
 	for _, opt := range opts {

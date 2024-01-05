@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// WorkspaceResumeAttachmentsAttachment - The type of attachment
-type WorkspaceResumeAttachmentsAttachment string
+// Attachment - The type of attachment
+type Attachment string
 
 const (
-	WorkspaceResumeAttachmentsAttachmentReadwrite WorkspaceResumeAttachmentsAttachment = "READWRITE"
-	WorkspaceResumeAttachmentsAttachmentReadonly  WorkspaceResumeAttachmentsAttachment = "READONLY"
+	AttachmentReadwrite Attachment = "READWRITE"
+	AttachmentReadonly  Attachment = "READONLY"
 )
 
-func (e WorkspaceResumeAttachmentsAttachment) ToPointer() *WorkspaceResumeAttachmentsAttachment {
+func (e Attachment) ToPointer() *Attachment {
 	return &e
 }
 
-func (e *WorkspaceResumeAttachmentsAttachment) UnmarshalJSON(data []byte) error {
+func (e *Attachment) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,17 +28,17 @@ func (e *WorkspaceResumeAttachmentsAttachment) UnmarshalJSON(data []byte) error 
 	case "READWRITE":
 		fallthrough
 	case "READONLY":
-		*e = WorkspaceResumeAttachmentsAttachment(v)
+		*e = Attachment(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for WorkspaceResumeAttachmentsAttachment: %v", v)
+		return fmt.Errorf("invalid value for Attachment: %v", v)
 	}
 }
 
-// WorkspaceResumeAttachments - Represents information related to database attachments
-type WorkspaceResumeAttachments struct {
+// ResumeAttachments - Represents information related to database attachments
+type ResumeAttachments struct {
 	// The type of attachment
-	Attachment WorkspaceResumeAttachmentsAttachment `json:"attachment"`
+	Attachment Attachment `json:"attachment"`
 	// Name of the database
 	Database string `json:"database"`
 	// The error if the attachment was not successful
@@ -47,50 +47,50 @@ type WorkspaceResumeAttachments struct {
 	Success bool `json:"success"`
 }
 
-func (o *WorkspaceResumeAttachments) GetAttachment() WorkspaceResumeAttachmentsAttachment {
+func (o *ResumeAttachments) GetAttachment() Attachment {
 	if o == nil {
-		return WorkspaceResumeAttachmentsAttachment("")
+		return Attachment("")
 	}
 	return o.Attachment
 }
 
-func (o *WorkspaceResumeAttachments) GetDatabase() string {
+func (o *ResumeAttachments) GetDatabase() string {
 	if o == nil {
 		return ""
 	}
 	return o.Database
 }
 
-func (o *WorkspaceResumeAttachments) GetError() *string {
+func (o *ResumeAttachments) GetError() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Error
 }
 
-func (o *WorkspaceResumeAttachments) GetSuccess() bool {
+func (o *ResumeAttachments) GetSuccess() bool {
 	if o == nil {
 		return false
 	}
 	return o.Success
 }
 
-// WorkspaceState - State of the workspace
-type WorkspaceState string
+// State of the workspace
+type State string
 
 const (
-	WorkspaceStateActive     WorkspaceState = "ACTIVE"
-	WorkspaceStatePending    WorkspaceState = "PENDING"
-	WorkspaceStateSuspended  WorkspaceState = "SUSPENDED"
-	WorkspaceStateFailed     WorkspaceState = "FAILED"
-	WorkspaceStateTerminated WorkspaceState = "TERMINATED"
+	StateActive     State = "ACTIVE"
+	StatePending    State = "PENDING"
+	StateSuspended  State = "SUSPENDED"
+	StateFailed     State = "FAILED"
+	StateTerminated State = "TERMINATED"
 )
 
-func (e WorkspaceState) ToPointer() *WorkspaceState {
+func (e State) ToPointer() *State {
 	return &e
 }
 
-func (e *WorkspaceState) UnmarshalJSON(data []byte) error {
+func (e *State) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -105,10 +105,10 @@ func (e *WorkspaceState) UnmarshalJSON(data []byte) error {
 	case "FAILED":
 		fallthrough
 	case "TERMINATED":
-		*e = WorkspaceState(v)
+		*e = State(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for WorkspaceState: %v", v)
+		return fmt.Errorf("invalid value for State: %v", v)
 	}
 }
 
@@ -123,14 +123,14 @@ type Workspace struct {
 	// Name of the workspace
 	Name string `json:"name"`
 	// (If included in the output) The result of database attachments after the workspace was resumed
-	ResumeAttachments []WorkspaceResumeAttachments `json:"resumeAttachments,omitempty"`
+	ResumeAttachments []ResumeAttachments `json:"resumeAttachments,omitempty"`
 	// (If included in the output) The current progress percentage for the scaling workspace
 	ScalingProgress *float64 `json:"scalingProgress,omitempty"`
 	// Size of the workspace (in workspace size notation), such as "S-00" or "S-1"
 	//
 	Size string `json:"size"`
 	// State of the workspace
-	State WorkspaceState `json:"state"`
+	State State `json:"state"`
 	// (If included in the output) The timestamp of when the workspace was terminated
 	TerminatedAt *string `json:"terminatedAt,omitempty"`
 	// ID of the workspace group containing the workspace
@@ -167,7 +167,7 @@ func (o *Workspace) GetName() string {
 	return o.Name
 }
 
-func (o *Workspace) GetResumeAttachments() []WorkspaceResumeAttachments {
+func (o *Workspace) GetResumeAttachments() []ResumeAttachments {
 	if o == nil {
 		return nil
 	}
@@ -188,9 +188,9 @@ func (o *Workspace) GetSize() string {
 	return o.Size
 }
 
-func (o *Workspace) GetState() WorkspaceState {
+func (o *Workspace) GetState() State {
 	if o == nil {
-		return WorkspaceState("")
+		return State("")
 	}
 	return o.State
 }

@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// billing - Operations related to billing
-type billing struct {
+// Billing - Operations related to billing
+type Billing struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newBilling(sdkConfig sdkConfiguration) *billing {
-	return &billing{
+func newBilling(sdkConfig sdkConfiguration) *Billing {
+	return &Billing{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // List - Lists the compute and storage usage of a organization
 // Lists the compute and storage usage of an organization in a given timeframe and aggregate type. The usage entries also contains details such as name, type and usage value.
-func (s *billing) List(ctx context.Context, endTime string, startTime string, aggregateBy *operations.ListBillingUsageAggregateBy, metric *operations.ListBillingUsageMetric) (*operations.ListBillingUsageResponse, error) {
+func (s *Billing) List(ctx context.Context, endTime string, startTime string, aggregateBy *operations.AggregateBy, metric *operations.Metric) (*operations.ListBillingUsageResponse, error) {
 	request := operations.ListBillingUsageRequest{
 		EndTime:     endTime,
 		StartTime:   startTime,

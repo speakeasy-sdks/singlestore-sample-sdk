@@ -1,6 +1,4 @@
-<!-- Start SDK Example Usage -->
-
-
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
@@ -14,16 +12,16 @@ import (
 
 func main() {
 	s := singlestoresamplesdk.New(
-		singlestoresamplesdk.WithSecurity(""),
+		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	var endTime string = "Bicycle"
+	var endTime string = "string"
 
-	var startTime string = "Metal"
+	var startTime string = "string"
 
-	var aggregateBy *operations.ListBillingUsageAggregateBy = operations.ListBillingUsageAggregateByHour
+	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth
 
-	var metric *operations.ListBillingUsageMetric = operations.ListBillingUsageMetricComputeCredit
+	var metric *operations.Metric = operations.MetricComputeCredit
 
 	ctx := context.Background()
 	res, err := s.Billing.List(ctx, endTime, startTime, aggregateBy, metric)
@@ -37,4 +35,4 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

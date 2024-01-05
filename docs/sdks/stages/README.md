@@ -32,26 +32,26 @@ You must specify the `workspaceGroupID` and the folder/file path in the API call
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
-    var path string = "online"
+    var path string = "string"
 
-    var workspaceGroupID string = "ad642c1f-c6fe-4072-81bc-dd89dc7fa504"
+    var workspaceGroupID string = "77ad642c-1fc6-4fe0-b241-bcdd89dc7fa5"
 
     createStagesFileRequest := &shared.CreateStagesFileRequest{
-        File: &shared.CreateStagesFileRequestFile{
-            Content: []byte("t\"Q644c'n?"),
-            File: "easily",
+        File: &shared.File{
+            Content: []byte("0x05D0b544f1"),
+            FileName: "functionalities_grocery_borders.pdf",
         },
     }
 
@@ -71,19 +71,21 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `ctx`                                                                             | [context.Context](https://pkg.go.dev/context#Context)                             | :heavy_check_mark:                                                                | The context to use for the request.                                               |
-| `path`                                                                            | *string*                                                                          | :heavy_check_mark:                                                                | Path in Stages                                                                    |
-| `workspaceGroupID`                                                                | *string*                                                                          | :heavy_check_mark:                                                                | ID of the Stages-enabled workspace group                                          |
-| `createStagesFileRequest`                                                         | [*shared.CreateStagesFileRequest](../../models/shared/createstagesfilerequest.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `isFile`                                                                          | **bool*                                                                           | :heavy_minus_sign:                                                                | If set to `true`, forces creation of an empty file                                |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
+| `path`                                                                                | *string*                                                                              | :heavy_check_mark:                                                                    | Path in Stages                                                                        |
+| `workspaceGroupID`                                                                    | *string*                                                                              | :heavy_check_mark:                                                                    | ID of the Stages-enabled workspace group                                              |
+| `createStagesFileRequest`                                                             | [*shared.CreateStagesFileRequest](../../pkg/models/shared/createstagesfilerequest.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `isFile`                                                                              | **bool*                                                                               | :heavy_minus_sign:                                                                    | If set to `true`, forces creation of an empty file                                    |
 
 
 ### Response
 
-**[*operations.CreateStagesFileResponse](../../models/operations/createstagesfileresponse.md), error**
-
+**[*operations.CreateStagesFileResponse](../../pkg/models/operations/createstagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -102,21 +104,21 @@ You must specify the `workspaceGroupID` and the folder/file path in the API call
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
-    var path string = "program"
+    var path string = "string"
 
-    var workspaceGroupID string = "b863f6ef-9b13-4aca-b0cb-816b33de6bc7"
+    var workspaceGroupID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
 
     ctx := context.Background()
     res, err := s.Stages.Delete(ctx, path, workspaceGroupID)
@@ -141,8 +143,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteStagesFileResponse](../../models/operations/deletestagesfileresponse.md), error**
-
+**[*operations.DeleteStagesFileResponse](../../pkg/models/operations/deletestagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -161,21 +165,21 @@ You must specify the `workspaceGroupID` and the folder/file path in the API call
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
-    var path string = "female"
+    var path string = "string"
 
-    var workspaceGroupID string = "8d8d81fd-7b76-44e3-9e47-5cb1f3659158"
+    var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
     var metadata *bool = false
 
@@ -203,8 +207,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetStagesFileResponse](../../models/operations/getstagesfileresponse.md), error**
-
+**[*operations.GetStagesFileResponse](../../pkg/models/operations/getstagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -223,21 +229,21 @@ You must specify the `workspaceGroupID` and the folder/file path in the API call
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
-    var path string = "Van"
+    var path string = "string"
 
-    var workspaceGroupID string = "05bf4aa7-7f20-44e7-b54c-352acfe54077"
+    var workspaceGroupID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
     stagesPatch := &shared.StagesPatch{
         NewPath: singlestoresamplesdk.String("parent_folder/new_sample_folder"),
@@ -257,15 +263,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |
-| `path`                                                    | *string*                                                  | :heavy_check_mark:                                        | Path in Stages to modify                                  |
-| `workspaceGroupID`                                        | *string*                                                  | :heavy_check_mark:                                        | ID of the Stages-enabled workspace group                  |
-| `stagesPatch`                                             | [*shared.StagesPatch](../../models/shared/stagespatch.md) | :heavy_minus_sign:                                        | N/A                                                       |
+| Parameter                                                     | Type                                                          | Required                                                      | Description                                                   |
+| ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------- |
+| `ctx`                                                         | [context.Context](https://pkg.go.dev/context#Context)         | :heavy_check_mark:                                            | The context to use for the request.                           |
+| `path`                                                        | *string*                                                      | :heavy_check_mark:                                            | Path in Stages to modify                                      |
+| `workspaceGroupID`                                            | *string*                                                      | :heavy_check_mark:                                            | ID of the Stages-enabled workspace group                      |
+| `stagesPatch`                                                 | [*shared.StagesPatch](../../pkg/models/shared/stagespatch.md) | :heavy_minus_sign:                                            | N/A                                                           |
 
 
 ### Response
 
-**[*operations.UpdateStagesFileResponse](../../models/operations/updatestagesfileresponse.md), error**
-
+**[*operations.UpdateStagesFileResponse](../../pkg/models/operations/updatestagesfileresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

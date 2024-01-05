@@ -14,13 +14,13 @@ import (
 	"net/http"
 )
 
-// stages - Operations related to stages
-type stages struct {
+// Stages - Operations related to stages
+type Stages struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newStages(sdkConfig sdkConfiguration) *stages {
-	return &stages{
+func newStages(sdkConfig sdkConfiguration) *Stages {
+	return &Stages{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -36,7 +36,7 @@ func newStages(sdkConfig sdkConfiguration) *stages {
 // - /v1/stages/68af2f46-0000-1000-9000-3f6f5365d878/fs/parent_folder%2Fsample_path
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
-func (s *stages) Create(ctx context.Context, path string, workspaceGroupID string, createStagesFileRequest *shared.CreateStagesFileRequest, isFile *bool) (*operations.CreateStagesFileResponse, error) {
+func (s *Stages) Create(ctx context.Context, path string, workspaceGroupID string, createStagesFileRequest *shared.CreateStagesFileRequest, isFile *bool) (*operations.CreateStagesFileResponse, error) {
 	request := operations.CreateStagesFileRequest{
 		Path:                    path,
 		WorkspaceGroupID:        workspaceGroupID,
@@ -130,7 +130,7 @@ func (s *stages) Create(ctx context.Context, path string, workspaceGroupID strin
 // - /v1/stages/68af2f46-0000-1000-9000-3f6f5365d878/fs/parent_folder%2Fsample_folder
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
-func (s *stages) Delete(ctx context.Context, path string, workspaceGroupID string) (*operations.DeleteStagesFileResponse, error) {
+func (s *Stages) Delete(ctx context.Context, path string, workspaceGroupID string) (*operations.DeleteStagesFileResponse, error) {
 	request := operations.DeleteStagesFileRequest{
 		Path:             path,
 		WorkspaceGroupID: workspaceGroupID,
@@ -213,7 +213,7 @@ func (s *stages) Delete(ctx context.Context, path string, workspaceGroupID strin
 // - /v1/stages/68af2f46-0000-1000-9000-3f6f5365d878/fs/parent_folder%2Fsample_path
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
-func (s *stages) Get(ctx context.Context, path string, workspaceGroupID string, metadata *bool) (*operations.GetStagesFileResponse, error) {
+func (s *Stages) Get(ctx context.Context, path string, workspaceGroupID string, metadata *bool) (*operations.GetStagesFileResponse, error) {
 	request := operations.GetStagesFileRequest{
 		Path:             path,
 		WorkspaceGroupID: workspaceGroupID,
@@ -302,7 +302,7 @@ func (s *stages) Get(ctx context.Context, path string, workspaceGroupID string, 
 // - /v1/stages/68af2f46-0000-1000-9000-3f6f5365d878/fs/parent_folder%2Fsample_folder
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
-func (s *stages) Update(ctx context.Context, path string, workspaceGroupID string, stagesPatch *shared.StagesPatch) (*operations.UpdateStagesFileResponse, error) {
+func (s *Stages) Update(ctx context.Context, path string, workspaceGroupID string, stagesPatch *shared.StagesPatch) (*operations.UpdateStagesFileResponse, error) {
 	request := operations.UpdateStagesFileRequest{
 		Path:             path,
 		WorkspaceGroupID: workspaceGroupID,

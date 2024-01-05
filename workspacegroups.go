@@ -15,12 +15,12 @@ import (
 	"strings"
 )
 
-type workspaceGroups struct {
+type WorkspaceGroups struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newWorkspaceGroups(sdkConfig sdkConfiguration) *workspaceGroups {
-	return &workspaceGroups{
+func newWorkspaceGroups(sdkConfig sdkConfiguration) *WorkspaceGroups {
+	return &WorkspaceGroups{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -29,7 +29,7 @@ func newWorkspaceGroups(sdkConfig sdkConfiguration) *workspaceGroups {
 // Creates a new workspace group for the current user. You must specify the name, region ID, and firewall ranges for the workspace group in the API request body.
 //
 // You may use the admin user password to connect with any workspace of the group. The admin user password can be specified in the request body. If the admin user password is not specified in the API request, a password is generated and returned in the response object.
-func (s *workspaceGroups) Create(ctx context.Context, request shared.WorkspaceGroupCreate) (*operations.CreateWorkspaceGroupResponse, error) {
+func (s *WorkspaceGroups) Create(ctx context.Context, request shared.WorkspaceGroupCreate) (*operations.CreateWorkspaceGroupResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/v1/workspaceGroups"
 
@@ -106,7 +106,7 @@ func (s *workspaceGroups) Create(ctx context.Context, request shared.WorkspaceGr
 
 // CreateStorage - Sets up Storage DR for the workspace group. Backup region and selected databases to be replicated are provided as part of the request.
 // You must specify the workspace group ID of the group you are setting up for disaster recovery and the region ID of your secondary region.
-func (s *workspaceGroups) CreateStorage(ctx context.Context, storageDRSetup shared.StorageDRSetup, workspaceGroupID string) (*operations.CreateStorageWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) CreateStorage(ctx context.Context, storageDRSetup shared.StorageDRSetup, workspaceGroupID string) (*operations.CreateStorageWorkspaceGroupsResponse, error) {
 	request := operations.CreateStorageWorkspaceGroupsRequest{
 		StorageDRSetup:   storageDRSetup,
 		WorkspaceGroupID: workspaceGroupID,
@@ -182,7 +182,7 @@ func (s *workspaceGroups) CreateStorage(ctx context.Context, storageDRSetup shar
 // Terminates a workspace group with the specified workspace group ID. You must specify the workspace group ID in the API call.
 //
 // By default, you may only terminate empty workspace groups (a workspace group without workspaces). To terminate a workspace group with active workspaces, use the `force` parameter.
-func (s *workspaceGroups) Delete(ctx context.Context, workspaceGroupID string, force *bool) (*operations.DeleteWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) Delete(ctx context.Context, workspaceGroupID string, force *bool) (*operations.DeleteWorkspaceGroupsResponse, error) {
 	request := operations.DeleteWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 		Force:            force,
@@ -264,7 +264,7 @@ func (s *workspaceGroups) Delete(ctx context.Context, workspaceGroupID string, f
 // Get - Gets information about a workspace group
 // Returns information for the specified
 // workspace group ID, in JSON format. You must specify the workspace group ID in the API call.
-func (s *workspaceGroups) Get(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) Get(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetWorkspaceGroupsResponse, error) {
 	request := operations.GetWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 		Fields:           fields,
@@ -346,7 +346,7 @@ func (s *workspaceGroups) Get(ctx context.Context, workspaceGroupID string, fiel
 // GetPrivateConnection - Gets private connection information for a workspace group
 // Returns private connection information for the specified
 // workspace group ID, in JSON format. You must specify the workspace group ID in the API call.
-func (s *workspaceGroups) GetPrivateConnection(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetPrivateConnectionWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) GetPrivateConnection(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetPrivateConnectionWorkspaceGroupsResponse, error) {
 	request := operations.GetPrivateConnectionWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 		Fields:           fields,
@@ -427,7 +427,7 @@ func (s *workspaceGroups) GetPrivateConnection(ctx context.Context, workspaceGro
 
 // GetRecoveryBackup - Gets information about which regions you can setup as a disaster recovery backup
 // Returns a list of regions with regions IDs in JSON format. You must specify the workspace group ID of the group you are setting up for disaster recovery.
-func (s *workspaceGroups) GetRecoveryBackup(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetRecoveryBackupWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) GetRecoveryBackup(ctx context.Context, workspaceGroupID string, fields *string) (*operations.GetRecoveryBackupWorkspaceGroupsResponse, error) {
 	request := operations.GetRecoveryBackupWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 		Fields:           fields,
@@ -506,7 +506,7 @@ func (s *workspaceGroups) GetRecoveryBackup(ctx context.Context, workspaceGroupI
 
 // GetStorageStatus - Gets information about the storage DR status of the workspace group
 // Returns the replication status of each database and the status of the latest Storage DR operation (Failover, Failback, etc.). You must specify the workspace group ID of the group that you are requesting status information for.
-func (s *workspaceGroups) GetStorageStatus(ctx context.Context, workspaceGroupID string) (*operations.GetStorageStatusWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) GetStorageStatus(ctx context.Context, workspaceGroupID string) (*operations.GetStorageStatusWorkspaceGroupsResponse, error) {
 	request := operations.GetStorageStatusWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 	}
@@ -580,7 +580,7 @@ func (s *workspaceGroups) GetStorageStatus(ctx context.Context, workspaceGroupID
 
 // List - Lists the workspace groups the user can access
 // Returns a list of all of the workspace groups accessible to the user. Use the `includeTerminated` parameter to get a list of terminated workspace groups.
-func (s *workspaceGroups) List(ctx context.Context, fields *string, includeTerminated *bool) (*operations.ListWorkspaceGroupResponse, error) {
+func (s *WorkspaceGroups) List(ctx context.Context, fields *string, includeTerminated *bool) (*operations.ListWorkspaceGroupResponse, error) {
 	request := operations.ListWorkspaceGroupRequest{
 		Fields:            fields,
 		IncludeTerminated: includeTerminated,
@@ -656,7 +656,7 @@ func (s *workspaceGroups) List(ctx context.Context, fields *string, includeTermi
 
 // Update - Updates a workspace group
 // Updates workspace group information for the specified workspace group, including the name, admin password, and firewall ranges. Specify the workspace group's new parameters in the request body. You must specify the workspace group ID in the API call.
-func (s *workspaceGroups) Update(ctx context.Context, workspaceGroupUpdate shared.WorkspaceGroupUpdate, workspaceGroupID string) (*operations.UpdateWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) Update(ctx context.Context, workspaceGroupUpdate shared.WorkspaceGroupUpdate, workspaceGroupID string) (*operations.UpdateWorkspaceGroupsResponse, error) {
 	request := operations.UpdateWorkspaceGroupsRequest{
 		WorkspaceGroupUpdate: workspaceGroupUpdate,
 		WorkspaceGroupID:     workspaceGroupID,
@@ -743,7 +743,7 @@ func (s *workspaceGroups) Update(ctx context.Context, workspaceGroupUpdate share
 
 // UpdateFailback - Starts failback to the primary region
 // You must specify the workspace group ID of the group in the standby (secondary) region from which you are triggering the failback.
-func (s *workspaceGroups) UpdateFailback(ctx context.Context, workspaceGroupID string) (*operations.UpdateFailbackWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) UpdateFailback(ctx context.Context, workspaceGroupID string) (*operations.UpdateFailbackWorkspaceGroupsResponse, error) {
 	request := operations.UpdateFailbackWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 	}
@@ -806,7 +806,7 @@ func (s *workspaceGroups) UpdateFailback(ctx context.Context, workspaceGroupID s
 
 // UpdateFailover - Starts failover to the secondary region
 // You must specify the workspace group ID of the group in the inactive (primary) region from which you are triggering the failover.
-func (s *workspaceGroups) UpdateFailover(ctx context.Context, workspaceGroupID string) (*operations.UpdateFailoverWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) UpdateFailover(ctx context.Context, workspaceGroupID string) (*operations.UpdateFailoverWorkspaceGroupsResponse, error) {
 	request := operations.UpdateFailoverWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 	}
@@ -869,7 +869,7 @@ func (s *workspaceGroups) UpdateFailover(ctx context.Context, workspaceGroupID s
 
 // UpdateStartFailoverTestMode - Starts Failover test mode
 // You must specify the workspace group ID for the group in the active (primary) region that you will failover from. This will give you an opportunity to setup any configuration on your workspace group in the secondary region.
-func (s *workspaceGroups) UpdateStartFailoverTestMode(ctx context.Context, workspaceGroupID string) (*operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) UpdateStartFailoverTestMode(ctx context.Context, workspaceGroupID string) (*operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse, error) {
 	request := operations.UpdateStartFailoverTestModeWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 	}
@@ -932,7 +932,7 @@ func (s *workspaceGroups) UpdateStartFailoverTestMode(ctx context.Context, works
 
 // UpdateStopFailoverTestMode - Stops Failover test mode
 // You must specify the workspace group ID for the group in the active (primary) region that you will failover from. This will end the Failover test making the workspace group in the secondary region along with its configuration no longer accessible.
-func (s *workspaceGroups) UpdateStopFailoverTestMode(ctx context.Context, workspaceGroupID string) (*operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse, error) {
+func (s *WorkspaceGroups) UpdateStopFailoverTestMode(ctx context.Context, workspaceGroupID string) (*operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse, error) {
 	request := operations.UpdateStopFailoverTestModeWorkspaceGroupsRequest{
 		WorkspaceGroupID: workspaceGroupID,
 	}

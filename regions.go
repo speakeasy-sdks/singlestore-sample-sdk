@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// regions - Operations related to regions
-type regions struct {
+// Regions - Operations related to regions
+type Regions struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newRegions(sdkConfig sdkConfiguration) *regions {
-	return &regions{
+func newRegions(sdkConfig sdkConfiguration) *Regions {
+	return &Regions{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // List - Lists all of the regions for the user that support workspaces
 // Returns a list of valid regions for the user that support workspaces, including the region ID and provider for each region.
-func (s *regions) List(ctx context.Context, fields *string) (*operations.ListRegionsResponse, error) {
+func (s *Regions) List(ctx context.Context, fields *string) (*operations.ListRegionsResponse, error) {
 	request := operations.ListRegionsRequest{
 		Fields: fields,
 	}

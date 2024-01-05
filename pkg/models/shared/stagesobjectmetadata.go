@@ -9,58 +9,58 @@ import (
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/utils"
 )
 
-type StagesObjectMetadataContentType string
+type ContentType string
 
 const (
-	StagesObjectMetadataContentTypeStr                         StagesObjectMetadataContentType = "str"
-	StagesObjectMetadataContentTypeArrayOfStagesObjectMetadata StagesObjectMetadataContentType = "arrayOfStagesObjectMetadata"
+	ContentTypeStr                         ContentType = "str"
+	ContentTypeArrayOfStagesObjectMetadata ContentType = "arrayOfStagesObjectMetadata"
 )
 
-type StagesObjectMetadataContent struct {
+type Content struct {
 	Str                         *string
 	ArrayOfStagesObjectMetadata []StagesObjectMetadata
 
-	Type StagesObjectMetadataContentType
+	Type ContentType
 }
 
-func CreateStagesObjectMetadataContentStr(str string) StagesObjectMetadataContent {
-	typ := StagesObjectMetadataContentTypeStr
+func CreateContentStr(str string) Content {
+	typ := ContentTypeStr
 
-	return StagesObjectMetadataContent{
+	return Content{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateStagesObjectMetadataContentArrayOfStagesObjectMetadata(arrayOfStagesObjectMetadata []StagesObjectMetadata) StagesObjectMetadataContent {
-	typ := StagesObjectMetadataContentTypeArrayOfStagesObjectMetadata
+func CreateContentArrayOfStagesObjectMetadata(arrayOfStagesObjectMetadata []StagesObjectMetadata) Content {
+	typ := ContentTypeArrayOfStagesObjectMetadata
 
-	return StagesObjectMetadataContent{
+	return Content{
 		ArrayOfStagesObjectMetadata: arrayOfStagesObjectMetadata,
 		Type:                        typ,
 	}
 }
 
-func (u *StagesObjectMetadataContent) UnmarshalJSON(data []byte) error {
+func (u *Content) UnmarshalJSON(data []byte) error {
 
-	str := new(string)
+	str := ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
-		u.Str = str
-		u.Type = StagesObjectMetadataContentTypeStr
+		u.Str = &str
+		u.Type = ContentTypeStr
 		return nil
 	}
 
 	arrayOfStagesObjectMetadata := []StagesObjectMetadata{}
 	if err := utils.UnmarshalJSON(data, &arrayOfStagesObjectMetadata, "", true, true); err == nil {
 		u.ArrayOfStagesObjectMetadata = arrayOfStagesObjectMetadata
-		u.Type = StagesObjectMetadataContentTypeArrayOfStagesObjectMetadata
+		u.Type = ContentTypeArrayOfStagesObjectMetadata
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u StagesObjectMetadataContent) MarshalJSON() ([]byte, error) {
+func (u Content) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -72,19 +72,19 @@ func (u StagesObjectMetadataContent) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type: all fields are null")
 }
 
-// StagesObjectMetadataFormat - Format of the response
-type StagesObjectMetadataFormat string
+// Format of the response
+type Format string
 
 const (
-	StagesObjectMetadataFormatJSON                   StagesObjectMetadataFormat = "json"
-	StagesObjectMetadataFormatLessThanNilGreaterThan StagesObjectMetadataFormat = "<nil>"
+	FormatJSON                   Format = "json"
+	FormatLessThanNilGreaterThan Format = "<nil>"
 )
 
-func (e StagesObjectMetadataFormat) ToPointer() *StagesObjectMetadataFormat {
+func (e Format) ToPointer() *Format {
 	return &e
 }
 
-func (e *StagesObjectMetadataFormat) UnmarshalJSON(data []byte) error {
+func (e *Format) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -93,10 +93,10 @@ func (e *StagesObjectMetadataFormat) UnmarshalJSON(data []byte) error {
 	case "json":
 		fallthrough
 	case "<nil>":
-		*e = StagesObjectMetadataFormat(v)
+		*e = Format(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for StagesObjectMetadataFormat: %v", v)
+		return fmt.Errorf("invalid value for Format: %v", v)
 	}
 }
 
@@ -136,12 +136,12 @@ func (e *StagesObjectMetadataType) UnmarshalJSON(data []byte) error {
 
 // StagesObjectMetadata - Represents the metadata corresponding to an object in Stages
 type StagesObjectMetadata struct {
-	Content *StagesObjectMetadataContent `json:"content,omitempty"`
-	Created *string                      `json:"created,omitempty"`
+	Content *Content `json:"content,omitempty"`
+	Created *string  `json:"created,omitempty"`
 	// Format of the response
-	Format       *StagesObjectMetadataFormat `json:"format,omitempty"`
-	LastModified *string                     `json:"last_modified,omitempty"`
-	Mimetype     *string                     `json:"mimetype,omitempty"`
+	Format       *Format `json:"format,omitempty"`
+	LastModified *string `json:"last_modified,omitempty"`
+	Mimetype     *string `json:"mimetype,omitempty"`
 	// Name of the Stages object
 	Name *string `json:"name,omitempty"`
 	// Path of the Stages object
@@ -152,7 +152,7 @@ type StagesObjectMetadata struct {
 	Writable *bool                     `json:"writable,omitempty"`
 }
 
-func (o *StagesObjectMetadata) GetContent() *StagesObjectMetadataContent {
+func (o *StagesObjectMetadata) GetContent() *Content {
 	if o == nil {
 		return nil
 	}
@@ -166,7 +166,7 @@ func (o *StagesObjectMetadata) GetCreated() *string {
 	return o.Created
 }
 
-func (o *StagesObjectMetadata) GetFormat() *StagesObjectMetadataFormat {
+func (o *StagesObjectMetadata) GetFormat() *Format {
 	if o == nil {
 		return nil
 	}
