@@ -1,6 +1,6 @@
 module github.com/speakeasy-sdks/singlestore-sample-sdk
 
-go 1.14
+go 1.20
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.0
