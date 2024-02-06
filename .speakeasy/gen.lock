@@ -4,19 +4,19 @@ management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
   speakeasyVersion: internal
-  generationVersion: 2.245.1
-  releaseVersion: 0.8.4
-  configChecksum: 194392582c5e97e97bac29a4ecced0e6
+  generationVersion: 2.250.2
+  releaseVersion: 0.9.0
+  configChecksum: 2e5cb27ba6a35929d443370c1f98990d
   repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
   published: true
 features:
   go:
-    core: 3.3.1
+    core: 3.3.2
     devContainers: 2.90.0
     flattening: 2.81.1
-    globalSecurity: 2.82.5
+    globalSecurity: 2.82.6
     globalServerURLs: 2.82.1
     groups: 2.81.2
     nameOverrides: 2.81.1

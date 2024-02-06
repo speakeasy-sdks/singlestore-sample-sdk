@@ -159,3 +159,13 @@ Based on:
 - [go v0.8.4] .
 ### Releases
 - [Go v0.8.4] https://github.com/speakeasy-sdks/singlestore-sample-sdk/releases/tag/v0.8.4 - .
+
+## 2024-02-06 00:07:24
+### Changes
+Based on:
+- OpenAPI Doc 1.1.33 
+- Speakeasy CLI 1.167.3 (2.250.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.9.0] .
+### Releases
+- [Go v0.9.0] https://github.com/speakeasy-sdks/singlestore-sample-sdk/releases/tag/v0.9.0 - .
