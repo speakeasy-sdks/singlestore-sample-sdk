@@ -48,14 +48,9 @@ func main() {
 
     var workspaceGroupID string = "77ad642c-1fc6-4fe0-b241-bcdd89dc7fa5"
 
-    createStagesFileRequest := &shared.CreateStagesFileRequest{
-        File: &shared.File{
-            Content: []byte("0x05D0b544f1"),
-            FileName: "functionalities_grocery_borders.pdf",
-        },
-    }
+    createStagesFileRequest := &shared.CreateStagesFileRequest{}
 
-    var isFile *bool = false
+    var isFile *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.Stages.Create(ctx, path, workspaceGroupID, createStagesFileRequest, isFile)
@@ -181,7 +176,7 @@ func main() {
 
     var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var metadata *bool = false
+    var metadata *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.Stages.Get(ctx, path, workspaceGroupID, metadata)

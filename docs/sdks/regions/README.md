@@ -31,7 +31,7 @@ func main() {
     )
 
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.Regions.List(ctx, fields)

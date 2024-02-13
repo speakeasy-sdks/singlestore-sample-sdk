@@ -318,7 +318,7 @@ func main() {
 
     var workspaceID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.Workspaces.Get(ctx, workspaceID, fields)
@@ -423,7 +423,7 @@ func main() {
 
     var workspaceID string = "4e6c6827-27ee-4013-85e7-e36151e0fa57"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.Workspaces.GetPrivateConnection(ctx, workspaceID, fields)
@@ -477,7 +477,7 @@ func main() {
 
     var workspaceID string = "0ebde48c-76bc-474b-a15a-a09cafb361f4"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.Workspaces.GetRecoveryBackup(ctx, workspaceID, fields)
@@ -583,9 +583,9 @@ func main() {
 
     var workspaceGroupID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
-    var includeTerminated *bool = false
+    var includeTerminated *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.Workspaces.List(ctx, workspaceGroupID, fields, includeTerminated)

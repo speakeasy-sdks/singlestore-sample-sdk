@@ -4,9 +4,9 @@ management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
   speakeasyVersion: internal
-  generationVersion: 2.250.2
-  releaseVersion: 0.9.0
-  configChecksum: 2e5cb27ba6a35929d443370c1f98990d
+  generationVersion: 2.253.0
+  releaseVersion: 0.9.1
+  configChecksum: 6b9b074078c7fec43b2d324d41934403
   repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
@@ -20,7 +20,7 @@ features:
     globalServerURLs: 2.82.1
     groups: 2.81.2
     nameOverrides: 2.81.1
-    unions: 2.85.2
+    unions: 2.85.3
 generatedFiles:
   - billing.go
   - organizations.go

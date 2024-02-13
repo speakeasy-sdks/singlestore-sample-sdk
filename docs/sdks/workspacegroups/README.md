@@ -43,18 +43,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Create(ctx, shared.WorkspaceGroupCreate{
-        AdminPassword: singlestoresamplesdk.String("string"),
-        ExpiresAt: singlestoresamplesdk.String("string"),
+        AdminPassword: singlestoresamplesdk.String(""),
+        ExpiresAt: singlestoresamplesdk.String(""),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
         },
         Name: "demo-workspace-group",
         RegionID: "7e7ffd27-0000-1000-9000-e72828a81ac7",
-        UpdateWindow: &shared.UpdateWindow{
-            Day: 2,
-            Hour: 1,
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -168,7 +164,7 @@ func main() {
 
     var workspaceGroupID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
 
-    var force *bool = false
+    var force *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Delete(ctx, workspaceGroupID, force)
@@ -224,7 +220,7 @@ func main() {
 
     var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.Get(ctx, workspaceGroupID, fields)
@@ -280,7 +276,7 @@ func main() {
 
     var workspaceGroupID string = "4e6c6827-27ee-4013-85e7-e36151e0fa57"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.GetPrivateConnection(ctx, workspaceGroupID, fields)
@@ -334,7 +330,7 @@ func main() {
 
     var workspaceGroupID string = "0ebde48c-76bc-474b-a15a-a09cafb361f4"
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.GetRecoveryBackup(ctx, workspaceGroupID, fields)
@@ -438,9 +434,9 @@ func main() {
     )
 
 
-    var fields *string = "string"
+    var fields *string = singlestoresamplesdk.String("string")
 
-    var includeTerminated *bool = false
+    var includeTerminated *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.WorkspaceGroups.List(ctx, fields, includeTerminated)
@@ -494,17 +490,13 @@ func main() {
 
 
     workspaceGroupUpdate := shared.WorkspaceGroupUpdate{
-        AdminPassword: singlestoresamplesdk.String("string"),
-        ExpiresAt: singlestoresamplesdk.String("string"),
+        AdminPassword: singlestoresamplesdk.String(""),
+        ExpiresAt: singlestoresamplesdk.String(""),
         FirewallRanges: []string{
             "192.168.0.1/32",
             "192.168.0.81/12",
         },
         Name: singlestoresamplesdk.String("new-workspace-group-name"),
-        UpdateWindow: &shared.UpdateWindow{
-            Day: 2,
-            Hour: 1,
-        },
     }
 
     var workspaceGroupID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
