@@ -33,9 +33,9 @@ func main() {
     )
 
 
-    var endTime string = "string"
+    var endTime string = "<value>"
 
-    var startTime string = "string"
+    var startTime string = "<value>"
 
     var aggregateBy *operations.AggregateBy = operations.AggregateByMonth.ToPointer()
 

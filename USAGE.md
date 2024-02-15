@@ -15,9 +15,9 @@ func main() {
 		singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
 	)
 
-	var endTime string = "string"
+	var endTime string = "<value>"
 
-	var startTime string = "string"
+	var startTime string = "<value>"
 
 	var aggregateBy *operations.AggregateBy = operations.AggregateByMonth.ToPointer()
 

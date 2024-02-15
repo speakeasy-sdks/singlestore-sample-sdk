@@ -44,7 +44,7 @@ func main() {
     )
 
 
-    var path string = "string"
+    var path string = "<value>"
 
     var workspaceGroupID string = "77ad642c-1fc6-4fe0-b241-bcdd89dc7fa5"
 
@@ -111,7 +111,7 @@ func main() {
     )
 
 
-    var path string = "string"
+    var path string = "<value>"
 
     var workspaceGroupID string = "8db863f6-ef9b-413a-8a70-cb816b33de6b"
 
@@ -172,7 +172,7 @@ func main() {
     )
 
 
-    var path string = "string"
+    var path string = "<value>"
 
     var workspaceGroupID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
@@ -236,7 +236,7 @@ func main() {
     )
 
 
-    var path string = "string"
+    var path string = "<value>"
 
     var workspaceGroupID string = "d0905bf4-aa77-4f20-8e77-54c352acfe54"
 
