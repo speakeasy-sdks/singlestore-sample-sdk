@@ -4,7 +4,7 @@ management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
   speakeasyVersion: internal
-  generationVersion: 2.258.0
+  generationVersion: 2.259.1
   releaseVersion: 0.10.0
   configChecksum: 1495da8b5b1db8661cc13a6a5c1c42b6
   repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git

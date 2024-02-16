@@ -76,8 +76,7 @@ func (u Content) MarshalJSON() ([]byte, error) {
 type Format string
 
 const (
-	FormatJSON                   Format = "json"
-	FormatLessThanNilGreaterThan Format = "<nil>"
+	FormatJSON Format = "json"
 )
 
 func (e Format) ToPointer() *Format {
@@ -91,8 +90,6 @@ func (e *Format) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "json":
-		fallthrough
-	case "<nil>":
 		*e = Format(v)
 		return nil
 	default:
@@ -104,10 +101,9 @@ func (e *Format) UnmarshalJSON(data []byte) error {
 type StagesObjectMetadataType string
 
 const (
-	StagesObjectMetadataTypeUnknown                StagesObjectMetadataType = ""
-	StagesObjectMetadataTypeJSON                   StagesObjectMetadataType = "json"
-	StagesObjectMetadataTypeDirectory              StagesObjectMetadataType = "directory"
-	StagesObjectMetadataTypeLessThanNilGreaterThan StagesObjectMetadataType = "<nil>"
+	StagesObjectMetadataTypeUnknown   StagesObjectMetadataType = ""
+	StagesObjectMetadataTypeJSON      StagesObjectMetadataType = "json"
+	StagesObjectMetadataTypeDirectory StagesObjectMetadataType = "directory"
 )
 
 func (e StagesObjectMetadataType) ToPointer() *StagesObjectMetadataType {
@@ -125,8 +121,6 @@ func (e *StagesObjectMetadataType) UnmarshalJSON(data []byte) error {
 	case "json":
 		fallthrough
 	case "directory":
-		fallthrough
-	case "<nil>":
 		*e = StagesObjectMetadataType(v)
 		return nil
 	default:

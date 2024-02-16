@@ -5,7 +5,6 @@ Format of the response
 
 ## Values
 
-| Name                           | Value                          |
-| ------------------------------ | ------------------------------ |
-| `FormatJSON`                   | json                           |
-| `FormatLessThanNilGreaterThan` | <nil>                          |
+| Name         | Value        |
+| ------------ | ------------ |
+| `FormatJSON` | json         |

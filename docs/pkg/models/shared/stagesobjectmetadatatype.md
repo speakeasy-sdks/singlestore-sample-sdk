@@ -5,9 +5,8 @@ Object type
 
 ## Values
 
-| Name                                             | Value                                            |
-| ------------------------------------------------ | ------------------------------------------------ |
-| `StagesObjectMetadataTypeUnknown`                |                                                  |
-| `StagesObjectMetadataTypeJSON`                   | json                                             |
-| `StagesObjectMetadataTypeDirectory`              | directory                                        |
-| `StagesObjectMetadataTypeLessThanNilGreaterThan` | <nil>                                            |
+| Name                                | Value                               |
+| ----------------------------------- | ----------------------------------- |
+| `StagesObjectMetadataTypeUnknown`   |                                     |
+| `StagesObjectMetadataTypeJSON`      | json                                |
+| `StagesObjectMetadataTypeDirectory` | directory                           |
