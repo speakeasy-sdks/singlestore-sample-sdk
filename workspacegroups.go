@@ -52,12 +52,12 @@ func (s *WorkspaceGroups) Create(ctx context.Context, request shared.WorkspaceGr
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -80,7 +80,6 @@ func (s *WorkspaceGroups) Create(ctx context.Context, request shared.WorkspaceGr
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.CreateWorkspaceGroupResponse{
@@ -155,12 +154,12 @@ func (s *WorkspaceGroups) CreateStorage(ctx context.Context, storageDRSetup shar
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -183,7 +182,6 @@ func (s *WorkspaceGroups) CreateStorage(ctx context.Context, storageDRSetup shar
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.CreateStorageWorkspaceGroupsResponse{
@@ -247,12 +245,12 @@ func (s *WorkspaceGroups) Delete(ctx context.Context, workspaceGroupID string, f
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -275,7 +273,6 @@ func (s *WorkspaceGroups) Delete(ctx context.Context, workspaceGroupID string, f
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.DeleteWorkspaceGroupsResponse{
@@ -351,12 +348,12 @@ func (s *WorkspaceGroups) Get(ctx context.Context, workspaceGroupID string, fiel
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -379,7 +376,6 @@ func (s *WorkspaceGroups) Get(ctx context.Context, workspaceGroupID string, fiel
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetWorkspaceGroupsResponse{
@@ -455,12 +451,12 @@ func (s *WorkspaceGroups) GetPrivateConnection(ctx context.Context, workspaceGro
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -483,7 +479,6 @@ func (s *WorkspaceGroups) GetPrivateConnection(ctx context.Context, workspaceGro
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetPrivateConnectionWorkspaceGroupsResponse{
@@ -558,12 +553,12 @@ func (s *WorkspaceGroups) GetRecoveryBackup(ctx context.Context, workspaceGroupI
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -586,7 +581,6 @@ func (s *WorkspaceGroups) GetRecoveryBackup(ctx context.Context, workspaceGroupI
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetRecoveryBackupWorkspaceGroupsResponse{
@@ -654,12 +648,12 @@ func (s *WorkspaceGroups) GetStorageStatus(ctx context.Context, workspaceGroupID
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -682,7 +676,6 @@ func (s *WorkspaceGroups) GetStorageStatus(ctx context.Context, workspaceGroupID
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.GetStorageStatusWorkspaceGroupsResponse{
@@ -755,12 +748,12 @@ func (s *WorkspaceGroups) List(ctx context.Context, fields *string, includeTermi
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -783,7 +776,6 @@ func (s *WorkspaceGroups) List(ctx context.Context, fields *string, includeTermi
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.ListWorkspaceGroupResponse{
@@ -858,12 +850,12 @@ func (s *WorkspaceGroups) Update(ctx context.Context, workspaceGroupUpdate share
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -886,7 +878,6 @@ func (s *WorkspaceGroups) Update(ctx context.Context, workspaceGroupUpdate share
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpdateWorkspaceGroupsResponse{
@@ -956,12 +947,12 @@ func (s *WorkspaceGroups) UpdateFailback(ctx context.Context, workspaceGroupID s
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -984,7 +975,6 @@ func (s *WorkspaceGroups) UpdateFailback(ctx context.Context, workspaceGroupID s
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpdateFailbackWorkspaceGroupsResponse{
@@ -1041,12 +1031,12 @@ func (s *WorkspaceGroups) UpdateFailover(ctx context.Context, workspaceGroupID s
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1069,7 +1059,6 @@ func (s *WorkspaceGroups) UpdateFailover(ctx context.Context, workspaceGroupID s
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpdateFailoverWorkspaceGroupsResponse{
@@ -1126,12 +1115,12 @@ func (s *WorkspaceGroups) UpdateStartFailoverTestMode(ctx context.Context, works
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1154,7 +1143,6 @@ func (s *WorkspaceGroups) UpdateStartFailoverTestMode(ctx context.Context, works
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpdateStartFailoverTestModeWorkspaceGroupsResponse{
@@ -1211,12 +1199,12 @@ func (s *WorkspaceGroups) UpdateStopFailoverTestMode(ctx context.Context, worksp
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1239,7 +1227,6 @@ func (s *WorkspaceGroups) UpdateStopFailoverTestMode(ctx context.Context, worksp
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.UpdateStopFailoverTestModeWorkspaceGroupsResponse{
