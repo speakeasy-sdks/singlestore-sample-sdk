@@ -31,7 +31,11 @@ func newWorkspaces(sdkConfig sdkConfiguration) *Workspaces {
 // Creates a new workspace for the current user in the specified workspace group. You must specify the name of the workspace and the workspace group ID in the request body. Once a workspace is created, you can neither change its name nor its workspace group. See [Workspaces](https://docs.singlestore.com/managed-service/en/reference/management-api.html#workspaces-729524) for more information.
 // This API call does not take any request parameters.
 func (s *Workspaces) Create(ctx context.Context, request shared.WorkspaceCreate) (*operations.CreateWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/v1/workspaces")
@@ -52,12 +56,12 @@ func (s *Workspaces) Create(ctx context.Context, request shared.WorkspaceCreate)
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -67,15 +71,15 @@ func (s *Workspaces) Create(ctx context.Context, request shared.WorkspaceCreate)
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -128,7 +132,11 @@ func (s *Workspaces) Create(ctx context.Context, request shared.WorkspaceCreate)
 // CreateResume - Resumes a workspace
 // Resumes a workspace with the specified workspace ID. You must specify the workspace ID in the API call.
 func (s *Workspaces) CreateResume(ctx context.Context, workspaceID string) (*operations.CreateResumeWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createResumeWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createResumeWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateResumeWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -147,12 +155,12 @@ func (s *Workspaces) CreateResume(ctx context.Context, workspaceID string) (*ope
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -162,15 +170,15 @@ func (s *Workspaces) CreateResume(ctx context.Context, workspaceID string) (*ope
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -225,7 +233,11 @@ func (s *Workspaces) CreateResume(ctx context.Context, workspaceID string) (*ope
 // CreateStorage - Sets up Storage DR for the workspace group of the provided workspace. Backup region and selected databases to be replicated are provided as part of the request.
 // You must specify the workspace ID of a workspace in the group you are setting up for disaster recovery and the region ID of your secondary region.
 func (s *Workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.StorageDRSetup, workspaceID string) (*operations.CreateStorageWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createStorageWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createStorageWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateStorageWorkspaceRequest{
 		StorageDRSetup: storageDRSetup,
@@ -251,12 +263,12 @@ func (s *Workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.St
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -266,15 +278,15 @@ func (s *Workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.St
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -316,7 +328,11 @@ func (s *Workspaces) CreateStorage(ctx context.Context, storageDRSetup shared.St
 // CreateSuspend - Suspends a workspace
 // Suspends a workspace with the specified workspace ID. You must specify the workspace ID in the API call.
 func (s *Workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*operations.CreateSuspendWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createSuspendWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createSuspendWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateSuspendWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -335,12 +351,12 @@ func (s *Workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*op
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -350,15 +366,15 @@ func (s *Workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*op
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -415,7 +431,11 @@ func (s *Workspaces) CreateSuspend(ctx context.Context, workspaceID string) (*op
 //
 // All the databases attached to the workspace are detached when the workspace is terminated.
 func (s *Workspaces) Delete(ctx context.Context, workspaceID string) (*operations.DeleteWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -434,12 +454,12 @@ func (s *Workspaces) Delete(ctx context.Context, workspaceID string) (*operation
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -449,15 +469,15 @@ func (s *Workspaces) Delete(ctx context.Context, workspaceID string) (*operation
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -512,7 +532,11 @@ func (s *Workspaces) Delete(ctx context.Context, workspaceID string) (*operation
 // Get - Gets information about a workspace
 // Returns workspace information for the specified workspace ID, in JSON format. You must specify the workspace ID in the API call.
 func (s *Workspaces) Get(ctx context.Context, workspaceID string, fields *string) (*operations.GetteWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getteWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getteWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetteWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -536,12 +560,12 @@ func (s *Workspaces) Get(ctx context.Context, workspaceID string, fields *string
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -551,15 +575,15 @@ func (s *Workspaces) Get(ctx context.Context, workspaceID string, fields *string
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -614,7 +638,11 @@ func (s *Workspaces) Get(ctx context.Context, workspaceID string, fields *string
 // GetOutbound - Gets the outbound allow list for a workspace
 // Returns the account ID which must be allowed for outbound connections.
 func (s *Workspaces) GetOutbound(ctx context.Context, workspaceID string) (*operations.GetOutboundWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getOutboundWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getOutboundWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetOutboundWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -633,12 +661,12 @@ func (s *Workspaces) GetOutbound(ctx context.Context, workspaceID string) (*oper
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -648,15 +676,15 @@ func (s *Workspaces) GetOutbound(ctx context.Context, workspaceID string) (*oper
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -711,7 +739,11 @@ func (s *Workspaces) GetOutbound(ctx context.Context, workspaceID string) (*oper
 // GetPrivateConnection - Gets private connection information for a workspace
 // Returns private connection information for the specified workspace ID, in JSON format. You must specify the workspace ID in the API call.
 func (s *Workspaces) GetPrivateConnection(ctx context.Context, workspaceID string, fields *string) (*operations.GetPrivateConnectionWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getPrivateConnectionWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getPrivateConnectionWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetPrivateConnectionWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -735,12 +767,12 @@ func (s *Workspaces) GetPrivateConnection(ctx context.Context, workspaceID strin
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -750,15 +782,15 @@ func (s *Workspaces) GetPrivateConnection(ctx context.Context, workspaceID strin
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -813,7 +845,11 @@ func (s *Workspaces) GetPrivateConnection(ctx context.Context, workspaceID strin
 // GetRecoveryBackup - Gets information about which regions you can setup as a disaster recovery backup
 // Returns a list of regions with regions IDs in JSON format. You must specify the workspace ID of a workspace in the group you are setting up for disaster recovery.
 func (s *Workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, fields *string) (*operations.GetRecoveryBackupWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getRecoveryBackupWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getRecoveryBackupWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetRecoveryBackupWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -837,12 +873,12 @@ func (s *Workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, 
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -852,15 +888,15 @@ func (s *Workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -913,7 +949,11 @@ func (s *Workspaces) GetRecoveryBackup(ctx context.Context, workspaceID string, 
 // GetStorageStatus - Gets information about the storage DR status of the group in which the provided workspace belongs to
 // Returns the replication status of each database and the status of the latest Storage DR operation (Failover, Failback, etc.). You must specify the workspace ID of a workspace in the group for which you are requesting the status information.
 func (s *Workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (*operations.GetStorageStatusWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getStorageStatusWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getStorageStatusWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetStorageStatusWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -932,12 +972,12 @@ func (s *Workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -947,15 +987,15 @@ func (s *Workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1008,7 +1048,11 @@ func (s *Workspaces) GetStorageStatus(ctx context.Context, workspaceID string) (
 // List - Lists the workspaces the user can access
 // Returns a list of all of the workspaces accessible to the user in the specified workspace group. You must specify the workspace group ID in the API call to list the workspaces in the group. Use the `includeTerminated` parameter to list the terminated workspaces.
 func (s *Workspaces) List(ctx context.Context, workspaceGroupID string, fields *string, includeTerminated *bool) (*operations.ListWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ListWorkspaceRequest{
 		WorkspaceGroupID:  workspaceGroupID,
@@ -1033,12 +1077,12 @@ func (s *Workspaces) List(ctx context.Context, workspaceGroupID string, fields *
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1048,15 +1092,15 @@ func (s *Workspaces) List(ctx context.Context, workspaceGroupID string, fields *
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1111,7 +1155,11 @@ func (s *Workspaces) List(ctx context.Context, workspaceGroupID string, fields *
 // Update - Updates information about a workspace
 // Updates workspace information for the specified workspace, including the size. Specify the workspace's new parameters in the request body. You must specify the workspace ID in the API call.
 func (s *Workspaces) Update(ctx context.Context, workspaceUpdate shared.WorkspaceUpdate, workspaceID string) (*operations.UpdateWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateWorkspaceRequest{
 		WorkspaceUpdate: workspaceUpdate,
@@ -1137,12 +1185,12 @@ func (s *Workspaces) Update(ctx context.Context, workspaceUpdate shared.Workspac
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1152,15 +1200,15 @@ func (s *Workspaces) Update(ctx context.Context, workspaceUpdate shared.Workspac
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1217,7 +1265,11 @@ func (s *Workspaces) Update(ctx context.Context, workspaceUpdate shared.Workspac
 // UpdateFailback - Starts failback to the primary region
 // You must specify the workspace ID of a workspace in the standby (secondary) region from which you are triggering the failback.
 func (s *Workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*operations.UpdateFailbackWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateFailbackWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateFailbackWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateFailbackWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -1236,12 +1288,12 @@ func (s *Workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*o
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1251,15 +1303,15 @@ func (s *Workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*o
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1301,7 +1353,11 @@ func (s *Workspaces) UpdateFailback(ctx context.Context, workspaceID string) (*o
 // UpdateFailover - Starts failover to the secondary region
 // You must specify the workspace ID of a workspace in the group in the inactive (primary) region from which you are triggering the failover.
 func (s *Workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*operations.UpdateFailoverWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateFailoverWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateFailoverWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateFailoverWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -1320,12 +1376,12 @@ func (s *Workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*o
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1335,15 +1391,15 @@ func (s *Workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*o
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1385,7 +1441,11 @@ func (s *Workspaces) UpdateFailover(ctx context.Context, workspaceID string) (*o
 // UpdateStartFailoverTestMode - Starts Failover test mode
 // You must specify the workspace ID of a workspace in the group in the active (primary) region that you will failover from. This will give you an opportunity to setup any configuration on your workspace group in the secondary region.
 func (s *Workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStartFailoverTestModeWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateStartFailoverTestModeWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateStartFailoverTestModeWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateStartFailoverTestModeWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -1404,12 +1464,12 @@ func (s *Workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceI
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1419,15 +1479,15 @@ func (s *Workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceI
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1469,7 +1529,11 @@ func (s *Workspaces) UpdateStartFailoverTestMode(ctx context.Context, workspaceI
 // UpdateStopFailoverTestMode - Stops Failover test mode
 // You must specify the workspace ID of a workspace in the group in the active (primary) region that you will failover from. This will end the Failover test making the workspace group in the secondary region along with its configuration no longer accessible.
 func (s *Workspaces) UpdateStopFailoverTestMode(ctx context.Context, workspaceID string) (*operations.UpdateStopFailoverTestModeWorkspaceResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateStopFailoverTestModeWorkspace"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateStopFailoverTestModeWorkspace",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateStopFailoverTestModeWorkspaceRequest{
 		WorkspaceID: workspaceID,
@@ -1488,12 +1552,12 @@ func (s *Workspaces) UpdateStopFailoverTestMode(ctx context.Context, workspaceID
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -1503,15 +1567,15 @@ func (s *Workspaces) UpdateStopFailoverTestMode(ctx context.Context, workspaceID
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

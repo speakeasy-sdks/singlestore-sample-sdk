@@ -29,7 +29,11 @@ func newPrivateConnection(sdkConfig sdkConfiguration) *PrivateConnection {
 // Create - Creates a new private connection
 // Creates a new private connection. Upon successful completion of the request, a private connection is scheduled for creation. To query the private connection status, use the endpoints for the workspace group and workspace (if provided).
 func (s *PrivateConnection) Create(ctx context.Context, request shared.PrivateConnectionCreate) (*operations.CreatePrivateConnectionResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createPrivateConnection"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createPrivateConnection",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	opURL, err := url.JoinPath(baseURL, "/v1/privateConnections")
@@ -50,12 +54,12 @@ func (s *PrivateConnection) Create(ctx context.Context, request shared.PrivateCo
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -65,15 +69,15 @@ func (s *PrivateConnection) Create(ctx context.Context, request shared.PrivateCo
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -126,7 +130,11 @@ func (s *PrivateConnection) Create(ctx context.Context, request shared.PrivateCo
 // Delete - Deletes a private connection
 // Deletes a private connection for the specified connection ID. Upon successful completion, a private connection is scheduled for deletion.
 func (s *PrivateConnection) Delete(ctx context.Context, connectionID string) (*operations.DeletePrivateConnectionResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deletePrivateConnection"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deletePrivateConnection",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeletePrivateConnectionRequest{
 		ConnectionID: connectionID,
@@ -145,12 +153,12 @@ func (s *PrivateConnection) Delete(ctx context.Context, connectionID string) (*o
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -160,15 +168,15 @@ func (s *PrivateConnection) Delete(ctx context.Context, connectionID string) (*o
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -223,7 +231,11 @@ func (s *PrivateConnection) Delete(ctx context.Context, connectionID string) (*o
 // Get - Gets information about a private connection
 // Returns private connection information for the specified connection ID, in JSON format. You must specify the connection ID in the API call.
 func (s *PrivateConnection) Get(ctx context.Context, connectionID string, fields *string) (*operations.GetPrivateConnectionResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getPrivateConnection"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getPrivateConnection",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetPrivateConnectionRequest{
 		ConnectionID: connectionID,
@@ -247,12 +259,12 @@ func (s *PrivateConnection) Get(ctx context.Context, connectionID string, fields
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -262,15 +274,15 @@ func (s *PrivateConnection) Get(ctx context.Context, connectionID string, fields
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -325,7 +337,11 @@ func (s *PrivateConnection) Get(ctx context.Context, connectionID string, fields
 // Update - Updates a private connection
 // Updates a private connection. You must specify the connection ID in the API call.
 func (s *PrivateConnection) Update(ctx context.Context, updatePrivateConnection shared.UpdatePrivateConnection, connectionID string) (*operations.UpdatePrivateConnectionResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updatePrivateConnection"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updatePrivateConnection",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdatePrivateConnectionRequest{
 		UpdatePrivateConnection: updatePrivateConnection,
@@ -351,12 +367,12 @@ func (s *PrivateConnection) Update(ctx context.Context, updatePrivateConnection 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -366,15 +382,15 @@ func (s *PrivateConnection) Update(ctx context.Context, updatePrivateConnection 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

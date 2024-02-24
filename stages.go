@@ -38,7 +38,11 @@ func newStages(sdkConfig sdkConfiguration) *Stages {
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
 func (s *Stages) Create(ctx context.Context, path string, workspaceGroupID string, createStagesFileRequest *shared.CreateStagesFileRequest, isFile *bool) (*operations.CreateStagesFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createStagesFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createStagesFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateStagesFileRequest{
 		Path:                    path,
@@ -70,12 +74,12 @@ func (s *Stages) Create(ctx context.Context, path string, workspaceGroupID strin
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -85,15 +89,15 @@ func (s *Stages) Create(ctx context.Context, path string, workspaceGroupID strin
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -152,7 +156,11 @@ func (s *Stages) Create(ctx context.Context, path string, workspaceGroupID strin
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
 func (s *Stages) Delete(ctx context.Context, path string, workspaceGroupID string) (*operations.DeleteStagesFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteStagesFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteStagesFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteStagesFileRequest{
 		Path:             path,
@@ -172,12 +180,12 @@ func (s *Stages) Delete(ctx context.Context, path string, workspaceGroupID strin
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -187,15 +195,15 @@ func (s *Stages) Delete(ctx context.Context, path string, workspaceGroupID strin
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -256,7 +264,11 @@ func (s *Stages) Delete(ctx context.Context, path string, workspaceGroupID strin
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
 func (s *Stages) Get(ctx context.Context, path string, workspaceGroupID string, metadata *bool) (*operations.GetStagesFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getStagesFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getStagesFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetStagesFileRequest{
 		Path:             path,
@@ -281,12 +293,12 @@ func (s *Stages) Get(ctx context.Context, path string, workspaceGroupID string, 
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -296,15 +308,15 @@ func (s *Stages) Get(ctx context.Context, path string, workspaceGroupID string, 
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -366,7 +378,11 @@ func (s *Stages) Get(ctx context.Context, path string, workspaceGroupID string, 
 //
 // You must specify the `workspaceGroupID` and the folder/file path in the API call.
 func (s *Stages) Update(ctx context.Context, path string, workspaceGroupID string, stagesPatch *shared.StagesPatch) (*operations.UpdateStagesFileResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "updateStagesFile"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "updateStagesFile",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.UpdateStagesFileRequest{
 		Path:             path,
@@ -393,12 +409,12 @@ func (s *Stages) Update(ctx context.Context, path string, workspaceGroupID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -408,15 +424,15 @@ func (s *Stages) Update(ctx context.Context, path string, workspaceGroupID strin
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

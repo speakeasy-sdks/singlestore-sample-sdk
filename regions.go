@@ -30,7 +30,11 @@ func newRegions(sdkConfig sdkConfiguration) *Regions {
 // List - Lists all of the regions for the user that support workspaces
 // Returns a list of valid regions for the user that support workspaces, including the region ID and provider for each region.
 func (s *Regions) List(ctx context.Context, fields *string) (*operations.ListRegionsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "listRegions"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "listRegions",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.ListRegionsRequest{
 		Fields: fields,
@@ -53,12 +57,12 @@ func (s *Regions) List(ctx context.Context, fields *string) (*operations.ListReg
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
+	client := s.sdkConfiguration.SecurityClient
+
+	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
-
-	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -68,15 +72,15 @@ func (s *Regions) List(ctx context.Context, fields *string) (*operations.ListReg
 			err = fmt.Errorf("error sending request: no response")
 		}
 
-		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		return nil, err
 	} else if utils.MatchStatusCodes([]string{"401", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 		if err != nil {
 			return nil, err
 		}
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
