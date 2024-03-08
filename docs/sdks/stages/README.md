@@ -57,7 +57,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateStagesFile != nil {
         // handle response
     }
@@ -120,7 +119,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeleteStagesFile != nil {
         // handle response
     }
@@ -183,7 +181,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.StagesObjectMetadata != nil {
         // handle response
     }
@@ -249,7 +246,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.ModifyStagesFile != nil {
         // handle response
     }

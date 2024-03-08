@@ -55,7 +55,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspaceGroup != nil {
         // handle response
     }
@@ -91,7 +90,6 @@ import(
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -114,8 +112,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -171,7 +168,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.TerminateWorkspaceGroups != nil {
         // handle response
     }
@@ -227,7 +223,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.WorkspaceGroup != nil {
         // handle response
     }
@@ -283,7 +278,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PrivateConnections != nil {
         // handle response
     }
@@ -337,7 +331,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Regions != nil {
         // handle response
     }
@@ -389,7 +382,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.StorageDRStatus != nil {
         // handle response
     }
@@ -443,7 +435,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.WorkspaceGroups != nil {
         // handle response
     }
@@ -506,7 +497,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.UpdateWorkspaceGroups != nil {
         // handle response
     }
@@ -543,7 +533,6 @@ import(
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -559,8 +548,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -595,7 +583,6 @@ import(
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -611,8 +598,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -647,7 +633,6 @@ import(
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -663,8 +648,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -699,7 +683,6 @@ import(
 	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	"net/http"
 )
 
 func main() {
@@ -715,8 +698,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }

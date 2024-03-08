@@ -40,7 +40,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreatePrivateConnectionResponse != nil {
         // handle response
     }
@@ -91,7 +90,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.DeletePrivateConnection != nil {
         // handle response
     }
@@ -144,7 +142,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PrivateConnections != nil {
         // handle response
     }
@@ -200,7 +197,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.UpdatePrivateConnectionResponse != nil {
         // handle response
     }
