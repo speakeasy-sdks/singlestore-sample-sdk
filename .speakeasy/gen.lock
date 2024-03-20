@@ -3,10 +3,10 @@ id: 41a9a426-272a-4999-b4e9-1cf35df21ff0
 management:
   docChecksum: 45c13b19398e9a0ecbb6c51994f44611
   docVersion: 1.1.33
-  speakeasyVersion: 1.207.1
-  generationVersion: 2.280.6
-  releaseVersion: 0.11.1
-  configChecksum: e2412256f185f97df7f31ace76fa9c7c
+  speakeasyVersion: 1.213.0
+  generationVersion: 2.283.1
+  releaseVersion: 0.11.2
+  configChecksum: 161dfca56017b16f03f90e94c4d02574
   repoURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/singlestore-sample-sdk
@@ -16,7 +16,7 @@ features:
     core: 3.4.4
     devContainers: 2.90.0
     flattening: 2.81.1
-    globalSecurity: 2.82.8
+    globalSecurity: 2.82.9
     globalServerURLs: 2.82.2
     groups: 2.81.2
     nameOverrides: 2.81.1
