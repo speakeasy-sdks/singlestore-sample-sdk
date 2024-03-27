@@ -155,9 +155,9 @@ func New(opts ...SDKOption) *Singlestore {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.11.2",
-			GenVersion:        "2.283.1",
-			UserAgent:         "speakeasy-sdk/go 0.11.2 2.283.1 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			SDKVersion:        "0.11.3",
+			GenVersion:        "2.291.0",
+			UserAgent:         "speakeasy-sdk/go 0.11.3 2.291.0 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
 			Hooks:             hooks.New(),
 		},
 	}
