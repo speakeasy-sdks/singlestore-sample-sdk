@@ -19,26 +19,25 @@ Returns a list of valid regions for the user that support workspaces, including 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
-    var fields *string = "Bicycle"
+    var fields *string = singlestoresamplesdk.String("<value>")
 
     ctx := context.Background()
     res, err := s.Regions.List(ctx, fields)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Regions != nil {
         // handle response
     }
@@ -55,5 +54,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListRegionsResponse](../../models/operations/listregionsresponse.md), error**
-
+**[*operations.ListRegionsResponse](../../pkg/models/operations/listregionsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

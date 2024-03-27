@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// StorageDRStatusComputeStorageDRState - Status of Storage DR operation
-type StorageDRStatusComputeStorageDRState string
+// StorageDRState - Status of Storage DR operation
+type StorageDRState string
 
 const (
-	StorageDRStatusComputeStorageDRStateActive    StorageDRStatusComputeStorageDRState = "Active"
-	StorageDRStatusComputeStorageDRStateCompleted StorageDRStatusComputeStorageDRState = "Completed"
-	StorageDRStatusComputeStorageDRStateFailed    StorageDRStatusComputeStorageDRState = "Failed"
-	StorageDRStatusComputeStorageDRStateExpired   StorageDRStatusComputeStorageDRState = "Expired"
-	StorageDRStatusComputeStorageDRStateCanceled  StorageDRStatusComputeStorageDRState = "Canceled"
+	StorageDRStateActive    StorageDRState = "Active"
+	StorageDRStateCompleted StorageDRState = "Completed"
+	StorageDRStateFailed    StorageDRState = "Failed"
+	StorageDRStateExpired   StorageDRState = "Expired"
+	StorageDRStateCanceled  StorageDRState = "Canceled"
 )
 
-func (e StorageDRStatusComputeStorageDRState) ToPointer() *StorageDRStatusComputeStorageDRState {
+func (e StorageDRState) ToPointer() *StorageDRState {
 	return &e
 }
 
-func (e *StorageDRStatusComputeStorageDRState) UnmarshalJSON(data []byte) error {
+func (e *StorageDRState) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,28 +37,28 @@ func (e *StorageDRStatusComputeStorageDRState) UnmarshalJSON(data []byte) error 
 	case "Expired":
 		fallthrough
 	case "Canceled":
-		*e = StorageDRStatusComputeStorageDRState(v)
+		*e = StorageDRState(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for StorageDRStatusComputeStorageDRState: %v", v)
+		return fmt.Errorf("invalid value for StorageDRState: %v", v)
 	}
 }
 
-// StorageDRStatusComputeStorageDRType - Name of Storage DR operation
-type StorageDRStatusComputeStorageDRType string
+// StorageDRType - Name of Storage DR operation
+type StorageDRType string
 
 const (
-	StorageDRStatusComputeStorageDRTypeFailover    StorageDRStatusComputeStorageDRType = "Failover"
-	StorageDRStatusComputeStorageDRTypeFailback    StorageDRStatusComputeStorageDRType = "Failback"
-	StorageDRStatusComputeStorageDRTypeDrTestStart StorageDRStatusComputeStorageDRType = "DRTestStart"
-	StorageDRStatusComputeStorageDRTypeDrTestEnd   StorageDRStatusComputeStorageDRType = "DRTestEnd"
+	StorageDRTypeFailover    StorageDRType = "Failover"
+	StorageDRTypeFailback    StorageDRType = "Failback"
+	StorageDRTypeDrTestStart StorageDRType = "DRTestStart"
+	StorageDRTypeDrTestEnd   StorageDRType = "DRTestEnd"
 )
 
-func (e StorageDRStatusComputeStorageDRType) ToPointer() *StorageDRStatusComputeStorageDRType {
+func (e StorageDRType) ToPointer() *StorageDRType {
 	return &e
 }
 
-func (e *StorageDRStatusComputeStorageDRType) UnmarshalJSON(data []byte) error {
+func (e *StorageDRType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -71,65 +71,65 @@ func (e *StorageDRStatusComputeStorageDRType) UnmarshalJSON(data []byte) error {
 	case "DRTestStart":
 		fallthrough
 	case "DRTestEnd":
-		*e = StorageDRStatusComputeStorageDRType(v)
+		*e = StorageDRType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for StorageDRStatusComputeStorageDRType: %v", v)
+		return fmt.Errorf("invalid value for StorageDRType: %v", v)
 	}
 }
 
-// StorageDRStatusCompute - Represents information related to a workspace group's latest storage DR operation
-type StorageDRStatusCompute struct {
+// Compute - Represents information related to a workspace group's latest storage DR operation
+type Compute struct {
 	// The number of database attachments that have been setup
 	CompletedAttachments *int64 `json:"completedAttachments,omitempty"`
 	// The number of workspaces that have been setup
 	CompletedWorkspaces *int64 `json:"completedWorkspaces,omitempty"`
 	// Status of Storage DR operation
-	StorageDRState StorageDRStatusComputeStorageDRState `json:"storageDRState"`
+	StorageDRState StorageDRState `json:"storageDRState"`
 	// Name of Storage DR operation
-	StorageDRType StorageDRStatusComputeStorageDRType `json:"storageDRType"`
+	StorageDRType StorageDRType `json:"storageDRType"`
 	// The total number of database attachments to setup
 	TotalAttachments *int64 `json:"totalAttachments,omitempty"`
 	// The total number of workspaces to setup
 	TotalWorkspaces *int64 `json:"totalWorkspaces,omitempty"`
 }
 
-func (o *StorageDRStatusCompute) GetCompletedAttachments() *int64 {
+func (o *Compute) GetCompletedAttachments() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.CompletedAttachments
 }
 
-func (o *StorageDRStatusCompute) GetCompletedWorkspaces() *int64 {
+func (o *Compute) GetCompletedWorkspaces() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.CompletedWorkspaces
 }
 
-func (o *StorageDRStatusCompute) GetStorageDRState() StorageDRStatusComputeStorageDRState {
+func (o *Compute) GetStorageDRState() StorageDRState {
 	if o == nil {
-		return StorageDRStatusComputeStorageDRState("")
+		return StorageDRState("")
 	}
 	return o.StorageDRState
 }
 
-func (o *StorageDRStatusCompute) GetStorageDRType() StorageDRStatusComputeStorageDRType {
+func (o *Compute) GetStorageDRType() StorageDRType {
 	if o == nil {
-		return StorageDRStatusComputeStorageDRType("")
+		return StorageDRType("")
 	}
 	return o.StorageDRType
 }
 
-func (o *StorageDRStatusCompute) GetTotalAttachments() *int64 {
+func (o *Compute) GetTotalAttachments() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.TotalAttachments
 }
 
-func (o *StorageDRStatusCompute) GetTotalWorkspaces() *int64 {
+func (o *Compute) GetTotalWorkspaces() *int64 {
 	if o == nil {
 		return nil
 	}
@@ -139,13 +139,13 @@ func (o *StorageDRStatusCompute) GetTotalWorkspaces() *int64 {
 // StorageDRStatus - Represents Storage DR status information
 type StorageDRStatus struct {
 	// Represents information related to a workspace group's latest storage DR operation
-	Compute StorageDRStatusCompute `json:"compute"`
-	Storage []ReplicatedDatabase   `json:"storage"`
+	Compute Compute              `json:"compute"`
+	Storage []ReplicatedDatabase `json:"storage"`
 }
 
-func (o *StorageDRStatus) GetCompute() StorageDRStatusCompute {
+func (o *StorageDRStatus) GetCompute() Compute {
 	if o == nil {
-		return StorageDRStatusCompute{}
+		return Compute{}
 	}
 	return o.Compute
 }

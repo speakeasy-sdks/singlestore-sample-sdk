@@ -1,0 +1,11 @@
+# ListBillingUsageRequest
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `EndTime`                                                                                   | *string*                                                                                    | :heavy_check_mark:                                                                          | The end time for the usage interval valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z      |
+| `StartTime`                                                                                 | *string*                                                                                    | :heavy_check_mark:                                                                          | The start time for the usage interval in valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z |
+| `AggregateBy`                                                                               | [*operations.AggregateBy](../../../pkg/models/operations/aggregateby.md)                    | :heavy_minus_sign:                                                                          | The aggregate type used to group usage which includes hour, day and month. default is hour  |
+| `Metric`                                                                                    | [*operations.Metric](../../../pkg/models/operations/metric.md)                              | :heavy_minus_sign:                                                                          | Metrics include ComputeCredit, StorageAvgByte. default is all                               |
