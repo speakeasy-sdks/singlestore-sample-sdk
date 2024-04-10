@@ -9,20 +9,20 @@ import (
 	"net/http"
 )
 
-// ListBillingUsageAggregateBy - The aggregate type used to group usage which includes hour, day and month. default is hour
-type ListBillingUsageAggregateBy string
+// AggregateBy - The aggregate type used to group usage which includes hour, day and month. default is hour
+type AggregateBy string
 
 const (
-	ListBillingUsageAggregateByHour  ListBillingUsageAggregateBy = "hour"
-	ListBillingUsageAggregateByDay   ListBillingUsageAggregateBy = "day"
-	ListBillingUsageAggregateByMonth ListBillingUsageAggregateBy = "month"
+	AggregateByHour  AggregateBy = "hour"
+	AggregateByDay   AggregateBy = "day"
+	AggregateByMonth AggregateBy = "month"
 )
 
-func (e ListBillingUsageAggregateBy) ToPointer() *ListBillingUsageAggregateBy {
+func (e AggregateBy) ToPointer() *AggregateBy {
 	return &e
 }
 
-func (e *ListBillingUsageAggregateBy) UnmarshalJSON(data []byte) error {
+func (e *AggregateBy) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -33,26 +33,26 @@ func (e *ListBillingUsageAggregateBy) UnmarshalJSON(data []byte) error {
 	case "day":
 		fallthrough
 	case "month":
-		*e = ListBillingUsageAggregateBy(v)
+		*e = AggregateBy(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ListBillingUsageAggregateBy: %v", v)
+		return fmt.Errorf("invalid value for AggregateBy: %v", v)
 	}
 }
 
-// ListBillingUsageMetric - Metrics include ComputeCredit, StorageAvgByte. default is all
-type ListBillingUsageMetric string
+// Metric - Metrics include ComputeCredit, StorageAvgByte. default is all
+type Metric string
 
 const (
-	ListBillingUsageMetricComputeCredit  ListBillingUsageMetric = "ComputeCredit"
-	ListBillingUsageMetricStorageAvgByte ListBillingUsageMetric = "StorageAvgByte"
+	MetricComputeCredit  Metric = "ComputeCredit"
+	MetricStorageAvgByte Metric = "StorageAvgByte"
 )
 
-func (e ListBillingUsageMetric) ToPointer() *ListBillingUsageMetric {
+func (e Metric) ToPointer() *Metric {
 	return &e
 }
 
-func (e *ListBillingUsageMetric) UnmarshalJSON(data []byte) error {
+func (e *Metric) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -61,10 +61,10 @@ func (e *ListBillingUsageMetric) UnmarshalJSON(data []byte) error {
 	case "ComputeCredit":
 		fallthrough
 	case "StorageAvgByte":
-		*e = ListBillingUsageMetric(v)
+		*e = Metric(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ListBillingUsageMetric: %v", v)
+		return fmt.Errorf("invalid value for Metric: %v", v)
 	}
 }
 
@@ -74,9 +74,9 @@ type ListBillingUsageRequest struct {
 	// The start time for the usage interval in valid UTC ISO8601 format e.g. 2023-07-30T18:30:00Z
 	StartTime string `queryParam:"style=form,explode=true,name=startTime"`
 	// The aggregate type used to group usage which includes hour, day and month. default is hour
-	AggregateBy *ListBillingUsageAggregateBy `queryParam:"style=form,explode=true,name=aggregateBy"`
+	AggregateBy *AggregateBy `queryParam:"style=form,explode=true,name=aggregateBy"`
 	// Metrics include ComputeCredit, StorageAvgByte. default is all
-	Metric *ListBillingUsageMetric `queryParam:"style=form,explode=true,name=metric"`
+	Metric *Metric `queryParam:"style=form,explode=true,name=metric"`
 }
 
 func (o *ListBillingUsageRequest) GetEndTime() string {
@@ -93,14 +93,14 @@ func (o *ListBillingUsageRequest) GetStartTime() string {
 	return o.StartTime
 }
 
-func (o *ListBillingUsageRequest) GetAggregateBy() *ListBillingUsageAggregateBy {
+func (o *ListBillingUsageRequest) GetAggregateBy() *AggregateBy {
 	if o == nil {
 		return nil
 	}
 	return o.AggregateBy
 }
 
-func (o *ListBillingUsageRequest) GetMetric() *ListBillingUsageMetric {
+func (o *ListBillingUsageRequest) GetMetric() *Metric {
 	if o == nil {
 		return nil
 	}

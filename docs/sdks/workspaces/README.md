@@ -35,15 +35,15 @@ This API call does not take any request parameters.
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
     ctx := context.Background()
@@ -55,7 +55,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspace != nil {
         // handle response
     }
@@ -64,16 +63,18 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
-| `request`                                                        | [shared.WorkspaceCreate](../../models/shared/workspacecreate.md) | :heavy_check_mark:                                               | The request object to use for the request.                       |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
+| `request`                                                            | [shared.WorkspaceCreate](../../pkg/models/shared/workspacecreate.md) | :heavy_check_mark:                                                   | The request object to use for the request.                           |
 
 
 ### Response
 
-**[*operations.CreateWorkspaceResponse](../../models/operations/createworkspaceresponse.md), error**
-
+**[*operations.CreateWorkspaceResponse](../../pkg/models/operations/createworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateResume
 
@@ -86,15 +87,15 @@ Resumes a workspace with the specified workspace ID. You must specify the worksp
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -105,7 +106,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspace != nil {
         // handle response
     }
@@ -122,8 +122,10 @@ func main() {
 
 ### Response
 
-**[*operations.CreateResumeWorkspaceResponse](../../models/operations/createresumeworkspaceresponse.md), error**
-
+**[*operations.CreateResumeWorkspaceResponse](../../pkg/models/operations/createresumeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateStorage
 
@@ -135,24 +137,21 @@ You must specify the workspace ID of a workspace in the group you are setting up
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
     storageDRSetup := shared.StorageDRSetup{
         DatabaseNames: []string{
-            "x",
-            "_",
-            "d",
-            "b",
+            "x_db",
         },
         RegionID: "6eaad1a5-ac7d-4864-9f5c-1bc4cadf5345",
     }
@@ -164,8 +163,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -173,17 +171,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `storageDRSetup`                                                  | [shared.StorageDRSetup](../../models/shared/storagedrsetup.md)    | :heavy_check_mark:                                                | Here's a sample of JSON data sent in the request body to the API. |
-| `workspaceID`                                                     | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace                                               |
+| Parameter                                                          | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `ctx`                                                              | [context.Context](https://pkg.go.dev/context#Context)              | :heavy_check_mark:                                                 | The context to use for the request.                                |
+| `storageDRSetup`                                                   | [shared.StorageDRSetup](../../pkg/models/shared/storagedrsetup.md) | :heavy_check_mark:                                                 | Here's a sample of JSON data sent in the request body to the API.  |
+| `workspaceID`                                                      | *string*                                                           | :heavy_check_mark:                                                 | ID of the workspace                                                |
 
 
 ### Response
 
-**[*operations.CreateStorageWorkspaceResponse](../../models/operations/createstorageworkspaceresponse.md), error**
-
+**[*operations.CreateStorageWorkspaceResponse](../../pkg/models/operations/createstorageworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## CreateSuspend
 
@@ -195,15 +195,15 @@ Suspends a workspace with the specified workspace ID. You must specify the works
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -214,7 +214,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspace != nil {
         // handle response
     }
@@ -231,8 +230,10 @@ func main() {
 
 ### Response
 
-**[*operations.CreateSuspendWorkspaceResponse](../../models/operations/createsuspendworkspaceresponse.md), error**
-
+**[*operations.CreateSuspendWorkspaceResponse](../../pkg/models/operations/createsuspendworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Delete
 
@@ -247,15 +248,15 @@ All the databases attached to the workspace are detached when the workspace is t
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -266,7 +267,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspace != nil {
         // handle response
     }
@@ -283,8 +283,10 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteWorkspaceResponse](../../models/operations/deleteworkspaceresponse.md), error**
-
+**[*operations.DeleteWorkspaceResponse](../../pkg/models/operations/deleteworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Get
 
@@ -296,28 +298,27 @@ Returns workspace information for the specified workspace ID, in JSON format. Yo
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
     var workspaceID string = "b18d8d81-fd7b-4764-a31e-475cb1f36591"
 
-    var fields *string = "Optional"
+    var fields *string = singlestoresamplesdk.String("<value>")
 
     ctx := context.Background()
     res, err := s.Workspaces.Get(ctx, workspaceID, fields)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Workspace != nil {
         // handle response
     }
@@ -335,8 +336,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetteWorkspaceResponse](../../models/operations/getteworkspaceresponse.md), error**
-
+**[*operations.GetteWorkspaceResponse](../../pkg/models/operations/getteworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetOutbound
 
@@ -348,15 +351,15 @@ Returns the account ID which must be allowed for outbound connections.
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -367,7 +370,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PrivateConnectionOutboundAllowLists != nil {
         // handle response
     }
@@ -384,8 +386,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetOutboundWorkspaceResponse](../../models/operations/getoutboundworkspaceresponse.md), error**
-
+**[*operations.GetOutboundWorkspaceResponse](../../pkg/models/operations/getoutboundworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetPrivateConnection
 
@@ -397,28 +401,27 @@ Returns private connection information for the specified workspace ID, in JSON f
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
     var workspaceID string = "4e6c6827-27ee-4013-85e7-e36151e0fa57"
 
-    var fields *string = "mobile"
+    var fields *string = singlestoresamplesdk.String("<value>")
 
     ctx := context.Background()
     res, err := s.Workspaces.GetPrivateConnection(ctx, workspaceID, fields)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.PrivateConnections != nil {
         // handle response
     }
@@ -436,8 +439,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetPrivateConnectionWorkspaceResponse](../../models/operations/getprivateconnectionworkspaceresponse.md), error**
-
+**[*operations.GetPrivateConnectionWorkspaceResponse](../../pkg/models/operations/getprivateconnectionworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetRecoveryBackup
 
@@ -449,28 +454,27 @@ Returns a list of regions with regions IDs in JSON format. You must specify the 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
     var workspaceID string = "0ebde48c-76bc-474b-a15a-a09cafb361f4"
 
-    var fields *string = "Dinar"
+    var fields *string = singlestoresamplesdk.String("<value>")
 
     ctx := context.Background()
     res, err := s.Workspaces.GetRecoveryBackup(ctx, workspaceID, fields)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Regions != nil {
         // handle response
     }
@@ -488,8 +492,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetRecoveryBackupWorkspaceResponse](../../models/operations/getrecoverybackupworkspaceresponse.md), error**
-
+**[*operations.GetRecoveryBackupWorkspaceResponse](../../pkg/models/operations/getrecoverybackupworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## GetStorageStatus
 
@@ -501,15 +507,15 @@ Returns the replication status of each database and the status of the latest Sto
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -520,7 +526,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.StorageDRStatus != nil {
         // handle response
     }
@@ -537,8 +542,10 @@ func main() {
 
 ### Response
 
-**[*operations.GetStorageStatusWorkspaceResponse](../../models/operations/getstoragestatusworkspaceresponse.md), error**
-
+**[*operations.GetStorageStatusWorkspaceResponse](../../pkg/models/operations/getstoragestatusworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## List
 
@@ -551,30 +558,29 @@ Returns a list of all of the workspaces accessible to the user in the specified 
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
     var workspaceGroupID string = "c184a429-302e-4aca-80db-f1718b882a50"
 
-    var fields *string = "backing"
+    var fields *string = singlestoresamplesdk.String("<value>")
 
-    var includeTerminated *bool = false
+    var includeTerminated *bool = singlestoresamplesdk.Bool(false)
 
     ctx := context.Background()
     res, err := s.Workspaces.List(ctx, workspaceGroupID, fields, includeTerminated)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Workspaces != nil {
         // handle response
     }
@@ -593,8 +599,10 @@ func main() {
 
 ### Response
 
-**[*operations.ListWorkspaceResponse](../../models/operations/listworkspaceresponse.md), error**
-
+**[*operations.ListWorkspaceResponse](../../pkg/models/operations/listworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## Update
 
@@ -607,15 +615,15 @@ Updates workspace information for the specified workspace, including the size. S
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -630,7 +638,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.CreateWorkspace != nil {
         // handle response
     }
@@ -639,17 +646,19 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `workspaceUpdate`                                                 | [shared.WorkspaceUpdate](../../models/shared/workspaceupdate.md)  | :heavy_check_mark:                                                | Here's a sample of JSON data sent to the API in the request body. |
-| `workspaceID`                                                     | *string*                                                          | :heavy_check_mark:                                                | ID of the workspace                                               |
+| Parameter                                                            | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `ctx`                                                                | [context.Context](https://pkg.go.dev/context#Context)                | :heavy_check_mark:                                                   | The context to use for the request.                                  |
+| `workspaceUpdate`                                                    | [shared.WorkspaceUpdate](../../pkg/models/shared/workspaceupdate.md) | :heavy_check_mark:                                                   | Here's a sample of JSON data sent to the API in the request body.    |
+| `workspaceID`                                                        | *string*                                                             | :heavy_check_mark:                                                   | ID of the workspace                                                  |
 
 
 ### Response
 
-**[*operations.UpdateWorkspaceResponse](../../models/operations/updateworkspaceresponse.md), error**
-
+**[*operations.UpdateWorkspaceResponse](../../pkg/models/operations/updateworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateFailback
 
@@ -661,15 +670,15 @@ You must specify the workspace ID of a workspace in the standby (secondary) regi
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -680,8 +689,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -697,8 +705,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailbackWorkspaceResponse](../../models/operations/updatefailbackworkspaceresponse.md), error**
-
+**[*operations.UpdateFailbackWorkspaceResponse](../../pkg/models/operations/updatefailbackworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateFailover
 
@@ -710,15 +720,15 @@ You must specify the workspace ID of a workspace in the group in the inactive (p
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -729,8 +739,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -746,8 +755,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateFailoverWorkspaceResponse](../../models/operations/updatefailoverworkspaceresponse.md), error**
-
+**[*operations.UpdateFailoverWorkspaceResponse](../../pkg/models/operations/updatefailoverworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateStartFailoverTestMode
 
@@ -759,15 +770,15 @@ You must specify the workspace ID of a workspace in the group in the active (pri
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -778,8 +789,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -795,8 +805,10 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStartFailoverTestModeWorkspaceResponse](../../models/operations/updatestartfailovertestmodeworkspaceresponse.md), error**
-
+**[*operations.UpdateStartFailoverTestModeWorkspaceResponse](../../pkg/models/operations/updatestartfailovertestmodeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## UpdateStopFailoverTestMode
 
@@ -808,15 +820,15 @@ You must specify the workspace ID of a workspace in the group in the active (pri
 package main
 
 import(
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
+	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
 	"context"
 	"log"
-	singlestoresamplesdk "github.com/speakeasy-sdks/singlestore-sample-sdk"
-	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 )
 
 func main() {
     s := singlestoresamplesdk.New(
-        singlestoresamplesdk.WithSecurity(""),
+        singlestoresamplesdk.WithSecurity("<YOUR_BEARER_TOKEN_HERE>"),
     )
 
 
@@ -827,8 +839,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.StatusCode == http.StatusOK {
+    if res != nil {
         // handle response
     }
 }
@@ -844,5 +855,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateStopFailoverTestModeWorkspaceResponse](../../models/operations/updatestopfailovertestmodeworkspaceresponse.md), error**
-
+**[*operations.UpdateStopFailoverTestModeWorkspaceResponse](../../pkg/models/operations/updatestopfailovertestmodeworkspaceresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

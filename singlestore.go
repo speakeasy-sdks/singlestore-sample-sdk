@@ -5,6 +5,7 @@ package singlestoresamplesdk
 import (
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/singlestore-sample-sdk/internal/hooks"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/models/shared"
 	"github.com/speakeasy-sdks/singlestore-sample-sdk/pkg/utils"
 	"net/http"
@@ -40,8 +41,7 @@ func Float32(f float32) *float32 { return &f }
 func Float64(f float64) *float64 { return &f }
 
 type sdkConfiguration struct {
-	DefaultClient     HTTPClient
-	SecurityClient    HTTPClient
+	Client            HTTPClient
 	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
 	ServerIndex       int
@@ -51,6 +51,7 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	RetryConfig       *utils.RetryConfig
+	Hooks             *hooks.Hooks
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -66,17 +67,17 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // All the URLs referenced in this API documentation use the `https://api.singlestore.com` service endpoint as their base.
 type Singlestore struct {
 	// Operations related to billing
-	Billing *billing
+	Billing *Billing
 	// Operations related to organizations
-	Organizations     *organizations
-	PrivateConnection *privateConnection
+	Organizations     *Organizations
+	PrivateConnection *PrivateConnection
 	// Operations related to regions
-	Regions *regions
+	Regions *Regions
 	// Operations related to stages
-	Stages          *stages
-	WorkspaceGroups *workspaceGroups
+	Stages          *Stages
+	WorkspaceGroups *WorkspaceGroups
 	// Operations related to workspaces
-	Workspaces *workspaces
+	Workspaces *Workspaces
 
 	sdkConfiguration sdkConfiguration
 }
@@ -115,22 +116,30 @@ func WithServerIndex(serverIndex int) SDKOption {
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *Singlestore) {
-		sdk.sdkConfiguration.DefaultClient = client
+		sdk.sdkConfiguration.Client = client
 	}
 }
 
 func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
 	return func(context.Context) (interface{}, error) {
-		return &security, nil
+		return security, nil
 	}
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKeyAuth string) SDKOption {
 	return func(sdk *Singlestore) {
 		security := shared.Security{APIKeyAuth: apiKeyAuth}
 		sdk.sdkConfiguration.Security = withSecurity(&security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+	return func(sdk *Singlestore) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
 	}
 }
 
@@ -146,9 +155,10 @@ func New(opts ...SDKOption) *Singlestore {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.1.33",
-			SDKVersion:        "0.5.0",
-			GenVersion:        "2.161.0",
-			UserAgent:         "speakeasy-sdk/go 0.5.0 2.161.0 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			SDKVersion:        "0.6.0",
+			GenVersion:        "2.302.1",
+			UserAgent:         "speakeasy-sdk/go 0.6.0 2.302.1 1.1.33 github.com/speakeasy-sdks/singlestore-sample-sdk",
+			Hooks:             hooks.New(),
 		},
 	}
 	for _, opt := range opts {
@@ -156,15 +166,15 @@ func New(opts ...SDKOption) *Singlestore {
 	}
 
 	// Use WithClient to override the default client if you would like to customize the timeout
-	if sdk.sdkConfiguration.DefaultClient == nil {
-		sdk.sdkConfiguration.DefaultClient = &http.Client{Timeout: 60 * time.Second}
+	if sdk.sdkConfiguration.Client == nil {
+		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
-	if sdk.sdkConfiguration.SecurityClient == nil {
-		if sdk.sdkConfiguration.Security != nil {
-			sdk.sdkConfiguration.SecurityClient = utils.ConfigureSecurityClient(sdk.sdkConfiguration.DefaultClient, sdk.sdkConfiguration.Security)
-		} else {
-			sdk.sdkConfiguration.SecurityClient = sdk.sdkConfiguration.DefaultClient
-		}
+
+	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
+	serverURL := currentServerURL
+	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
+	if serverURL != currentServerURL {
+		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
 	sdk.Billing = newBilling(sdk.sdkConfiguration)
