@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// ReplicatedDatabaseDuplicationState - Duplication state of the database
-type ReplicatedDatabaseDuplicationState string
+// DuplicationState - Duplication state of the database
+type DuplicationState string
 
 const (
-	ReplicatedDatabaseDuplicationStatePending  ReplicatedDatabaseDuplicationState = "Pending"
-	ReplicatedDatabaseDuplicationStateActive   ReplicatedDatabaseDuplicationState = "Active"
-	ReplicatedDatabaseDuplicationStateInactive ReplicatedDatabaseDuplicationState = "Inactive"
-	ReplicatedDatabaseDuplicationStateError    ReplicatedDatabaseDuplicationState = "Error"
+	DuplicationStatePending  DuplicationState = "Pending"
+	DuplicationStateActive   DuplicationState = "Active"
+	DuplicationStateInactive DuplicationState = "Inactive"
+	DuplicationStateError    DuplicationState = "Error"
 )
 
-func (e ReplicatedDatabaseDuplicationState) ToPointer() *ReplicatedDatabaseDuplicationState {
+func (e DuplicationState) ToPointer() *DuplicationState {
 	return &e
 }
 
-func (e *ReplicatedDatabaseDuplicationState) UnmarshalJSON(data []byte) error {
+func (e *DuplicationState) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -34,10 +34,10 @@ func (e *ReplicatedDatabaseDuplicationState) UnmarshalJSON(data []byte) error {
 	case "Inactive":
 		fallthrough
 	case "Error":
-		*e = ReplicatedDatabaseDuplicationState(v)
+		*e = DuplicationState(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ReplicatedDatabaseDuplicationState: %v", v)
+		return fmt.Errorf("invalid value for DuplicationState: %v", v)
 	}
 }
 
@@ -46,7 +46,7 @@ type ReplicatedDatabase struct {
 	// Name of the database
 	DatabaseName string `json:"databaseName"`
 	// Duplication state of the database
-	DuplicationState ReplicatedDatabaseDuplicationState `json:"duplicationState"`
+	DuplicationState DuplicationState `json:"duplicationState"`
 	// Name of the region
 	Region string `json:"region"`
 }
@@ -58,9 +58,9 @@ func (o *ReplicatedDatabase) GetDatabaseName() string {
 	return o.DatabaseName
 }
 
-func (o *ReplicatedDatabase) GetDuplicationState() ReplicatedDatabaseDuplicationState {
+func (o *ReplicatedDatabase) GetDuplicationState() DuplicationState {
 	if o == nil {
-		return ReplicatedDatabaseDuplicationState("")
+		return DuplicationState("")
 	}
 	return o.DuplicationState
 }

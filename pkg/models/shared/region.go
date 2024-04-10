@@ -7,20 +7,20 @@ import (
 	"fmt"
 )
 
-// RegionProvider - Name of the provider
-type RegionProvider string
+// Provider - Name of the provider
+type Provider string
 
 const (
-	RegionProviderAws   RegionProvider = "AWS"
-	RegionProviderGcp   RegionProvider = "GCP"
-	RegionProviderAzure RegionProvider = "Azure"
+	ProviderAws   Provider = "AWS"
+	ProviderGcp   Provider = "GCP"
+	ProviderAzure Provider = "Azure"
 )
 
-func (e RegionProvider) ToPointer() *RegionProvider {
+func (e Provider) ToPointer() *Provider {
 	return &e
 }
 
-func (e *RegionProvider) UnmarshalJSON(data []byte) error {
+func (e *Provider) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -31,26 +31,26 @@ func (e *RegionProvider) UnmarshalJSON(data []byte) error {
 	case "GCP":
 		fallthrough
 	case "Azure":
-		*e = RegionProvider(v)
+		*e = Provider(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RegionProvider: %v", v)
+		return fmt.Errorf("invalid value for Provider: %v", v)
 	}
 }
 
 // Region - Represents information related to a region in which a workspace group is created
 type Region struct {
 	// Name of the provider
-	Provider RegionProvider `json:"provider"`
+	Provider Provider `json:"provider"`
 	// Name of the region
 	Region string `json:"region"`
 	// ID of the region
 	RegionID string `json:"regionID"`
 }
 
-func (o *Region) GetProvider() RegionProvider {
+func (o *Region) GetProvider() Provider {
 	if o == nil {
-		return RegionProvider("")
+		return Provider("")
 	}
 	return o.Provider
 }
